@@ -1,0 +1,52 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>
+            显示弹窗
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <ion-row>
+        <ion-col>
+            <button ion-button block (click)="OpenOverlay('overlay1')">显示弹窗1</button>
+        </ion-col>
+    </ion-row>
+
+    <ion-row>
+        <ion-col>
+            <button ion-button block (click)="OpenOverlay('overlay2')">显示弹窗2</button>
+        </ion-col>
+    </ion-row>
+</ion-content>
+
+<div id="overlay1" class="aq-common-overlay aq-border-radius-5">
+    <ion-row class="aq-padding-top-30">
+        <ion-col text-center class="aq-textsize-15 aq-textcolor-black-core">
+            弹窗1已弹出
+        </ion-col>
+    </ion-row>
+    <ion-row padding-top>
+        <ion-col>
+            <button ion-button block class="aq-bgcolor-blue-20 aq-textcolor-white-core aq-height-35" (click)="CloseOverlay()">
+                关闭弹窗
+            </button>
+        </ion-col>
+    </ion-row>
+</div>
+
+<div id="overlay2" class="aq-common-overlay aq-border-radius-5">
+    <ion-row class="aq-padding-top-30">
+        <ion-col text-center class="aq-textsize-15 aq-textcolor-black-core">
+            弹窗2已弹出
+        </ion-col>
+    </ion-row>
+    <ion-row padding-top>
+        <ion-col>
+            <button ion-button block class="aq-bgcolor-blue-20 aq-textcolor-white-core aq-height-35" (click)="CloseOverlay()">
+                关闭弹窗
+            </button>
+        </ion-col>
+    </ion-row>
+</div>
+<div class="aq-overlay-backdrop" (click)="CloseOverlay()"></div>

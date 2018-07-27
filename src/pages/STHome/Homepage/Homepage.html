@@ -1,0 +1,106 @@
+<ion-content>
+    <!-- 首页顶部轮播 -->
+    <ion-slides pager autoplay="600" speed="2000" loop="true" (click)="news()">
+        <ion-slide>
+            <img src="assets/img/1.png">
+        </ion-slide>
+
+        <ion-slide>
+            <img src="assets/img/2.png">
+        </ion-slide>
+
+        <ion-slide>
+            <img src="assets/img/3.png">
+        </ion-slide>
+
+        <ion-slide>
+            <img src="assets/img/4.png">
+        </ion-slide>
+
+        <ion-slide>
+            <img src="assets/img/5.png">
+        </ion-slide>
+
+    </ion-slides>
+
+    <ion-row text-center>
+        <ion-col col-3>
+            <img class="width-50" src="assets/icon/icon1.png" (click)="homesign()">
+            <p class="font-1">签到</p>
+        </ion-col>
+        <ion-col col-3>
+            <img class="width-50" src="assets/icon/icon2.png" (click)="homebonus()" >
+            <p class="font-1" >红包</p>
+        </ion-col>
+        <ion-col col-3 >
+            <img class="width-50" src="assets/icon/icon3.png" (click)="riskmanagement()">
+            <p class="font-1">风控</p>
+        </ion-col>
+        <ion-col col-3>
+            <img class="width-50" src="assets/icon/icon4.png" (click)="notice()">
+            <p class="font-1">公告</p>
+        </ion-col>
+    </ion-row>
+
+
+    <div class="gray"></div>
+
+    <ion-row>
+        <img class="img_tu" src="assets/img/tu.png">
+        <span class="font-2">新手标</span>
+    </ion-row>
+
+    <ion-row text-center>
+        <ion-col>
+                <h5 class="font3">新手标S0520</h5>
+        </ion-col>
+    </ion-row>
+
+    <ion-row text-center>
+            <ion-col>
+                <p class="font4">12.66%</p>
+            </ion-col>
+        </ion-row>
+
+    <ion-row text-center>
+        <ion-col col-4>
+            <p class="font5">10万</p>
+        </ion-col>
+        <ion-col col-4>
+            <p class="font5">30</p>
+        </ion-col>
+        <ion-col col-4>
+            <p class="font5">30</p>
+        </ion-col>
+    </ion-row>
+
+    <ion-row text-center>
+            <ion-col col-4>
+                <p class="font6">总金额</p>
+            </ion-col>
+            <ion-col col-4>
+                <p class="font6">已投资</p>
+            </ion-col>
+            <ion-col col-4>
+                <p class="font6">锁定期限</p>
+            </ion-col>
+        </ion-row>
+    
+    <ion-row text-center>
+        <ion-col>
+            <button (click)="product()">立即体验</button>
+        </ion-col>    
+    </ion-row>
+
+
+    <footer>
+        <ion-row text-center class=""bottom>
+            <ion-col>
+                <div class="font7">这是一些说明</div>
+            </ion-col>
+        </ion-row>
+    </footer>
+<ion-row>
+    <div class="gray_2"></div>
+</ion-row>
+</ion-content>

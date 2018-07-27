@@ -1,0 +1,24 @@
+Page-MineCoupon{
+    // ticket：优惠券
+    .Ticket{
+        border-bottom: 1px solid #EEEEEE;
+        margin-top: 8px;
+    }
+    .Ticketpic{
+        transform: scale(0.75,0.75);
+        margin-left: 20px;
+        margin-top: -3px;
+    }
+    // 箭头
+    .Arrows{
+        transform: scale(0.5,0.5);
+        margin-top: 2px;
+    }
+   .Ticketfont{
+       position: absolute;
+       top: 5px;
+       left: 30px;
+       letter-spacing: 1px;
+   }
+ 
+}

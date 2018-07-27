@@ -1,0 +1,63 @@
+<ion-header>
+  <ion-navbar color="MintCream">
+    <ion-title>
+      注册
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-grid padding>
+    <ion-item padding-top class="aq-border-bottom aq-border-color-grey-50  aq-padding-left-0">
+      <ion-label class="phone-number" fixed>
+        <img class="aq-vertical-middle login-icon" src="assets/img/icon/phoneicon.png">
+      </ion-label>
+      <ion-input class="aq-text-size-big" type="tel" maxlength="11" placeholder="请输入您的手机号" readonly [(ngModel)]="MobilePhone"></ion-input>
+    </ion-item>
+    <ion-item padding-top class="aq-border-bottom aq-border-color-grey-50 aq-padding-left-0">
+      <ion-input class="aq-text-size-big" item-start [(ngModel)]="ImgValidationCode" type="text" placeholder="请输入图形验证码"
+        maxlength="4"></ion-input>
+      <img item-end [src]="ImgCode" alt="" class="aq-padding-top-4" onclick="this.src=this.src+'?'" />
+    </ion-item>
+    <ion-item padding-top class="aq-border-bottom aq-border-color-grey-50  aq-padding-left-0">
+      <ion-input class="aq-text-size-big" item-start [(ngModel)]="ValidationCode" type="text" placeholder="请输入短信验证码"
+        maxlength="6"></ion-input>
+      <button [disabled]="verifyCode.disable" (click)="getValidationCode()" item-end ion-button clear  class="aq-text-color-red-core aq-padding-top-4">{{verifyCode.verifyCodeTips}}</button>
+    </ion-item>
+    <ion-item padding-top class="aq-border-bottom aq-border-color-grey-50  aq-padding-left-0">
+      <ion-label item-start class="aq-text-size-big phone-password">
+        设置登录密码
+      </ion-label>
+      <ion-input item-end class="aq-text-size-big" type="password" placeholder="8位以上数字与字母" [(ngModel)]="Password"></ion-input>
+    </ion-item>
+    <ion-item padding-top class="aq-border-bottom aq-border-color-grey-50  aq-padding-left-0">
+      <ion-label item-start class="aq-text-size-big phone-password">
+        推荐码
+      </ion-label>
+      <ion-input item-end class="aq-text-size-big" type="text" placeholder="请输入他人推荐码" [(ngModel)]="Recommendationcode"></ion-input>
+    </ion-item>
+  </ion-grid>
+  <ion-row>
+    <ion-col offset-1 col-10>
+      <button ion-button full class="aq-radius-10 height-35 aq-text-size-large" (click)="submitToRegister()"
+        [ngClass]="{'aq-bg-color-red-70':Password,'aq-bg-color-grey-40':!Password}">
+        提交
+      </button>
+    </ion-col>
+  </ion-row>
+</ion-content>
+
+<div *ngIf="Overlay.overlay1" class="aq-common-overlay aq-border-radius-5">
+  <ion-row class="aq-padding-top-30">
+    <ion-col text-center class="aq-textsize-15 aq-textcolor-black-core">
+      注册成功
+    </ion-col>
+  </ion-row>
+  <ion-row padding-top>
+    <ion-col>
+      <button ion-button block class="aq-bgcolor-red-10 aq-textcolor-white-core aq-height-35" (click)="goFillinpasswordPage()">
+        <span class="submit">确认</span>
+      </button>
+    </ion-col>
+  </ion-row>
+</div>
+<div *ngIf="backdrop" class="aq-overlay-backdrop" (click)="CloseOverlay()"></div>

@@ -1,0 +1,84 @@
+import { Component } from '@angular/core';
+import { NavController, NavParams, ViewController, ModalController, ActionSheetController } from 'ionic-angular';
+import { StorageService } from "../../../providers/StorageService";
+// import { STMineService } from "../STMineService";
+import { HomepagePage } from './../../STHome/Homepage/Homepage';
+// import { Utils } from './../../../providers/Utils';
+import { NativeService } from './../../../providers/NativeService';
+import { isLogin, USER_INFO, USER_ID } from './../../../providers/Constants';
+import { ModifyMineInfoPage } from './../ModifyMineInfo/ModifyMineInfo';
+import { AlertController } from 'ionic-angular/components/alert/alert-controller';
+import { TabsPage } from './../../../app/tabs/tabs';
+@Component({
+  selector: 'Page-MineInfo',
+  templateUrl: 'MineInfo.html',
+})
+export class MineInfoPage {
+  GetUserInfoModel: any;
+  isLogin: any;
+  USER_INFO: any;
+  USER_ID: any;
+  // Name:string='';
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public viewCtrl: ViewController,
+    public modalCtrl: ModalController,
+    public actionSheetCtrl: ActionSheetController,
+    public nativeService: NativeService,
+    public _StorageService: StorageService,
+    public alerCtrl: AlertController
+  ) {
+    this.isLogin = this._StorageService.read(isLogin);
+    //传值
+    // this.navCtrl.push( ModifyMineInfoPage , { UserTrueName:this.Name });
+
+    if (this.isLogin) {
+      this.GetUserInfoModel = this.navParams.get('GetUserInfoModel') ? this.navParams.get('GetUserInfoModel') : "";
+      if (this.GetUserInfoModel.UserBirthday != null) {
+        this.GetUserInfoModel.UserBirthday = this.GetUserInfoModel.UserBirthday.split('T')[0];
+      }
+    }
+
+  }
+  ionViewDidLoad() {
+
+  }
+  ionViewDidEnter() {
+
+  }
+  SubmitpasswordMoveHomepage() {
+    this.viewCtrl.dismiss();
+    let HomepageModal = this.modalCtrl.create(HomepagePage);
+    HomepageModal.present();
+  }
+  SubmitpasswordMoveModifypassword() {
+
+  }
+  // 提交修改信息
+  Confirm(GetUserInfoModel) {
+    this.navCtrl.push(ModifyMineInfoPage, { GetUserInfoModel: this.GetUserInfoModel });
+  }
+  // 退出登录
+  goExitlogon() {
+    let alert = this.alerCtrl.create({
+      title: '',
+      message: '是否退出登录？',
+      buttons: [{
+        text: "是",
+        handler: data => {
+          this.isLogin = this._StorageService.remove(isLogin);
+          this.USER_INFO = this._StorageService.remove(USER_INFO);
+          this.USER_ID = this._StorageService.remove(USER_ID);
+          this.navCtrl.push(TabsPage);
+        }
+      }, {
+        text: "否"
+      }
+      ]
+    });
+    alert.present()
+  }
+
+  UserAuthNameCode: any; //定义实名认证状态
+}

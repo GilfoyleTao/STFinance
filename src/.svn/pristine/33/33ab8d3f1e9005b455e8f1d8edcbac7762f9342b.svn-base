@@ -1,0 +1,64 @@
+//Base
+import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
+import { ErrorHandler, NgModule } from '@angular/core';
+import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+import { HttpModule } from '@angular/http';
+import { MyApp } from './app.component';
+//Providers
+import { HttpService } from './../providers/HttpService';
+import { NativeService } from './../providers/NativeService';
+import { Utils } from "../providers/Utils";
+import { GlobalData } from './../providers/GlobalData';
+//Modules
+import { TabsModule } from './tabs/tabs.module';
+import { STHomeModule } from './../pages/STHome/STHome.module';
+import { STProductModule } from './../pages/STProduct/STProduct.module';
+import { STPropertyModule } from './../pages/STProperty/STProperty.module';
+import { STMineModule } from './../pages/STMine/STMine.module';
+import { STLoginModule } from './../pages/STLogin/STLogin.module';
+//Others
+import { SplashScreen } from '@ionic-native/splash-screen';
+import { StatusBar } from '@ionic-native/status-bar';
+//NativeService
+import { Camera } from "@ionic-native/camera";//相机
+import { FileTransfer } from '@ionic-native/file-transfer';//文件上传
+import { File } from '@ionic-native/file';//访问文件夹
+import { ImagePicker } from '@ionic-native/image-picker'; //图片选择
+
+@NgModule({
+  declarations: [MyApp],
+  imports: [
+
+    TabsModule,
+    HttpModule,
+    BrowserModule,
+    CommonModule,
+    IonicModule.forRoot(MyApp, {
+      backButtonText: '', // 配置返回按钮的文字  
+      backButtonIcon: 'ios-arrow-back-outline' // 配置返回按钮的图标
+    }),
+    STLoginModule,
+    STHomeModule,
+    STProductModule,
+    STPropertyModule,
+    STMineModule
+  ],
+  bootstrap: [IonicApp],
+  entryComponents: [MyApp],
+  providers: [
+    GlobalData,
+    StatusBar,
+    SplashScreen,
+    Camera,
+    File,
+    FileTransfer,
+    ImagePicker,
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
+    HttpService,
+    NativeService,
+    Utils,
+    
+  ]
+})
+export class AppModule { }

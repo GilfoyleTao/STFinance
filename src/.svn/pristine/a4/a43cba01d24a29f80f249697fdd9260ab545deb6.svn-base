@@ -1,0 +1,42 @@
+import { Component } from '@angular/core';
+import { NavController, NavParams } from 'ionic-angular';
+import { FILE_SERVE_URL } from '../../../providers/Constants';
+import { STHomeService } from "../STHomeService";
+import { GetRiskManagementInfoModel } from './../STHomeModel';
+
+
+@Component({
+    selector: 'Page-HomeRiskManagement',
+    templateUrl: 'HomeRiskManagement.html',
+})
+export class HomeRiskManagementPage {
+
+    PageNum: any;//页数
+    RecordNum: any;//每页获取的数量
+    ImgUrl: any;
+    _GetRiskManagementInfoModel: GetRiskManagementInfoModel;
+
+    constructor(public navCtrl: NavController,public navParams: NavParams,private _STHomeService: STHomeService) {
+        this.ImgUrl = FILE_SERVE_URL;
+    }
+
+
+    ionViewDidLoad() {
+        this.GetRiskManagementInfo();
+
+    }
+
+
+    ionViewDidEnter() {
+
+    }
+
+    //获得风控信息
+    GetRiskManagementInfo() {
+        this._STHomeService.GetRiskManagementInfo(this.PageNum, this.RecordNum).subscribe((data: any) => {
+            if (data.Code == 0) {
+                this._GetRiskManagementInfoModel = data.Data;
+            }
+        });
+    }
+}

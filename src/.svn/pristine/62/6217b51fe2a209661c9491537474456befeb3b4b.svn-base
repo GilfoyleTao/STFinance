@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-navbar color="MintCream" hideBackButton>
+    <ion-title>公告</ion-title>
+    <ion-buttons start>
+      <button ion-button icon-only (click)="OpenHomepage()">
+        <ion-icon class="aq-margin-left-8 aq-margin-bottom-16 textsize-30" name="ios-arrow-back-outline"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-grid no-padding>
+    <ion-row text-center class="bg-color-grey">
+      <ion-col col-3 *ngFor="let fircategory of FirCategorys" offset-2>
+
+        <div class="border-width " [ngClass]="{'border-bottom-red':fircategory.Selected,'textcolor-red-30':fircategory.Selected}"
+          (click)="GetListone(fircategory)">
+          <p class="aq-textsize-15 margin-top-bottom-18">{{fircategory.CategoryName}}</p>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-12 *ngFor="let noticelist of _GetHomeNoticeModel?.L_Notice" (click)="MoveOfficialNoticeDetails(noticelist.NoticeId)">
+        <ion-list inset class="aq-border-bottom ">
+          <p class="text-color-grey-40 aq-textsize-13 aq-margin-top-clear margin-bottom-20 margin-left-15 ">{{noticelist.NoticeTitle}}</p>
+          <div class="readpoint" *ngIf="noticelist.NoticeState == 1"></div>
+          <p class="text-color-grey-32 textsize-11 margin-bottom-clear margin-left-15 ">{{noticelist.NoticeDescription}}</p>
+          <p class="text-color-grey-32 textsize-11 margin-top-clear margin-left-15 ">{{noticelist.NoticeDate}}</p>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

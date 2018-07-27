@@ -1,0 +1,39 @@
+import { Component } from '@angular/core';
+import { NavController, NavParams, ViewController, ModalController } from 'ionic-angular';
+import { STMineService } from "../STMineService";
+import { FILE_SERVE_URL } from '../../../providers/Constants';
+import { CommonQuestionsModel } from './../STMineModel';
+
+@Component({
+    selector: 'Page-CommonQuestion',
+    templateUrl: 'CommonQuestion.html',
+})
+export class CommonQuestionPage {
+    show: number;
+    ImgUrl: String;//获取图片的url前缀
+    _CommonQuestionsModel: CommonQuestionsModel;
+    constructor(public navCtrl: NavController, public navParams: NavParams,
+        public viewCtrl: ViewController, public modalCtrl: ModalController,
+        private _STMineService: STMineService, public params: NavParams) {
+            this.ImgUrl = FILE_SERVE_URL;
+    }
+    ionViewDidLoad() {
+    }
+    ionViewDidEnter() {
+        this.CommonQuestions()
+    }
+    //常见问题接口
+    CommonQuestions() {
+        this._STMineService.CommonQuestions().subscribe((data: any) => {
+            if (data.Code == 0) {
+                this._CommonQuestionsModel = data.Data;
+                console.log(this._CommonQuestionsModel.BannerUrl);
+          
+            }
+        });
+    }
+    // 资产安全如何保障
+    ShowContain(index) {
+        this.show = index;
+    }
+}

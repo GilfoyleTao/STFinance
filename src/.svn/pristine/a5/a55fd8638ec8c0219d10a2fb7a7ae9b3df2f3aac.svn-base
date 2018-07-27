@@ -1,0 +1,92 @@
+export class GetProductListModel {
+    ProductId: string;
+    CategoryName: string;
+    ProductName: string;
+    ProductRate: string;
+    ProductTotalMoney: string;
+    ProductInvestMoney: string;
+    ProductLockPeriod: string;
+    L_Category: Array<L_Category>;
+}
+class L_Category {
+    CategoryName: string;
+    ProductList: Array<ProductList>;
+
+}
+class ProductList {
+    ProductId: string;
+    ProductName: string;
+    ProductStartDate: string;
+    ProductRate: string;
+    ProductRaiseRate: string;
+    ProductLockPeriod: string;
+    ProductMinPurchase: string;
+    ProductStatus: string;
+}
+
+export class getProductDetailModel {
+    ProductId:string;
+    ProductName:string;
+    ProductRate:string;
+    ProductTotalMoney:string;
+    ProductInvestMoney:string;
+    ProductLockPeriod:string;
+    ProductPlanStartDate:string;
+    ProductPlanEarnDate:string;
+    ProductStartMoney:string;
+    ProductStatus:string;
+}
+
+export class GetProductdeclaration {
+    L_DeclarationList: Array<L_DeclarationList>;
+    L_CreditList: Array<L_CreditList>;
+}
+
+class L_DeclarationList {
+    DeclarationId: string;
+    DeclarationName: string;
+    DeclarationDescription: string;
+}
+
+class L_CreditList {
+    CreditId: string;
+    CreditNum: string;
+    CreditorName: string;
+    CreditorNum: string;
+    CreditorMoney: string;
+
+}
+
+
+
+
+
+export class ProductPayment {
+    CouponId: string;
+    CouponName: string;
+    CouponType: string;
+    CouponMoney: string;
+    CouponStartDate: string;
+    CouponEndDate: string;
+
+}
+
+
+
+export class GetMyCoupon {
+    L_CouponList: Array<L_CouponList>;
+}
+
+class L_CouponList {
+    CouponId: string;
+    CouponName: string;
+    CouponType: string;
+    CouponMoney: string;
+    CouponStartDate: string;
+    CouponEndDate: string;
+
+}
+
+export class GetProductServiceAgreement {
+    ProductServiceAgreement: string;
+}

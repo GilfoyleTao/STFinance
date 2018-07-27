@@ -1,0 +1,131 @@
+Page-Register {
+    .aq-Modifypassword-telicon {
+        width: 14px;
+        height: 21px;
+    } 
+    .phoneinput {
+        padding-left: 30px;
+        margin-top: -34px;
+        margin-bottom: -10px;
+    }
+    .ion-navbar {
+        height: 64px;
+    }
+    .ValidationCode {
+        position: relative;
+        margin-top: 0px;
+        margin-bottom: -10px;
+        left: -10px;;
+    }
+    .ValidationCodePic {
+        float: right;
+        position: relative;
+        margin-bottom: -50px;
+        margin-top: 9px;
+        z-index: 99;
+    }
+    .ValidationCodeinput{
+        margin-top: -10px;
+    }
+    .aq-textsize-16 {
+        color: #3F3F3F;
+    }
+    .button-inner {
+        color: #CB0101;
+        margin-left: 5px;
+    }
+    .getNumber {
+        color: #CB0101;
+        font-size: 16px;
+    }
+    .submit {
+        color: white;
+    }
+    .submitbotton {
+        margin-left: -8px;
+        margin-top: 33px;
+        margin-right: -8px;
+    }
+    .submitbottonbot {
+        margin-left: 9px;
+        border-radius: 8px;
+    }
+    .aq-title-LoginPwd {
+        color: #626262;
+    }
+    .Messagecode {
+        position: absolute;
+        bottom: -7px;
+        left: -2px;
+    }
+    .Messageinput {
+        top: -5px;
+        position: relative;
+        padding: 0px;
+    }
+    .getMessagecode {
+        font-size: 16px;
+        margin-top: 5px;
+    }
+    .MessagecodeButton {
+        float: right;
+        z-index: 999;
+        width: 39%;
+        position: relative;
+        margin-bottom: -4px;
+    }
+    .Recommendation {
+        position: relative;
+        padding: 2px;
+    }
+    .loginpwd {
+        position: relative;
+        bottom: -6px;
+    }
+    .pwdinput {
+        top: -2px;
+        position: relative;
+        padding: 0px;
+    }
+    .aq-textsize-14 {
+        color: #A6A6A6;
+        margin-left: 100px;
+        padding-right: -100px;
+        margin-top: -45px;
+        position: relative;
+        bottom: -6px;
+    }
+    .border-color-grey {
+        border-bottom: 1px solid #A6A6A6;
+    }
+    .border-color-red-core {
+        border-bottom: 1px solid #CB0101 !important;
+    }
+    .Passwordsinput {
+        margin-top: -10px;
+    }
+    .TotalupdateMessage {
+        margin-top: 25px;
+        margin-left: 2px;
+        padding-right: -40px;
+    }
+    .Recommendationcode {
+        width: 68%;
+        position: relative;
+        margin-bottom: 2px;
+    }
+    .Passwords {
+        width: 70%;
+        position: relative;
+        bottom: -5px;
+        right: -3px;
+    }
+    .Recommendationcodeinput {
+        position: relative;
+        padding: 0px;
+    }
+    .Recommendation{
+        position: relative;
+        margin-bottom:6px;
+    }
+}

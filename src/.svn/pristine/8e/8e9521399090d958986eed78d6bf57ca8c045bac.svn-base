@@ -1,0 +1,31 @@
+import { Component } from '@angular/core';
+import { NavController, NavParams } from 'ionic-angular';
+import { TabsPage } from './../../../app/tabs/tabs';
+import { ViewChild } from '@angular/core';
+import { Slides } from 'ionic-angular';
+@Component({
+    selector: 'Page-HomeAdvertisement',
+    templateUrl: 'HomeAdvertisement.html',
+})
+export class HomeAdvertisementPage {
+    @ViewChild(Slides) 
+    slides: Slides;
+    sliders: any;
+    constructor(public navCtrl: NavController, public navParams: NavParams) {
+        this.sliders = [
+            { 'id': 0, 'AdvertisementPhoto': 'assets/img/advertise/Advertisement1.jpg' },
+            { 'id': 1, 'AdvertisementPhoto': 'assets/img/advertise/Advertisement2.jpg' },
+            { 'id': 2, 'AdvertisementPhoto': 'assets/img/advertise/Advertisement3.jpg' }
+        ]
+    }
+    slideChanged() {
+        let currentIndex = this.slides.getActiveIndex();
+        if (currentIndex == 3) {
+           this.goHomepage();
+        }
+    }
+    
+    goHomepage() {
+        this.navCtrl.push(TabsPage);
+    }
+}

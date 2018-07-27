@@ -1,0 +1,64 @@
+// Base
+import { NgModule } from '@angular/core';
+import { IonicPageModule } from 'ionic-angular';
+//Service
+import { StorageService } from './../../providers/StorageService';
+import { STMineService } from './STMineService';
+//Pages
+import { STMinePage } from './STMine';
+import { MineInfoPage } from './MineInfo/MineInfo';
+import { ModifyMineInfoPage } from './ModifyMineInfo/ModifyMineInfo';
+import { MineCouponPage } from './MineCoupon/MineCoupon';
+import { MineCouponDetailPage } from './MineCouponDetail/MineCouponDetail';
+import { FillinBankCardPage } from './FillinBankCard/FillinBankCard';
+import { CommonQuestionPage } from './CommonQuestion/CommonQuestion';
+import { AboutAppPage } from './AboutApp/AboutApp';
+import { MineCenterPage } from './MineCenter/MineCenter';
+import { MineBankCardPage } from './MineBankCard/MineBankCard';
+import { MineFeedbackPage } from './MineFeedback/MineFeedback';
+import { AuthenticationPage } from './Authentication/Authentication';
+import { RelieveBankCardPage } from './RelieveBankCard/RelieveBankCard';
+// import { ModifypasswordPage } from './../STLogin/Modifypassword/Modifypassword';
+@NgModule({
+    declarations: [
+        STMinePage,
+        MineCenterPage,
+        MineInfoPage,
+        ModifyMineInfoPage,
+        MineFeedbackPage,
+        MineCouponPage,
+        MineCouponDetailPage,
+        MineBankCardPage,
+        FillinBankCardPage,
+        CommonQuestionPage,
+        AboutAppPage,
+        AuthenticationPage,
+        RelieveBankCardPage
+        // ModifypasswordPage,
+    ],
+    imports: [
+        IonicPageModule.forChild(STMinePage)
+    ],
+    entryComponents: [
+        STMinePage,
+        MineCenterPage,
+        MineInfoPage,
+        ModifyMineInfoPage,
+        MineFeedbackPage,
+        MineCouponPage,
+        MineCouponDetailPage,
+        MineBankCardPage,
+        FillinBankCardPage,
+        CommonQuestionPage,
+        AboutAppPage,
+        AuthenticationPage,
+        RelieveBankCardPage
+        // ModifypasswordPage,
+    ],
+    exports: [
+        STMinePage
+    ],
+    providers: [STMineService, StorageService]
+})
+
+export class STMineModule { }

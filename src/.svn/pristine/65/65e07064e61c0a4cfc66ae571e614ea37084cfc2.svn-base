@@ -1,0 +1,101 @@
+<ion-header>
+  <ion-navbar color="MintCream">
+    <ion-title>买入</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="aq-bgcolor-grey-F4F4F4">
+  <ion-row class="aq-bgcolor-white-core-10 aq-border-bottom-white-20">
+    <ion-col col-6 text-left class="aq-height-50 ">
+      <p class="aq-textsize-16 aq-textcolor-grey-60 aq-padding-left-10 aq-margin-top-8">{{ProductName}}</p>
+    </ion-col>
+    <ion-col col-6 text-right class="aq-height-50 ">
+      <p class="aq-textsize-15 aq-textcolor-red-10 aq-padding-right-5 aq-margin-top-8" (click)="MoveProductIncomeDisplay()">收益及取出规则</p>
+    </ion-col>
+  </ion-row>
+  <ion-item no-lines class="aq-padding-top-15 aq-bgcolor-white-core-10">
+    <ion-icon name="logo-yen" class="aq-textsize-36 aq-padding-left-10 aq-textcolor-grey-60" item-start></ion-icon>
+    <ion-input type="tel" maxlength="10" placeholder="{{ProductStartMoney}}元起购" [(ngModel)]="Payment" class="aq-textcolor-grey-50 aq-textsize-14"></ion-input>
+  </ion-item>
+  <ion-row class="aq-height-0">
+    <ion-col col-1 class="aq-border-bottom-light-20"></ion-col>
+    <ion-col col-11 class="aq-border-bottom-white-20"></ion-col>
+  </ion-row>
+  <!-- <div class="aq-border-bottom  aq-margin-left-30"></div> -->
+  <!-- <ion-row class="aq-bgcolor-white-core-10 aq-height-50">
+    <ion-col>
+      <p class="aq-textsize-12 aq-textcolor-grey-50 aq-padding-left-25 aq-padding-top-5">
+        预计
+        <span class="aq-textcolor-pink-30">{{StartDate}}</span>产生收益，
+        <span class="aq-textcolor-pink-30">{{EndDate}}</span>收益到账
+      </p>
+    </ion-col>
+  </ion-row> -->
+  <!-- <div class="aq-border-F4F4F4"></div> -->
+  <ion-row class="aq-border-bottom aq-bgcolor-white-core-10 aq-padding-top-10 aq-height-50">
+    <ion-col>
+      <p class="aq-textsize-14 aq-textcolor-grey-50 aq-padding-left-25 aq-margin-top-5">支付方式</p>
+    </ion-col>
+  </ion-row>
+  <ion-row class="aq-bgcolor-white-core-10">
+    <ion-col col-2 text-center>
+      <img src="assets/img/ProductList/checkTrue.png" *ngIf="PayCardStatus" (click)="swithPayMethod('CardTrue')" class="aq-height-20 aq-width-20 aq-margin-top-6">
+      <img src="assets/img/ProductList/checkFalse.png" *ngIf="!PayCardStatus" (click)="swithPayMethod('CardFalse')" class="aq-height-20 aq-width-20 aq-margin-top-6">
+    </ion-col>
+    <ion-col col-10>
+      <p class="aq-textsize-14 aq-textcolor-grey-70 aq-margin-top-7 aq-margin-left-m15">银行卡支付</p>
+    </ion-col>
+  </ion-row>
+  <div class="aq-border-bottom  aq-margin-left-30 aq-margin-top-m5"></div>
+  <ion-row class="aq-bgcolor-white-core-10">
+    <ion-col col-2 text-center>
+      <img src="assets/img/ProductList/checkTrue.png" *ngIf="PayWXStatus" (click)="swithPayMethod('WXTrue')" class="aq-height-20 aq-width-20 aq-margin-top-6">
+      <img src="assets/img/ProductList/checkFalse.png" *ngIf="!PayWXStatus" (click)="swithPayMethod('WXFalse')" class="aq-height-20 aq-width-20 aq-margin-top-6">
+    </ion-col>
+    <ion-col col-10>
+      <!-- <p class="aq-textsize-14 aq-textcolor-grey-70 aq-margin-top-7 aq-margin-left-m15">微信支付</p> -->
+      <img src="assets/img/ProductList/wx.png" class="aq-width-72 aq-height-20 aq-margin-top-5 aq-margin-left-m17">
+    </ion-col>
+  </ion-row>
+
+  <ion-row class="aq-bgcolor-white-core-10 aq-margin-top-7">
+    <ion-col col-2 text-center>
+      <img src="assets/img/ProductList/card.png" class="aq-height-20 aq-width-20 aq-margin-top-13">
+    </ion-col>
+    <ion-col col-3>
+      <p class="aq-textsize-14 aq-textcolor-grey-70 aq-margin-top-13 aq-margin-left-m15">优惠券</p>
+    </ion-col>
+    <ion-col col-6 text-right (click)="MoveProductCoupons()">
+      <p class="aq-textsize-14 aq-textcolor-grey-70 aq-margin-left-m15">{{ProductCoupons?.CouponName}}</p>
+    </ion-col>
+    <ion-col col-1 text-right>
+      <ion-icon name="arrow-forward" class="aq-textsize-30 aq-textcolor-red-10 aq-margin-top-10 aq-padding-right-5"></ion-icon>
+    </ion-col>
+  </ion-row>
+  <ion-row class="aq-padding-top-5">
+    <ion-col col-2 text-right>
+      <img src="assets/img/ProductList/checkFalse.png" (click)="swithSelected('false')" *ngIf="!selectedStatus" class="aq-height-15 aq-width-15 aq-margin-top-15">
+      <img src="assets/img/ProductList/checkTrue.png" (click)="swithSelected('true')" *ngIf="selectedStatus" class="aq-height-15 aq-width-15 aq-margin-top-15">
+    </ion-col>
+    <ion-col col-10>
+      <p class="aq-textsize-14 aq-textcolor-grey-70">
+        同意服务协议及风险提示
+        <span class="aq-textsize-14 aq-textcolor-pink-30" (click)="MoveProductRiskStatement()">《风险声明》</span>
+      </p>
+    </ion-col>
+    <ion-col col-2></ion-col>
+    <ion-col col-6 text-left>
+      <p class="aq-textsize-14 aq-textcolor-blue-30 aq-margin-top-m17" (click)="MoveProductServiceAgreement()">《服务协议声明》</p>
+    </ion-col>
+  </ion-row>
+
+</ion-content>
+
+<ion-footer>
+  <ion-row>
+    <ion-col text-center col-12 class="aq-height-40" [ngClass]="{'aq-bgcolor-red-10':selectedStatus,'aq-bgcolor-grey-30':!selectedStatus}"
+      (click)="ProductPayment()">
+      <p no-padding class="aq-textsize-16 aq-textcolor-white-10 aq-margin-top-3">买入</p>
+    </ion-col>
+  </ion-row>
+</ion-footer>

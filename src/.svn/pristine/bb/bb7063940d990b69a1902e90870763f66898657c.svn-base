@@ -1,0 +1,116 @@
+Page-PropertyWithdraw {
+    p {
+        margin: 0px;
+        padding: 0px;
+    }
+    .background {
+        background: #F4F4F4;
+    }
+    .color-323232 {
+        color: #323232;
+    }
+    .font-size-16 {
+        font-size: 16px;
+    }
+    .font-size-15 {
+        font-size: 15px;
+    }
+    .width-400 {
+        width: 500px;
+    }
+    .line-height-50 {
+        line-height: 50px;
+    }
+    .height-50 {
+        height: 50px;
+    }
+    .color-CB0101 {
+        color: #CB0101;
+    }
+    .margin-left-14 {
+        margin-left: 14px;
+    }
+    .margin-right-10 {
+        padding-right: 10px;
+    }
+    .height-170 {
+        height: 170px;
+    }
+    .color-B5B5B5 {
+        color: #B5B5B5;
+    }
+    .color-FC3131 {
+        color: #FC3131;
+    }
+    .line-height-84 {
+        line-height: 80px;
+    }
+    .width-24 {
+        width: 24px;
+    }
+    .height-30 {
+        height: 30px;
+    }
+    .margin-top-22 {
+        margin-top: 22px;
+    }
+    .margin-top-6 {
+        margin-top: 6px;
+    }
+    .font-size-14 {
+        font-size: 14px;
+    }
+    .width-14 {
+        width: 14px
+    }
+    .height-14 {
+        height: 14px;
+    }
+    .height-42 {
+        height: 42px;
+    }
+    .line-height-44 {
+        line-height: 44px;
+    }
+    .margin-top-14 {
+        margin-top: 13px;
+    }
+    .margin-left-18 {
+        margin-left: 18px;
+    }
+    .height-84 {
+        height: 84px;
+    }
+    .margin-top-24 {
+        margin-top: 24px;
+    }
+    .margin-right-14 {
+        margin-right: 14px;
+    }
+    .height-44 {
+        height: 44px;
+    }
+    .margin-top-32 {
+        margin-top: 32px;
+    }
+    .border-no {
+        border: 0px;
+    }
+    .margin-left-12 {
+        margin-left: 12px;
+    }
+    .border-bottom-1 {
+        border-bottom: 1px solid #f2f2f2;
+    }
+    .margin-left-10 {
+        margin-left: 10px;
+    }
+    .checkbox-ios .checkbox-checked {
+        border-color: #CB0101;
+        background-color: #CB0101;
+    }
+    .checkbox-md .checkbox-checked {
+        border-color: #CB0101;
+        background-color: #CB0101;
+    }
+}

@@ -1,0 +1,138 @@
+<ion-header>
+    <ion-navbar color="light">
+        <ion-title>{{_GetMyPropertyDetailsModel?.ProductName}}</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content class="background">
+    <ion-grid no-padding>
+        <ion-row>
+            <ion-col class="height-210 widht-375">
+                <ion-row>
+                    <ion-col col-12 class="text-align-center aq-textcolor-white-core font-size-16 margin-top-13">昨日收益（元）</ion-col>
+                    <ion-col col-12 class="text-align-center aq-textcolor-white-core font-size-32 margin-top-6">{{_GetMyPropertyDetailsModel?.UserYesterdayMoney}}</ion-col>
+                    <!-- <ion-col col-12 class="text-align-center aq-textcolor-white-core font-size-16 margin-top-8">总金额{{_GetMyPropertyDetailsModel?.ProductTotalMoney}}元</ion-col> -->
+                    <ion-col col-12>
+                        <ion-row class="margin-top-16 background-img font-size-15">
+                            <ion-col col-1></ion-col>
+                            <ion-col col-5>
+                                <p class="text-align-center aq-textcolor-white-core">{{_GetMyPropertyDetailsModel?.UserEstimateMoney}}</p>
+                                <p class="text-align-center aq-textcolor-white-core margin-top-6 margin-top-10">预计收益（元）</p>
+                            </ion-col>
+                            <ion-col col-5>
+                                <p class="text-align-center aq-textcolor-white-core">{{_GetMyPropertyDetailsModel?.ProductRate}} %</p>
+                                <p class="text-align-center aq-textcolor-white-core margin-top-6 margin-top-10">预计年化收益率</p>
+                            </ion-col>
+                            <ion-col col-1></ion-col>
+                        </ion-row>
+                    </ion-col>
+                </ion-row>
+            </ion-col>
+        </ion-row>
+
+        <ion-row  class="aq-bgcolor-white-core height-42">
+            <ion-col col-6 class="">
+                <p class="aq-text-size-normal color-626262 line-height-42 margin-left-12">起息时间</p>
+            </ion-col>
+            <ion-col col-6 class="">
+                <p text-right class="aq-text-size-normal color-626262 line-height-42 margin-left-12 padding-right-12">{{_GetMyPropertyDetailsModel?.InComeStartDate | date: 'yyyy-MM-dd'}}</p>
+            </ion-col>
+        </ion-row>
+
+        <ion-row no-padding class="width-400">
+            <img src="assets/img/Line.png">
+        </ion-row>
+
+        <ion-row class="aq-bgcolor-white-core height-38">
+            <ion-col col-6 class="">
+                <p  class="aq-text-size-normal color-626262 line-height-38 margin-left-12">到息时间</p>
+            </ion-col>
+            <ion-col col-6 class="">
+                <p text-right class="aq-text-size-normal color-626262 line-height-38 margin-left-12 padding-right-12">{{_GetMyPropertyDetailsModel?.ProductDeadlineDate | date: 'yyyy-MM-dd'}}</p>
+            </ion-col>
+        </ion-row>
+
+        <ion-row no-padding class="width-400">
+            <img src="assets/img/Line.png">
+        </ion-row>
+
+    </ion-grid>
+
+    <ion-grid class="aq-bgcolor-white-core">
+        <ion-row class="aq-height-25">
+            <ion-col class="aq-padding-top-10">
+                <div class="aq-height-14 border-left-6">
+                    <img class="width-6 height-13 " src="assets/img/tu.png">
+                </div>
+                <p class="aq-text-size-normal aq-textcolor-grey-40 aq-padding-left-8 aq-margin-top-m17 aq-padding-left-15">为你推荐</p>
+            </ion-col>
+        </ion-row>
+        <ion-row no-padding class="padding-left-3"  *ngFor="let PropertyDetails of _GetMyPropertyDetailsModel?.L_RecommondProductList" (click) = "openProductDetail(PropertyDetails?.ProductId)">
+            <ion-col col-6 no-padding class="margin-top-16"><p class="aq-text-size-normal aq-textcolor-grey-40">{{PropertyDetails?.ProductName}}</p></ion-col>
+            <ion-col col-6 no-padding text-left class="margin-top-16"><p class="aq-textsize-13 aq-textcolor-pink-30">{{PropertyDetails?.ProductStartDate}}开售</p></ion-col>
+            <ion-col col-6 no-padding class="margin-top-16"> 
+                <p class="aq-textsize-24 aq-margin-top-m8 aq-textcolor-pink-30">{{PropertyDetails?.ProductRate}}%
+                </p>
+            </ion-col>
+            <ion-col col-3 no-padding class="margin-top-16"><p class="aq-textsize-24 aq-margin-top-m10 aq-textcolor-grey-40  ">{{PropertyDetails?.ProductLockPeriod}}天</p></ion-col>
+            <ion-col col-3 no-padding text-center>
+                <img src="assets/img/ProductList/unStart.png" *ngIf="PropertyDetails?.ProductStatus == 0.00"  class="aq-height-45 aq-width-45 aq-margin-top-4">
+                <img src="assets/img/ProductList/one.png" *ngIf="PropertyDetails?.ProductStatus > 0.00 && PropertyDetails?.ProductStatus <= 12.50" class="aq-height-45 aq-width-45 aq-margin-top-4">
+                <img src="assets/img/ProductList/two.png" *ngIf="PropertyDetails?.ProductStatus >12.50 && PropertyDetails?.ProductStatus <= 25.00" class="aq-height-45 aq-width-45 aq-margin-top-4">
+                <img src="assets/img/ProductList/three.png" *ngIf="PropertyDetails?.ProductStatus >25.00 && PropertyDetails?.ProductStatus <= 37.50" class="aq-height-45 aq-width-45 aq-margin-top-4">
+                <img src="assets/img/ProductList/four.png" *ngIf="PropertyDetails?.ProductStatus >37.50 && PropertyDetails?.ProductStatus <= 50.00" class="aq-height-45 aq-width-45 aq-margin-top-4">
+                <img src="assets/img/ProductList/five.png" *ngIf="PropertyDetails?.ProductStatus >50.00 && PropertyDetails?.ProductStatus <= 62.50" class="aq-height-45 aq-width-45 aq-margin-top-4">
+                <img src="assets/img/ProductList/six.png" *ngIf="PropertyDetails?.ProductStatus >62.50 && PropertyDetails?.ProductStatus <= 75.00" class="aq-height-45 aq-width-45 aq-margin-top-4">
+                <img src="assets/img/ProductList/seven.png" *ngIf="PropertyDetails?.ProductStatus >75.00 && PropertyDetails?.ProductStatus <= 87.50" class="aq-height-45 aq-width-45 aq-margin-top-4">
+            </ion-col>
+            <ion-col col-6 no-padding class="margin-top-32"><p class="aq-text-size-normal aq-textcolor-grey-50 aq-margin-top-m32">期望年均回报率</p></ion-col>
+            <ion-col col-6 no-padding class="margin-top-32"><p class="aq-text-size-normal aq-textcolor-grey-50 aq-margin-top-m32">理财额度 {{PropertyDetails?.ProductMinPurchase}}元</p></ion-col>
+            <ion-col no-padding col-12 class="margin-top-2 border-bottom-1 aq-margin-top-m25 height-1" ></ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>
+
+<ion-footer>
+    <ion-row class="aq-height-50">
+        <ion-col text-center col-6 [ngClass]="{'aq-bgcolor-red-10 aq-height-40 aq-height-50':Purchase , 'aq-bgcolor-black-70 aq-height-40 aq-height-50':!Purchase}" (click)="openProductPaymentPage()">
+            <p no-padding class="aq-textsize-16 aq-textcolor-white-10 aq-margin-top-7">继续购买</p>
+        </ion-col>
+        
+        <ion-col text-center col-6 [ngClass]="{'aq-bgcolor-red-20 aq-textcolor-white-10 aq-height-40 aq-height-50':Redeem , 'aq-bgcolor-black-10 aq-textcolor-white-10 aq-height-40 aq-height-50':!Redeem}"  (click)="OpenOverlay('overlay1')">
+            <p no-padding [ngClass]="{'aq-textsize-16 aq-textcolor-white-10':!Redeem , 'aq-textsize-16 aq-textcolor-white-10 aq-margin-top-8':Redeem}">赎回</p>
+            <p no-padding *ngIf="display" class="textsize-8 aq-textcolor-white-10 ">注：您购买的标未到期不可赎回</p>
+        </ion-col>
+        
+    </ion-row>
+</ion-footer>
+<!-- 弹窗效果 -->
+<div *ngIf="Overlay.overlay1" class="aq-common-overlay aq-border-radius-5 aq-width-300">
+    <ion-row no-padding>
+        <ion-col text-center>
+            <input text-center type="number" placeholder="请输入赎回金额" [(ngModel)]="redemptionMoney" class="no-border aq-textcolor-grey-50 aq-textsize-16 aq-margin-top-30">
+            <!-- <button class="aq-textcolor-red-10 aq-textsize-15 aq-bgcolor-white-core " end>全部赎回</button> -->
+        </ion-col>
+    </ion-row>
+    <ion-row no-padding text-center>
+        <ion-col col-1></ion-col>
+        <ion-col col-10 no-padding class="width-80 height-1 bgcolor-b5 aq-margin-top-12"></ion-col>
+        <ion-col col-1></ion-col>
+    </ion-row>
+    <ion-row no-padding class="aq-margin-top-20">
+        <ion-col text-center class="aq-textsize-15 aq-textcolor-black-core">
+            <p class="aq-textcolor-grey-50 aq-text-size-normal">*可赎回
+                <span class="aq-textcolor-pink-30 aq-text-size-normal aq-margin-left-10 line-height-14">{{_GetRedeemMoneyMidel}}元</span>
+            </p>
+        </ion-col>
+    </ion-row>
+    <ion-row text-center padding-top>
+        <ion-col col-1></ion-col>
+        <ion-col col-10  (click)="RedeemMoney()">
+            <button ion-button block class="aq-bgcolor-red-10 aq-textcolor-white-core aq-height-32 aq-textsize-16 border-radius-6">
+                确认赎回
+            </button>
+        </ion-col>
+        <ion-col col-1></ion-col>
+    </ion-row>
+</div>
+<div *ngIf="backdrop" class="aq-overlay-backdrop" (click)="CloseOverlay()"></div>

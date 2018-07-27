@@ -1,0 +1,49 @@
+// Base
+import { NgModule } from '@angular/core';
+import { IonicPageModule } from 'ionic-angular';
+import { ComponentsModule } from "../../Component/components.module";
+//Service
+import { StorageService } from './../../providers/StorageService';
+import { STHomeService } from './STHomeService';
+//Pages
+import { STHomePage } from './STHome';
+import { HomepagePage } from './Homepage/Homepage';
+import { HomeSignPage } from './HomeSign/HomeSign';
+import { HomeRiskManagementPage } from './HomeRiskManagement/HomeRiskManagement';
+import { HomeBonusPage } from './HomeBonus/HomeBonus';
+import { HomeNoticePage } from './HomeNotice/HomeNotice';
+import { HomeNoticeDetailsPage } from './HomeNoticeDetails/HomeNoticeDetails';
+import { HomeAdvertisementPage } from './HomeAdvertisement/HomeAdvertisement';
+// import { ModifypasswordPage } from './../STLogin/Modifypassword/Modifypassword';
+
+@NgModule({
+    declarations: [
+        HomepagePage,
+        HomeSignPage,
+        HomeRiskManagementPage,
+        HomeBonusPage,
+        HomeNoticePage,
+        HomeNoticeDetailsPage,
+        STHomePage,
+        HomeAdvertisementPage
+    ],
+    imports: [
+        IonicPageModule.forChild(STHomePage),
+        ComponentsModule
+    ],
+    entryComponents: [
+        HomepagePage,
+        HomeSignPage,
+        HomeBonusPage,
+        HomeRiskManagementPage,
+        HomeNoticePage,
+        HomeNoticeDetailsPage,
+        HomeAdvertisementPage
+    ],
+    exports: [
+        STHomePage
+    ],
+    providers: [STHomeService, StorageService]
+})
+
+export class STHomeModule { }

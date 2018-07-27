@@ -1,0 +1,92 @@
+Page-MineCenter {
+    .background{
+        height: 180px;
+        width: 100%;
+    }
+    // 背景
+    .Userbackground {
+        margin-bottom: -25px;
+        margin-left: -2px;
+    } // 设置的文字样式
+    .Set {
+        top: 1px;
+        right: 13px;
+        position: absolute;
+        float: right;
+    } // 用户头像
+    .Userpicture {
+        top: 30px;
+        left: 5px;
+        position: absolute;
+        transform: scale(0.5, 0.5);
+    } //总列表 D Sr. 后加
+    .Totallist {
+        margin-top: 17px;
+    } // 用户名
+    .Username {
+        top:35%;
+        left:35%;
+        position: absolute;
+    }
+    .UserRecommendCode{
+        top:55%;
+        left:35%;
+        position: absolute;
+        letter-spacing: 1px;
+    } 
+    // 我的钱包（row的样式）
+    .Wallet {
+        border-bottom: 1px solid #EEEEEE;
+        height: 45px;
+    } // 小图片
+    .Walletpic {
+        margin-top: 2px;
+        transform: scale(0.5, 0.5);
+        margin-left: -7px;
+    } // 我的钱包样式
+    .Mywallet {
+        top: 12px;
+        left: -23px;
+        position: absolute;
+        letter-spacing: 1px;
+    } // 优惠券文字样式
+    .Myticket {
+        top: 10px;
+        left: -23px;
+        position: absolute;
+        letter-spacing: 1px;
+    } // 箭头前文字
+    .Before-arrows {
+        top: 10px;
+        right: 5px;
+        position: absolute;
+        letter-spacing: 1px;
+    } // 箭头
+    .Arrows {
+        margin-top: 3px;
+        transform: scale(0.5, 0.5);
+    } // 灰色条
+    .Graycolor {
+        height: 14px;
+        margin-top: -5px;
+    } // 会员中心+安全保障+常见问题+用户反馈文字样式
+    .WalletMymember {
+        border-bottom: 1px solid #EEEEEE;
+        height: 45px;
+        margin-top: -3px;
+    }
+    .Mymember {
+        top: 12px;
+        left: -23px;
+        position: absolute;
+        letter-spacing: 1px;
+    } // 常见问题图标
+    .Problempic {
+        transform: scale(0.5, 0.5);
+        margin-top: -2px;
+        margin-left: -5px;
+    }
+    .num_BankCardPic{
+        font-size: 15px;
+    }
+}

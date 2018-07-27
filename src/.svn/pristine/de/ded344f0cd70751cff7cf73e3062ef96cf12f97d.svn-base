@@ -1,0 +1,57 @@
+export class SubmitphonenumberMoveRegisterViewModel {
+}
+export class GetUserInfoModel {
+    UserId: any;
+    UserTrueName: string;
+    UserName: string;
+    UserPhone: any;
+    UserSex: any;
+    UserAge: any;
+    UserBirthday: any;
+    UserIdentityCode: any;
+    UserPhoto: any;
+    UserRecommendCode: any;
+    UserAuthNameCode:any;
+    L_BankCardList: Array<L_BankCardList>;
+    L_CouponList: Array<L_CouponList>;
+}
+class L_BankCardList {
+    BankCardId: any;
+    BankCardName: any;
+    BankCardNum: any;
+    BankCardPhoto: any;
+}
+class L_CouponList {
+    CouponId: any;
+    CouponName: any;
+    CouponType: any;
+    CouponMoney: any;
+    CouponStartDate: any;
+    CouponEndDate: any;
+}
+export class CommonQuestionsModel {
+   BannerUrl:any;
+   L_Questions:Array<L_Questions>;
+}
+
+class L_Questions{
+    RiskTitle: any;
+    RiskDescription: any;
+}
+export class AboutAppModel {
+    AppContactPhone: any;
+    AppTitle : any;
+    LogoUrl: any;
+}
+export class ModifyUserInfoModel{
+    UserId: any;
+    UserTrueName: string;
+    UserName: string;
+    UserPhone: any;
+    UserIdentityCode: any;
+    UserPhoto: any;
+    UserRecommendCode: '';
+}
+export class GetCouponDetailModel{
+    CouRule:any;
+}

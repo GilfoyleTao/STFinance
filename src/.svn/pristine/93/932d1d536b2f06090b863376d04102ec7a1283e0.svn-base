@@ -1,0 +1,94 @@
+import { Injectable } from '@angular/core';
+import { Response } from '@angular/http';
+import { Observable } from "rxjs";
+import { HttpService } from "../../providers/HttpService";
+
+
+
+
+@Injectable()
+export class STHomeService {
+
+    constructor(public httpService: HttpService) {
+
+    }
+    //初始化页面
+    InitHomepage(UserId): Observable<any> {
+        let url = 'STHome/InitHomePage';
+        let postBody = {
+            UserId: UserId
+        };
+
+        return this.httpService.getWebApi(url, postBody).map((res: Response) => res);
+    }
+
+    InitHomeSign(): Observable<any> {
+        let url = 'STHome/InitHomeSign';
+        let postBody = {
+        }
+
+        return this.httpService.getWebApi(url, postBody).map((res: Response) => res);
+    }
+
+    //风控信息
+    GetRiskManagementInfo(currentUserID: string, PageNum: string, RecordNum: number): Observable<any> {
+        let url = 'STHome/GetRiskManagementInfo';
+        let postBody = {
+            currentUserID: currentUserID,
+            PageNum: PageNum,
+            RecordNum: RecordNum
+        }
+        return this.httpService.getWebApi(url, postBody).map((res: Response) => res);
+    }
+
+    GetOfficialNoticeList(): Observable<any> {
+        let url = 'STHome/GetOfficialNoticeList';
+        let postBody = {
+        }
+
+        return this.httpService.getWebApi(url, postBody).map((res: Response) => res);
+    }
+    //获得公告列表 
+    GetHomeNotice(UserId: string, Status: string): Observable<any> {
+        let url = 'STHome/GetHomeNotice';
+        let postBody = {
+            UserId: UserId,
+            Status: Status,
+        }
+
+        return this.httpService.getWebApi(url, postBody).map((res: Response) => res);
+    }
+    //获得公告详情
+    GetHomeNoticeDetail(NoticeId: string): Observable<any> {
+        let url = 'STHome/GetHomeNoticeDetail';
+        let postBody = {
+            NoticeId: NoticeId
+        }
+        return this.httpService.getWebApi(url, postBody).map((res: Response) => res);
+    }
+    //阅读消息
+    ReadNotice(UserId: string, NoticeId: string): Observable<any> {
+        let url = 'STHome/ReadNotice';
+        let postBody = {
+            UserId: UserId,
+            NoticeId: NoticeId,
+        }
+        return this.httpService.getWebApi(url, postBody).map((res: Response) => res);
+    }
+    // 签到
+    SignToday(UserId: string, Date: any): Observable<any> {
+        let url = 'STHome/SignToday';
+        let postBody = {
+            UserId: UserId,
+            Date: Date,
+        }
+        return this.httpService.getWebApi(url, postBody).map((res: Response) => res);
+    }
+    GetSignInfo(UserId: string): Observable<any> {
+        let url = 'STHome/GetSignInfo';
+        let postBody = {
+            UserId: UserId
+        }
+        return this.httpService.getWebApi(url, postBody).map((res: Response) => res);
+    }
+}

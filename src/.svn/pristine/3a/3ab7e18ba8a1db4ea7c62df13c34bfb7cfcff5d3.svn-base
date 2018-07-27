@@ -1,0 +1,53 @@
+<ion-header>
+    <ion-navbar color="MintCream">
+        <ion-title class="aq-textsize-16" >登录</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <ion-grid>
+        <ion-row>
+            <ion-col col-12 >
+                <img src="assets/img/login/logo.png"  alt="" class="Logo">
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    
+    <ion-grid>
+      <ion-row>
+        <ion-col col-10 class="MobilePhone">
+            <img src="assets/img/login/phone.png"  alt="" class="phonelogo">
+            <ion-input [ngClass]="{'border-color-red-core': MobilePhone}"  type="tel"  maxlength="11"  class="border-color-grey aq-textsize-16  MobilePhoneinput" [(ngModel)]="Phone" >{{Phone}}</ion-input>
+        </ion-col>
+        <ion-col col-2></ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-grid>
+        <ion-row>
+            <ion-col col-10 class="Password">
+                <img src="assets/img/login/lock.png"  alt="" class="Passwordlogo">
+                <ion-input [ngClass]="{'border-color-red-core': Password}"  type="password" placeholder="请输入密码" class="border-color-grey  aq-textsize-16 MobilePhoneinput" [(ngModel)]="Password"></ion-input>
+          </ion-col>
+          <ion-col col-2></ion-col>
+        </ion-row>
+      </ion-grid> 
+
+    <ion-grid>
+        <ion-row>
+          <ion-col col-10> 
+            <button ion-button full  class="aq-height-35 aq-bgcolor-grey-30 aq-textsize-18  Nextstep"
+             (click)="UserLogin()"  [ngClass]="{'aq-bgcolor-red-10':Password,'aq-bgcolor-grey-30':!Password}" [disabled]="!Password">
+            <span class="aq-textcolor-white-core">下一步</span></button>
+          </ion-col>
+          <ion-col col-2></ion-col>
+        </ion-row>
+      </ion-grid>
+
+    <ion-grid>
+        <ion-row>
+            <ion-col col-12 class="forgetpassword"  (click)="ForgetPassword()"> 忘记密码&nbsp;?</ion-col>
+        </ion-row>
+      
+    </ion-grid>
+</ion-content>

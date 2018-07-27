@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-navbar >
+    <ion-title >登录或注册</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <ion-row text-center>
+        <img src="assets/img/Mine/1.png">
+    </ion-row>
+    <ion-row  style="margin-top: 25px;height: 43px;"> 
+      <ion-col col-1 text-left no-padding  style="margin-left: 25px;margin-top: 13px">
+                <img src="assets/img/login/phone.png">
+      </ion-col>
+    <ion-col col-7 text-left style="font-size: 15px; color: gray;" class="item item-input">
+        <ion-input type="text" [(ngModel)]="mobile"  placeholder="请输入手机号"></ion-input>
+      </ion-col>  
+  </ion-row> 
+  
+  <ion-row style="margin-left: 25px;margin-right:25px;"class=" height-backgroundcolor2" ></ion-row>
+
+  <ion-row padding-top >
+    <ion-col  text-center *ngIf="mobile"  (click)="goFillinpassword()" style="background:rgb(170, 10, 10);color:white; font-size: 20px;margin-left: 25px;margin-right:25px;margin-top: 20px;border-radius:5px;">
+      下一步
+    </ion-col>
+    <ion-col  text-center *ngIf="!mobile"  style="background:gray;color:white; font-size: 20px;margin-left: 25px;margin-right:25px;margin-top: 20px;border-radius:5px;">
+        下一步
+      </ion-col>
+  </ion-row>
+
+</ion-content>
+  <!-- <ion-row>
+    <ion-col (click)="goRegister()" text-center style="color: firebrick;margin-top: 8px" >
+      注册
+      </ion-col>
+  </ion-row>
+ -->

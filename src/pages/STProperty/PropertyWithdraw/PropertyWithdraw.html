@@ -1,0 +1,89 @@
+<ion-header>
+    <ion-navbar color="light">
+        <ion-title>提现</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <ion-row style="height: 10%;">
+        <ion-col text-left style="font-size:20px;margin-left: 10px;margin-top:-3px;">
+            <p>提现金额</p>
+        </ion-col>
+        <ion-col text-right style="font-size:17px;color:red;margin-right: 3%;margin-top:3px;" (click)="goProductIncomeDisplay()">
+            <p>收益及取出规则</p>
+        </ion-col>
+    </ion-row>
+    <ion-row>
+        <img src="assets/img/Line.png" width="100%">
+    </ion-row>
+
+    
+    <ion-row class="color-lightgrey padding-left-20 border-bottom height-80 bg-color-white">
+        <ion-col col-2 style="margin-top: 23px;margin-left:5px;">
+                <img src="assets/img/RMB.png" style="width: 23px;height: 34px;" />
+        </ion-col>
+        <ion-col col-6 style="margin-top: 10%;">
+            <input type="number" class="height-10 color-lightgrey border-none" style="border: none; font-size:15px;"
+            [(ngModel)]="quanbu" placeholder="最多取500.00元"/>
+        </ion-col>
+        <ion-col col-3 text-right style="margin-top:5%;color:red;font-size:16px;">
+            <p (click)="quanbuquchu()">全部取出</p>
+        </ion-col>
+    </ion-row>
+
+
+    <ion-row style="margin-left: 10%;margin-bottom: 15%;">
+        <img src="assets/img/Line.png">
+    </ion-row>
+
+    <ion-row>
+        <img src="assets/img/Line-4.png" width="100%">
+    </ion-row>
+
+    <ion-row style="height:8%;margin-top:3%;margin-bottom:-1.5%;">
+        <ion-col style="font-size:18px;margin-left: 3%;color:gray">
+            取出到
+        </ion-col>
+    </ion-row>
+
+    <ion-row>
+        <img src="assets/img/Line.png" width="100%">
+    </ion-row>
+
+    <ion-item>
+        <ion-row>
+          <ion-col col-2 *ngIf="!paym"><img src="assets/img/ProductList/checkTrue.png" class="height-20 width-20"></ion-col>
+          <ion-col col-2 *ngIf="paym"><img src="assets/img/ProductList/checkFalse.png" class="height-20 width-20" block (click)="nopaym()"></ion-col>
+          <ion-col col-10>银行卡（招商银行8899）</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-2 *ngIf="!paym"><img src="assets/img/ProductList/checkFalse.png" block (click)="yespaym()" class="height-20 width-20"></ion-col>
+          <ion-col col-2 *ngIf="paym"><img src="assets/img/ProductList/checkTrue.png" class="height-20 width-20"></ion-col>
+          <ion-col col-10>银行卡（北京银行8899）</ion-col>
+        </ion-row>
+      </ion-item>
+
+</ion-content>
+
+<ion-footer>
+    <ion-row text-center style=" font-size:15px;background:red; height:40px;color:white;">
+        <ion-col style="margin-top:4px;" (click)="OpenOverlay88('overlay88')">
+            提现
+        </ion-col>
+    </ion-row>
+</ion-footer>
+
+<div id="overlay88" class="aq-common-overlay aq-border-radius-5">
+    <ion-row>
+        <ion-col text-center style="color: rgb(170, 10, 10); font-size: 18px">
+            提现成功
+        </ion-col>
+    </ion-row>
+    <ion-row padding-top>
+        <ion-col text-center style="background:rgb(170, 10, 10);color:white; font-size: 20px;margin-left: 5px;margin-right:5px;margin-bottom: 5px;"
+            (click)="CloseOverlay88()">
+            确认
+        </ion-col>
+    </ion-row>
+</div>
+<div class="aq-overlay-backdrop" (click)="CloseOverlay88()"></div>

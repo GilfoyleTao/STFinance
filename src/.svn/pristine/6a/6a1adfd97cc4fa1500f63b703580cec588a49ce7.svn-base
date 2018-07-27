@@ -1,0 +1,78 @@
+export class InitHomePageModel{
+    IsUnread:any;
+    L_ProductList:Array<L_ProductList>;
+    L_BannerList:Array<L_BannerList>;
+    PageDescription:string;
+
+}
+class L_ProductList{
+    ProductId: string;
+    CategoryName: string;
+    ProductName: string;
+    ProductRate: string;
+    ProductTotalMoney: any;
+    ProductInvestMoney: any;
+    ProductLockPeriod: string;
+    ProductPhoto: string;
+}
+
+class L_BannerList{
+    
+}
+
+export class InitHomepageViewModel {
+    
+}
+export class DaysCollectModel{
+    Date:any;
+    SignStatus:string;
+}
+
+
+export class GetHotExchangeModel{
+    
+    L_ExchangeList:Array<L_ExchangeList>;
+   
+}
+class L_ExchangeList{
+    ExchangeRule:string;
+    ExchangePhoto:string;
+
+}
+
+export class GetRedPacketMoneyModel{
+
+    RedPacketId:string;
+    Money:string;
+}
+
+export class GetRiskManagementInfoModel{
+    ImgUrl:string;
+   
+}
+export class GetHomeNoticeModel{
+    L_Notice:Array<L_Notice>;
+}
+
+class L_Notice{
+    NoticeState:any;
+    NoticeId:string;
+    NoticeTitle:string;
+    NoticeDescription:string;
+    NoticeDate:string;
+
+}
+export class GetHomeNoticeDetailModel{
+    NoticeDescription:string;  
+}
+
+export class ReadNoticeModel{
+    Status:any;
+}
+
+export class SignTodayModel{
+    AccumulateSignDays:any;
+}
+export class GetSignInfoModel{
+    SignStatus:boolean;
+}

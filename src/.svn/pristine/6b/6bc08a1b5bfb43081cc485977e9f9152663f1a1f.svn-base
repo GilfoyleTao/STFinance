@@ -1,0 +1,72 @@
+import { Component } from '@angular/core';
+import { NavController, NavParams, ViewController, ModalController } from 'ionic-angular';
+import { FillinBankCardPage } from './../FillinBankCard/FillinBankCard';
+import { STMineService } from "../STMineService";
+import { GetUserInfoModel } from './../STMineModel';
+import { USER_INFO, isLogin } from './../../../providers/Constants';
+import { StorageService } from "../../../providers/StorageService";
+@Component({
+    selector: 'Page-MineBankCard',
+    templateUrl: 'MineBankCard.html',
+})
+export class MineBankCardPage {
+    // _GetUserInfoModel:any;
+    IsShow: boolean;
+    UserId: any;
+    isLogin: any;
+    USER_INFO: any;
+    _GetUserInfoModel: GetUserInfoModel;
+    constructor(
+        public navCtrl: NavController, 
+        public navParams: NavParams, 
+        public viewCtrl: ViewController, 
+        public modalCtrl: ModalController,
+        private _STMineService: STMineService,
+        public _StorageService: StorageService,
+    ) {
+        this._GetUserInfoModel = this.navParams.get('_GetUserInfoModel');
+        this.isLogin = this._StorageService.read(isLogin);
+        if (this.isLogin) {
+            this.USER_INFO = this._StorageService.read(USER_INFO);
+            console.log(this.USER_INFO)
+            this.UserId = this.USER_INFO.UserId;
+            this.IsShow = true;
+        }
+        else {
+            this.UserId = '0';
+            this.IsShow = false;
+        }
+    }
+    
+    ionViewDidLoad() {
+
+    }
+
+    ionViewDidEnter() {
+this.GetUserInfo(this.UserId);
+    }
+    // 跳到添加银卡行卡
+    MoveFillinBankCard(){
+        this.navCtrl.push(FillinBankCardPage);
+    }
+    // 跳回个人中心
+    MoveMineCenterPage(){
+        this.navCtrl.parent.select(3);
+    }
+    //接口
+    GetUserInfo(UserId) {
+        this._STMineService.GetUserInfo(UserId).subscribe((data: any) => {
+            if (data.Code == 0) {
+                this._GetUserInfoModel = data.Data;
+                // if (this._GetUserInfoModel.UserPhoto == null || this._GetUserInfoModel.UserPhoto == '') {
+                
+                //     this.IsShow = false;
+                // }
+                // else {
+                //     console.log("1111");
+                //     this.IsShow = true;
+                // }
+            }
+        });
+    }
+}

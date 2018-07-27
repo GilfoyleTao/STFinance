@@ -1,0 +1,24 @@
+<ion-header>
+    <ion-navbar color="MintCream">
+        <ion-title class="aq-textsize-16">我的优惠券</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <ion-item>
+        <ion-col col-6>
+            <img src="assets/img/ProductList/percent-ten.png" class="height-1 width-1" *ngFor="let item of cou1" (click)="goProductPayment(item)">
+        </ion-col>
+        <ion-col col-6>
+            <img src="assets/img/ProductList/percent-TW.png" class="height-1 width-1"  *ngFor="let item of cou2" (click)="goProductPayment(item)">
+        </ion-col>
+    </ion-item>
+    <ion-item>
+        <ion-col col-6>
+            <img src="assets/img/ProductList/percent-ten.png" class="height-1 width-1"  *ngFor="let item of cou3" (click)="goProductPayment(item)">
+        </ion-col>
+        <ion-col col-6>
+            <img src="assets/img/ProductList/percent-TW.png" class="height-1 width-1"  *ngFor="let item of cou4" (click)="goProductPayment(item)">
+        </ion-col>
+    </ion-item>
+</ion-content>

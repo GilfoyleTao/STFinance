@@ -1,0 +1,126 @@
+<!-- 设置及用户头像 -->
+  <ion-content> 
+<!--         <ion-list>-->        
+        <div style="position: relative">
+            <div>
+                <ion-col col-4 style="position: absolute; margin-left: 30px ;margin-top: 50px">
+                    <img src="assets/img/Mine/Userpic.png"(click)="goset()" width="70" height="70">
+                </ion-col>
+                <ion-col col-4 text-left style="position: absolute;margin-left: 110px;margin-top:70px;font-size: 20px;color: white;" (click)="goset()">{{onename}}</ion-col>
+                <ion-col col-3 text-left style="position: absolute;margin-left: 320px;margin-top:5px; color: white;" (click)="goset()">         设置
+                </ion-col>    
+            </div>
+            <img src="assets/img/Mine/background.png">
+        </div>
+
+
+        <ion-row  no-padding (click)="goMineBankCard()"  style="height: 43px;">
+                <ion-col col-1 text-center no-padding style="margin-left: 5px;margin-top: 13px">
+                        <img src="assets/img/Mine/Wallet.png" height="14px" width="21px">
+                </ion-col>
+                <ion-col col-3  class="line-height-52" text-left no-padding style="font-size: 15px">我的钱包</ion-col>
+                <ion-col col-6  class="line-height-52" text-right no-padding style="color: dimgray">3张已绑定</ion-col>
+                <ion-col col-1 text-right no-padding  style="margin-left: 5px;margin-top: 13px">
+                        <img src="assets/img/Mine/More.png" height="13px" width="8px">
+                </ion-col>
+        </ion-row>
+
+        <ion-row class=" height-backgroundcolor2" ></ion-row>
+
+        <ion-row  no-padding (click)="goMineCoupon()" style="height: 43px;">
+                <ion-col col-1 text-center no-padding style="margin-left: 5px;margin-top: 13px">
+                        <img src="assets/img/Mine/优惠.png" height="14px" width="21px">
+                </ion-col>
+                <ion-col col-3   class="line-height-52" text-left no-padding style="font-size: 15px">我的优惠券</ion-col>
+                <ion-col col-6  class="line-height-52" text-right no-padding style="color: dimgray">3张可用</ion-col>
+                <ion-col col-1 text-right no-padding  style="margin-left: 5px;margin-top: 13px">
+                        <img src="assets/img/Mine/More.png" height="13px" width="8px">
+                </ion-col>
+        </ion-row>
+
+        <ion-row class=" height-backgroundcolor2" ></ion-row>
+        
+        <ion-row  no-padding (click)="gorenzheng('overlay10')"  style="height: 43px;">
+                        <ion-col col-1 text-center no-padding style="margin-left: 5px;margin-top: 10px">
+                                <img src="assets/img/RealName.png" height="21px" width="18px">
+                        </ion-col>
+                        <ion-col col-9  class="line-height-52" text-left no-padding style="font-size: 15px">实名认证</ion-col>
+                        <ion-col col-1 text-right no-padding  style="margin-left: 5px;margin-top: 13px">
+                                <img src="assets/img/Mine/More.png" height="13px" width="8px">
+                        </ion-col>
+                </ion-row>
+                <ion-row class=" height-backgroundcolor2" ></ion-row>
+     
+        <ion-row class=" height-backgroundcolor1" ></ion-row>
+
+        <ion-row  no-padding  style="height: 43px;" >
+                <ion-col col-1 text-center no-padding style="margin-left: 5px;margin-top: 10px">
+                        <img src="assets/img/Mine/会员.png" height="18px" width="21px">
+                </ion-col>
+                <ion-col col-3  class="line-height-52" text-left no-padding style="font-size: 15px">会员中心</ion-col>
+                <ion-col col-6  class="line-height-52" text-right no-padding style="color: dimgray">升级中，待开放</ion-col>
+                <ion-col col-1 text-right no-padding  style="margin-left: 5px;margin-top: 13px">
+                        <img src="assets/img/Mine/More.png" height="13px" width="8px">
+                </ion-col>
+        </ion-row>
+        <ion-row class=" height-backgroundcolor2" ></ion-row>
+
+        <ion-row  no-padding (click)="goRiskManagement()"  style="height: 43px;">
+                <ion-col col-1 text-center no-padding style="margin-left: 5px;margin-top: 10px">
+                        <img src="assets/img/Mine/安全.png" height="21px" width="18px">
+                </ion-col>
+                <ion-col col-9  class="line-height-52" text-left no-padding style="font-size: 15px">安全保障</ion-col>
+                <ion-col col-1 text-right no-padding  style="margin-left: 5px;margin-top: 13px">
+                        <img src="assets/img/Mine/More.png" height="13px" width="8px">
+                </ion-col>
+        </ion-row>
+        <ion-row class=" height-backgroundcolor2" ></ion-row>
+
+        <ion-row  no-padding (click)="goCommonQuestion()"  style="height: 43px;">
+                <ion-col col-1 text-center no-padding style="margin-left: 5px;margin-top: 13px">
+                        <img src="assets/img/Mine/问题.png" height="15px" width="21px">
+                </ion-col>
+                <ion-col col-9 class="line-height-52" text-left no-padding style="font-size: 15px">常见问题</ion-col>
+                <ion-col col-1 text-right no-padding  style="margin-left: 5px;margin-top: 13px">
+                        <img src="assets/img/Mine/More.png" height="13px" width="8px">
+                </ion-col>
+        </ion-row>
+        <ion-row class=" height-backgroundcolor2" ></ion-row>
+
+        <ion-row  no-padding (click)="goMineFeedback()"  style="height: 43px;">
+                <ion-col col-1 text-center no-padding style="margin-left: 5px;margin-top: 10px">
+                        <img src="assets/img/Mine/反馈.png" height="21px" width="20px">
+                </ion-col>
+                <ion-col col-9 class="line-height-52" text-left no-padding style="font-size: 15px">用户反馈</ion-col>
+                <ion-col col-1 text-right no-padding  style="margin-left: 5px;margin-top: 13px">
+                        <img src="assets/img/Mine/More.png" height="13px" width="8px">
+                </ion-col>
+        </ion-row>
+        <ion-row class=" height-backgroundcolor2" ></ion-row>
+
+        <ion-row  no-padding (click)="goAboutApp()"  style="height: 43px;">
+                <ion-col col-1 text-center no-padding style="margin-left: 5px;margin-top: 12px">
+                        <img src="assets/img/Mine/关于.png" height="18px" width="19px">
+                </ion-col>
+                <ion-col col-9 class="line-height-52" text-left no-padding style="font-size: 15px">关于app</ion-col>
+                <ion-col col-1 text-right no-padding  style="margin-left: 5px;margin-top: 13px">
+                        <img src="assets/img/Mine/More.png" height="13px" width="8px">
+                </ion-col>
+        </ion-row>
+        <ion-row class=" height-backgroundcolor2" ></ion-row>
+
+ </ion-content> 
+
+ <div id="overlay10" class="aq-common-overlay aq-border-radius-5">
+        <ion-row>
+            <ion-col text-center style="color: rgb(170, 10, 10); font-size: 18px">
+                不可重复认证
+            </ion-col>
+        </ion-row>
+        <ion-row padding-top>
+            <ion-col  text-center style="background:rgb(170, 10, 10);color:white; font-size: 20px;margin-left: 5px;margin-right:5px;margin-bottom: 5px;" (click)="YES()">
+                确认
+            </ion-col>
+        </ion-row>
+      </div>
+      <div class="aq-overlay-backdrop" (click)="YES()"></div>

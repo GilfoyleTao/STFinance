@@ -1,0 +1,222 @@
+<ion-header>
+  <ion-navbar color="MintCream">
+    <ion-title>新手标J0543</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-item text-center>
+    <ion-row>
+      <ion-col text-center class="text-color-1 text-size-3"><strong>12.66%</strong></ion-col>
+    </ion-row>
+    <h4 style="color:dimgrey" text-center class="height-35">预计年化收益率</h4> 
+
+    <ion-row *ngIf="!pg">
+      <ion-col col-3>
+        <p text-center class="text-color-1">10万</p>
+        <h4 style="color:dimgrey" text-center>总金额</h4> 
+      </ion-col>
+      <ion-col col-1>
+        <img src="assets/img/Line-1.png" >
+      </ion-col>
+      <ion-col col-4>
+        <p text-center class="text-color-1">2018-5-31</p>
+        <h4 style="color:dimgrey" text-center>截止日期</h4> 
+      </ion-col>
+      <ion-col col-1>
+          <img src="assets/img/Line-1.png" >
+      </ion-col>
+      <ion-col col-3>
+        <p text-center class="text-color-1">30天</p>
+        <h4 style="color:dimgrey" text-center>锁定期限</h4>
+      </ion-col>
+    </ion-row>
+
+    <ion-row *ngIf="pg">
+      <ion-col col-5>
+        <p text-center class="text-color-1">10万</p>
+        <h4 style="color:dimgrey" text-center>总金额</h4>
+      </ion-col>
+      <ion-col col-2>
+        <img src="assets/img/Line-1.png" class="bg-color-black">
+      </ion-col>
+      <ion-col col-5>
+        <p text-center class="text-color-1">30天</p>
+        <h4 style="color:dimgrey" text-center>锁定期限</h4>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <p><img style="witdh:60%" src="assets/img/Line-3.png"></p><p><img src="assets/img/Line-4.png" class="width-160 height-5"></p>
+    </ion-row>
+    <ion-row text-left>
+      <h6 style="color:rgb(173,173,173)">投资进度</h6>
+    </ion-row>
+  </ion-item>
+
+  <ion-row>
+    <ion-col col-6>
+      <p  style="margin-top:5px;margin-bottom: 0px" text-center class="bg-color-white height-20 text-size-1" block (click)="nobg()" [ngClass]="{'text-color-1':!pg,'text-color-2':pg}">产品详情</p>
+      <ion-row *ngIf="!pg">
+        <p style="margin-top:0px;margin-bottom: 0px"><img src="assets/img/Line-3.png" class="width-180 height-2"></p>
+      </ion-row>
+      <ion-row *ngIf="pg">
+        <p style="margin-top:0px;margin-bottom: 0px"><img src="assets/img/Line-4.png" class="width-180 height-2"></p>
+      </ion-row>
+    </ion-col>
+    <ion-col col-6>
+      <p  style="margin-top:5px;margin-bottom: 0px" text-center class="bg-color-white height-20 text-size-1" block (click)="bg()" [ngClass]="{'text-color-1':pg,'text-color-2':!pg}">债权明细</p>
+      <ion-row *ngIf="!pg">
+         <p style="margin-top:0px;margin-bottom: 0px" class="text-align-center"><img src="assets/img/Line-4.png" class="width-180 height-2"></p>
+      </ion-row>
+      <ion-row *ngIf="pg">
+         <p style="margin-top:0px;margin-bottom: 0px"><img src="assets/img/Line-3.png" class="width-180 height-2"></p>
+      </ion-row>
+    </ion-col>
+  </ion-row>
+
+  <ion-row *ngIf="!pg">
+    <ion-row style="margin-left:15px;margin-top: 5px">
+      <img class="img_tu" src="assets/img/tu.png" class="height-19">
+      <span style="color:dimgrey;margin-bottom:2px" class="font-2 text-size-1">产品说明</span>
+    </ion-row>
+      <ion-row class="text-size-1 item-md height-180" style="padding-bottom: 5px;margin-top: 5px;margin-bottom: 10px;">
+        <h4 style="color:dimgrey;margin-left:10px;"> 月月盈是聚财猫推出的固定期限投资产品。</h4>
+        <h4 style="color:dimgrey;margin-left:10px;"> 依托多年风控模型积累，投资人的资金由系统自动</h4>
+        <h4 style="color:dimgrey;margin-left:10px;"> 匹配至不同借款人。投资明细与借款合同一一对应</h4>
+        <h4 style="color:dimgrey;margin-left:10px;"> 月月盈是聚财猫推出的固定期限投资产品。</h4>
+        <h4 style="color:dimgrey;margin-left:10px;"> 依托多年风控模型积累，投资人的资金由系统自动</h4>
+        <h4 style="color:dimgrey;margin-left:10px;"> 匹配至不同借款人。 投资明细与借款合同一一对应</h4>
+        <br/>
+      </ion-row>
+      <ion-row style="margin-left:15px;margin-top: 5px">
+        <img class="img_tu" src="assets/img/tu.png" class="height-19">
+        <span style="color:dimgrey;margin-bottom:2px" class="font-2 text-size-1">收益说明</span>
+      </ion-row>
+      <ion-row class="text-size-1 item-md height-160" style="padding-bottom: 5px;margin-top:5px;margin-bottom: 10px">
+        <h4 style="color:dimgrey;margin-left:10px;">月月盈是聚财猫推出的固定期限投资产品。</h4>
+        <h4 style="color:dimgrey;margin-left:10px;">依托多年风控模型积累，投资人的资金由系统自动</h4>
+        <h4 style="color:dimgrey;margin-left:10px;">匹配至不同借款人。投资明细与借款合同一一对应</h4>
+        <h4 style="color:dimgrey;margin-left:10px;">月月盈是聚财猫推出的固定期限投资产品。</h4>
+        <h4 style="color:dimgrey;margin-left:10px;">依托多年风控模型积累，投资人的资金由系统自动</h4>
+        <h4 style="color:dimgrey;margin-left:10px;">匹配至不同借款人。投资明细与借款合同一一对应</h4>
+      </ion-row>
+      <ion-row style="margin-left:15px;margin-top: 5px">
+        <img class="img_tu" src="assets/img/tu.png" class="height-19">
+        <span style="color:dimgrey;margin-bottom:2px" class="font-2 text-size-1">计息说明</span>
+      </ion-row>
+      <ion-row class="text-size-1 item-md height-160" style="margin-top: 5px;margin-bottom: 10px">
+        <h4 style="color:dimgrey;margin-left:10px;">月月盈是聚财猫推出的固定期限投资产品。</h4>
+            <h4 style="color:dimgrey;margin-left:10px;">依托多年风控模型积累，投资人的资金由系统自动</h4>
+                <h4 style="color:dimgrey;margin-left:10px;"> 匹配至不同借款人。投资明细与借款合同一一对应</h4>
+                    <h4 style="color:dimgrey;margin-left:10px;">月月盈是聚财猫推出的固定期限投资产品。</h4>
+                        <h4 style="color:dimgrey;margin-left:10px;">依托多年风控模型积累，投资人的资金由系统自动</h4>
+                            <h4 style="color:dimgrey;margin-left:10px;">匹配至不同借款人。投资明细与借款合同一一对应</h4>
+      </ion-row>
+  </ion-row>
+
+  <ion-row *ngIf="pg">
+    <ion-item>
+      <ion-row style="color:dimgrey" class="text-size-2 height-35">项目编号 JK-JCM...023852</ion-row>
+      <ion-row>
+      <ion-col col-4>
+          <p text-center class="text-size-2 height-35">苏*</p>
+          <p style="color:rgb(173,173,173)" text-center>融资人</p>
+        </ion-col>
+        <ion-col col-4>
+          <p text-center style="margin-top:3px;" class="text-size-2 height-35">4406****32</p>
+          <p style="color:rgb(173,173,173)" text-center>证件号码</p>
+        </ion-col>
+        <ion-col col-4>
+          <p text-center class="text-size-2 height-35">35,251.85元</p>
+          <p style="color:rgb(173,173,173)" text-center>融资金额</p>
+        </ion-col>
+        </ion-row>
+    </ion-item>
+
+    <ion-item>
+      <ion-row style="color:dimgrey" class="text-size-2">项目编号 JK-JCM...023852</ion-row>
+      <ion-row>
+      <ion-col col-4>
+        <p text-center class="text-size-2">苏*</p>
+        <p style="color:rgb(173,173,173)" text-center>融资人</p>
+      </ion-col>
+      <ion-col col-4>
+        <p text-center style="margin-top:3px;" class="text-size-2">4406****32</p>
+        <p style="color:rgb(173,173,173)" text-center>证件号码</p>
+      </ion-col>
+      <ion-col col-4>
+        <p text-center class="text-size-2">35,251.85元</p>
+        <p style="color:rgb(173,173,173)" text-center>融资金额</p>
+      </ion-col>
+      </ion-row>
+    </ion-item>
+
+    <ion-item>
+      <ion-row style="color:dimgrey" class="text-size-2">项目编号 JK-JCM...023852</ion-row>
+      <ion-row>
+      <ion-col col-4>
+          <p text-center class="text-size-2">苏*</p>
+          <p style="color:rgb(173,173,173)" text-center>融资人</p>
+        </ion-col>
+        <ion-col col-4>
+          <p text-center style="margin-top:3px;" class="text-size-2">4406****32</p>
+          <p style="color:rgb(173,173,173)" text-center>证件号码</p>
+        </ion-col>
+        <ion-col col-4>
+          <p text-center class="text-size-2">35,251.85元</p>
+          <p style="color:rgb(173,173,173)" text-center>融资金额</p>
+        </ion-col>
+      </ion-row>
+    </ion-item>
+  </ion-row>
+</ion-content>
+
+    <div id="overlay3" class="aq-common-overlay aq-border-radius-5">
+      <ion-row class="text-size-1 item-md height-40" style="margin-top: 5px;margin-bottom: 10px">
+        <ion-col col-9 style="margin-left: 2px" class="text-size-2">收益计算
+        </ion-col>
+        <ion-col col-2 style="float:right">
+          <p style="position: relative;left:15px" class="height-30 width-30"><img src="assets/img/cha.png"  (click)="CloseOverlay()"></p>
+        </ion-col>
+      </ion-row>
+      <!--ion-item-->
+        <ion-row>
+          <ion-col col-2 style="margin-left: 2px"><img src="assets/img/ProductList/counters.png" style="vertical-align:middle"></ion-col>
+          <ion-col col-8> 
+            <input  text-left style="border:none;margin-top: 10px" type="text" name="date" id="date">
+          </ion-col>
+          <ion-col col-1 style="margin-right: 0px;margin-top:10px">天</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-2 style="margin-left: 2px"><img src="assets/img/ProductList/savingPot.png" style="vertical-align:middle"></ion-col>
+          <ion-col col-8> 
+            <input text-left style="border:none;margin-top: 10px" type="text" name="price" id="price">
+          </ion-col>
+          <ion-col col-1 style="margin-right: 0px;margin-top: 10px">元</ion-col>
+        </ion-row>
+      <!--/ion-item-->
+      <ion-row>
+        <ion-col col-6 style="margin-left: 8px;margin-top: 10px" (click)="onclickresult('numresult','price','date')" class="text-size-2">产品预期收益</ion-col>
+        <ion-col col-5 class="text-align-right text-color-1 text-size-2">
+          <input type="text" id="numresult" style="height: 50px; width: 100px; font-size: 15px; border:none" class="text-align-right">元
+        </ion-col>
+      </ion-row>
+    </div>
+    <div class="aq-overlay-backdrop" (click)="CloseOverlay()"></div>
+    
+
+<ion-footer>
+  <ion-row class="height-50">
+  <ion-col col-2 class="bg-color-pink">
+    <p style="margin-top: 5px;margin-left: 15px"><img src="assets/img/ProductList/counter.png" class="height-30 width-30"></p>
+  </ion-col>
+  <ion-col col-4 class="bg-color-pink text-size-4 text-color-3">
+    <p text-left (click)="OpenOverlay('overlay3')" style="margin-top:10px;margin-left: 10px">计算收益</p>
+  </ion-col>
+  <ion-col col-6 class="bg-color-red text-size-4 text-color-3">
+    <p text-center (click)="goProductPayment()" style="margin-top: 10px">立即抢购</p>
+  </ion-col>
+  </ion-row>
+</ion-footer>
+

@@ -1,0 +1,41 @@
+import { Component } from '@angular/core';
+import { NavController, NavParams } from 'ionic-angular';
+//services
+import { StorageService } from "../../../providers/StorageService";
+import { STMineService } from "../STMineService";
+import { AlertService } from '../../../providers/Alert.service';
+//model
+import { ModifyUserInfoModel } from './../STMineModel';
+@Component({
+  selector: 'Page-ModifyMineInfo',
+  templateUrl: 'ModifyMineInfo.html',
+})
+export class ModifyMineInfoPage {
+  UserId: any;
+  UserTrueName: string;
+  UserIdentityCode: any;
+  GetUserInfoModel: any;
+  _ModifyUserInfoModel: ModifyUserInfoModel
+  constructor(public navCtrl: NavController, public navParams: NavParams, private _STMineService: STMineService, public _StorageService: StorageService, public _AlertService: AlertService) {
+    this.GetUserInfoModel = this.navParams.get('GetUserInfoModel');
+    this.UserTrueName = this.GetUserInfoModel.UserTrueName;
+    this.UserIdentityCode = this.GetUserInfoModel.UserIdentityCode;
+  }
+  ionViewDidLoad() {
+
+  }
+  ionViewDidEnter() {
+
+  }
+
+  // 修改用户信息
+  saveUserInfo() {
+    this._STMineService.ModifyUserInfo(this.UserTrueName, this.UserIdentityCode)
+      .subscribe((data: any) => {
+        if (data.Code == 0) {
+          this._AlertService.presentAlert('', "保存成功");
+          this.navCtrl.parent.select(3);
+        }
+      });
+  }
+}

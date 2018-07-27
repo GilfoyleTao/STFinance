@@ -1,0 +1,90 @@
+<ion-header>
+  <ion-navbar color="MintCream">
+    <ion-title>
+      <span class="aq-title-LoginPwd">添加银行卡</span>
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-row no-padding style="font-size:15px; height: 43px;">
+    <ion-col  text-left  no-padding class="line-height-52" style="margin-left: 20px">
+      银行卡号
+    </ion-col>
+    <ion-col  no-padding>
+      <ion-input text-right type="text" placeholder="请输入卡号" #username></ion-input>
+    </ion-col>
+  </ion-row>
+  <ion-row class=" height-backgroundcolor2" ></ion-row>
+
+  <ion-row  no-padding style="font-size:15px ;height: 43px;">
+    <ion-col text-left  no-padding class="line-height-52"  style="margin-left: 20px">
+      真实姓名
+    </ion-col>
+    <ion-col  no-padding>
+      <ion-input text-right type="text" placeholder="请输入真实姓名" #username></ion-input>
+    </ion-col>
+  </ion-row>
+
+  <ion-row class=" height-backgroundcolor2" ></ion-row>
+
+  <ion-row  no-padding style="font-size:15px;height: 43px;">
+    <ion-col  no-padding text-left class="line-height-52" style="margin-left: 20px">
+      身份证码
+    </ion-col>
+    <ion-col no-padding >
+        <ion-input text-right type="text" placeholder="请输入身份证号码" #username></ion-input>
+    </ion-col>
+  </ion-row>
+
+  <ion-row class=" height-backgroundcolor2" ></ion-row>
+
+  <ion-row   no-padding style="font-size:15px;height: 43px;">
+    <ion-col  no-padding col-2 text-left class="line-height-52" style="margin-left: 20px;font-size:15px">
+      手机号
+    </ion-col>
+    <ion-col  no-padding col-6  >
+        <ion-input text-right style="font-size:13px" type="text" placeholder="请输入银行卡绑定的手机号" #username></ion-input>
+    </ion-col>
+    <ion-col  no-padding col-3  text-right style="color:rgb(170, 10, 10);margin-top: 10px;"(click)="getCode()">
+       |  获取验证码
+    </ion-col>
+  </ion-row>
+
+  <ion-row class=" height-backgroundcolor2" ></ion-row>
+
+  <ion-row   no-padding style="font-size:15px;height: 43px;">
+    <ion-col  no-padding text-left class="line-height-52" style="margin-left: 20px">
+     验证码
+    </ion-col>
+    <ion-col  no-padding>
+        <ion-input  text-right  type="text" placeholder="请输入验证码" #username></ion-input>
+    </ion-col>
+  </ion-row>
+
+  <ion-row class=" height-backgroundcolor2" ></ion-row>
+
+</ion-content>
+
+<ion-footer>
+    <ion-row text-center  style=" font-size:15px;background:red; height:40px;color:white;" >
+        <ion-col style="margin-top:4px" (click)="Update('overlay1')">
+           提交信息
+        </ion-col>
+    </ion-row>
+</ion-footer>
+
+
+<div id="overlay1" class="aq-common-overlay aq-border-radius-5">
+  <ion-row>
+      <ion-col text-center style="color: rgb(170, 10, 10); font-size: 18px">
+         绑定成功
+      </ion-col>
+  </ion-row>
+  <ion-row padding-top>
+      <ion-col  text-center style="background:rgb(170, 10, 10);color:white; font-size: 20px;margin-left: 5px;margin-right:5px;margin-bottom: 5px;" (click)="OK()">
+          确认
+      </ion-col>
+  </ion-row>
+</div>
+<div class="aq-overlay-backdrop" (click)="OK()"></div>

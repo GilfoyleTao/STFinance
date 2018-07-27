@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-navbar color="MintCream">
+    <ion-title>
+      <span class="aq-title-LoginPwd">添加银行卡</span>
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-list class="FillBankCard-input">
+    <ion-item>
+      <ion-label class="aq-text-size-normal aq-margin-left-5">银行卡号</ion-label>
+      <ion-input type="text" value="" placeholder="请输入卡号" maxlength="19" text-right class="aq-text-size-normal" [(ngModel)]="Bankcardnumber"
+        required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label class="aq-text-size-normal aq-margin-left-5">开户姓名</ion-label>
+      <ion-input type="text" placeholder="请输入开户姓名" text-right class="aq-text-size-normal" [(ngModel)]="TrueName" required></ion-input>
+    </ion-item>
+    <img src="http://www.dlstzc.com:8080/api/STAccount/imgStream" alt="" class="ValidationCodePic" onclick="this.src=this.src+'?'"
+      class="ValidationCodePic" />
+    <ion-item>
+      <ion-label class="aq-text-size-normal aq-margin-left-5">图形验证码</ion-label>
+      <ion-input name="lock" [(ngModel)]="ValidationCode" type="text" maxlength="4" class="aq-text-size-normal " required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label class="aq-text-size-normal aq-margin-left-5">手机号</ion-label>
+      <ion-input type="tel" maxlength="11" placeholder="请输入银行卡绑定的手机号" text-center-right class="aq-text-size-normal PhoneNumber" [(ngModel)]="Phone"
+        required></ion-input>
+      <button item-end ion-button clear [disabled]=over (click)="sendCode()" class="GetMessageCode aq-text-size-normal">获取验证码
+        <span *ngIf="over">{{Count}}秒</span>
+      </button>
+    </ion-item>
+    <ion-item>
+      <ion-label class="aq-text-size-normal aq-margin-left-5">验证码</ion-label>
+      <ion-input type="tel" value="" placeholder="请输入验证码" text-right [(ngModel)]="Messagecode" maxlength="6" class="aq-text-size-normal"
+        required></ion-input>
+    </ion-item>
+  </ion-list>
+</ion-content>
+<ion-footer>
+  <button full class="aq-bgcolor-red-10" (click)="Submit()" ion-button>
+    <span class="CommitFeedback">提交信息</span>
+  </button>
+</ion-footer>
+
+<div *ngIf="Overlay.overlay1" class="aq-common-overlay aq-border-radius-5">
+  <ion-row class="aq-padding-top-30">
+    <ion-col text-center class="aq-textsize-15 aq-textcolor-black-core">
+      绑定成功
+    </ion-col>
+  </ion-row>
+  <ion-row padding-top>
+    <ion-col text-center>
+      <button ion-button block class="aq-bgcolor-red-10 aq-textcolor-white-core aq-height-35" (click)="CloseOverlay()">
+        <span class="FillBankCard-Submit">确认</span>
+      </button>
+    </ion-col>
+  </ion-row>
+</div>
+<div *ngIf="backdrop" class="aq-overlay-backdrop" (click)="CloseOverlay()"></div>

@@ -1,0 +1,24 @@
+Page-ProductCoupons {
+    .aq-height-83 {
+        height:83px;
+    }
+    .aq-height-90 {
+        height:90px;
+    }
+
+    .aq-margin-left-19 {
+        margin-left:19px;
+    }
+
+    .aq-margin-top-m31{
+        margin-top:-31px !important;
+    }
+
+    .aq-margin-top-m27{
+        margin-top:-27px !important;
+    }
+
+    .aq-margin-top-m8{
+        margin-top:-8px !important;
+    }
+}

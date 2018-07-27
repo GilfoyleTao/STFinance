@@ -1,0 +1,177 @@
+import { Component } from '@angular/core';
+import { NavController, NavParams, ViewController, ModalController } from 'ionic-angular';
+import { StorageService } from "../../../providers/StorageService";
+import { STMineService } from "../STMineService";
+import { MineBankCardPage } from './../MineBankCard/MineBankCard';
+import { Utils } from './../../../providers/Utils';
+import { AlertController } from 'ionic-angular/components/alert/alert-controller';
+@Component({
+    selector: 'Page-FillinBankCard',
+    templateUrl: 'FillinBankCard.html',
+})
+export class FillinBankCardPage {
+    backdrop: any;
+    Count: any;
+    over: any;
+    timer: any;
+    TrueName: any;
+    Phone:any ='';
+    Bankcardnumber: any;
+    ValidationCode: any;
+    ImgUrl: string;//图片路径
+    // length: any;
+    Messagecode: any;
+    constructor(public navCtrl: NavController,
+        // private alertCtrl: AlertController,
+        public navParams: NavParams,
+        public viewCtrl: ViewController,
+        public modalCtrl: ModalController,
+        private _STMineService: STMineService,
+        public _StorageService: StorageService,
+        public alerCtrl: AlertController,
+    ) {
+        this.backdrop = "aq-overlay-backdrop" + Math.floor(Math.random() * 100);
+    }
+
+    ionViewDidLoad() {
+    }
+
+    ionViewDidEnter() {
+        
+    }
+
+    setCountTimer() {
+        this.timer = setInterval(() => {
+            if (this.Count == 0) {
+                this.over = false;
+            }
+            else {
+                this.Count = this.Count - 1;
+            }
+        }, 1000);
+    }
+    // 跳回钱包
+    MoveMinBankCard() {
+        this.navCtrl.push(MineBankCardPage);
+    }
+    // 弹窗
+    OpenOverlay(OverlayId) {
+        let overlay = document.getElementsByClassName(OverlayId);
+        for (let i = 0; i < overlay.length; i++) {
+            overlay[i].setAttribute('style', 'display:block');
+        }
+        document.getElementById(this.backdrop).setAttribute('style', 'display:block');
+        this.CloseOverlay();
+    }
+    CloseOverlay() {
+        let overlay = document.getElementsByClassName('aq-common-overlay');
+        for (let i = 0; i < overlay.length; i++) {
+            overlay[i].setAttribute('style', 'display:none');
+        }
+        document.getElementById(this.backdrop).setAttribute('style', 'display:none');
+        this.navCtrl.push(MineBankCardPage);
+    }
+    //提交
+    Submit() {
+        if (this.Phone.length === 11
+            && Utils.isNotEmpty(this.Bankcardnumber)
+            && Utils.isNotEmpty(this.TrueName)
+            && Utils.isNotEmpty(this.ValidationCode)
+            && Utils.isNotEmpty(this.Messagecode)
+        ) {
+        this.CheckValidationCode();
+        }
+        else {
+            let alert = this.alerCtrl.create({
+                title: '请输入完整信息', 
+                buttons: ['确定']
+                });
+                alert.present();
+        }
+    }
+   
+    // 倒计时
+    sendCode() {
+        if (Utils.isEmpty(this.Phone) 
+        || Utils.isEmpty(this.Bankcardnumber) 
+        || Utils.isEmpty(this.TrueName)
+        || Utils.isEmpty(this.ValidationCode)
+    ) {
+            let alert = this.alerCtrl.create({
+                title: '请输入完整信息', 
+                buttons: ['确定']
+                });
+                alert.present();
+        }
+        console.log(this.Phone);
+        if (this.Phone.length === 11 && Utils.isNotEmpty(this.Bankcardnumber) && Utils.isNotEmpty(this.TrueName)) {
+            this.SendCode();
+        }
+
+    }
+    //发送验证码接口
+    SendCode() {
+        if(this.Phone.length < 11){
+            let alert = this.alerCtrl.create({
+                title: '请输入11位银行预留的手机号', 
+                buttons: ['确定']
+                });
+                alert.present();
+        }
+        if(this.Phone.length === 11 && Utils.isEmpty(this.ValidationCode)){
+            let alert = this.alerCtrl.create({
+                title: '请输入短信验证码', 
+                buttons: ['确定']
+                });
+                alert.present();
+        }
+        if(this.Phone.length === 11 && Utils.isNotEmpty(this.ValidationCode)){  
+            this._STMineService.SendCode(this.Phone, this.ValidationCode).subscribe((data: any) => {
+            if (data.Code == 1) {
+                let alert = this.alerCtrl.create({
+                    title: '请输入正确的图形验证码', 
+                    buttons: ['确定']
+                    });
+                    alert.present();
+            }
+            else {
+                this.Count = 60;
+                this.over = true;
+                this.setCountTimer();
+            }
+        });}
+      
+    }
+     // 判读校验码成功还是失败
+     CheckValidationCode() {
+        this._STMineService.CheckValidationCode(this.Phone, this.Messagecode).subscribe((data: any) => {
+            // 请求成功
+            if (data.Data.Status == true) {
+                this.AddBankCard();
+            }
+            //验证码输入有误
+            if (data.Data.Status == false) {
+                let alert = this.alerCtrl.create({
+                    title: '请认真填写个人信息', 
+                    buttons: ['确定']
+                    });
+                    alert.present();
+            }
+        });
+    }
+    //添加银行卡
+    AddBankCard() {
+        this._STMineService.AddBankCard(this.Bankcardnumber ,this.TrueName, this.Phone,  ).subscribe((data: any) => {
+            if (data.Code == 0) {
+                this.OpenOverlay('overlay2');
+            }
+            if (data.Code == 1) {
+                let alert = this.alerCtrl.create({
+                    title: '此用户不符合要求，请重新添加银行卡', 
+                    buttons: ['确定']
+                    });
+                    alert.present();
+            }
+        });
+    }
+}

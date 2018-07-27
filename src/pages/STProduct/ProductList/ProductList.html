@@ -1,0 +1,152 @@
+<ion-header>
+  <ion-navbar color="MintCream">
+    <ion-title >理财</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-item text-center>
+    <ion-row>
+      <img class="img_tu" src="assets/img/tu.png" class="height-20">
+      <span class="font-2">新手标</span>
+    </ion-row>
+    <ion-row>
+      <ion-col text-center class="text-size-2">新手标S0520</ion-col>
+    </ion-row>
+    <ion-row class="height-100">
+    <ion-col text-center class="text-color-1 text-size-3 height-100">12.66%</ion-col>
+    </ion-row>
+    <ion-row>
+       <ion-col col-4>
+         <p class="text-color-1" text-center>10万</p>
+         <p text-center>总金额</p>
+       </ion-col>
+       <ion-col col-4>
+         <p text-center class="text-color-1">30</p>
+         <p text-center>已投资</p>
+       </ion-col>
+       <ion-col col-4>
+         <p text-center class="text-color-1">30</p>
+         <p text-center>锁定期限</p>
+       </ion-col>
+    </ion-row>
+    <ion-col text-center>
+         <button ion-button class="width-300 height-30 text-color-2 bg-color-1" (click)="goProductDetails()" round>立即体验</button>
+    </ion-col>
+  </ion-item>
+
+  <ion-item>
+    <ion-row>
+      <img class="img_tu" src="assets/img/tu.png" class="height-20">
+      <span class="font-2">爆款特惠</span>
+    </ion-row>
+    <ion-row>
+    <ion-col col-5>
+      <p class="text-size-1" text-left>月月盈Z5414</p>
+      <ion-row><p text-left class="text-color-1 text-size-5 height-40" style="margin-top:8px">{{percent1}}%</p>
+        <p class="text-color-1 text-size-1" style="margin-top:16px">+1.68%</p>
+      </ion-row>
+      <p class="text-size-4" text-left>期望年均回报率</p>
+    </ion-col>
+    <ion-col col-3>
+      <p class="text-size-1 text-color-1" text-center>10:00开售</p>
+      <ion-row><p class="text-size-5 height-40" style="margin-left:13px;margin-top:8px">43</p>
+        <p class="text-size-1" style="margin-top:16px">天</p></ion-row>
+      <p class="text-size-4" text-center>1000元起购</p>
+    </ion-col>
+    <ion-col col-4 *ngIf="pic1==1"> <img  style="float:right" src="assets/img/ProductList/unStart.png" height="60"></ion-col>
+    <ion-col col-4 *ngIf="pic1==2"> <img  style="float:right" src="assets/img/ProductList/one.png" height="60"></ion-col>
+    <ion-col col-4 *ngIf="pic1==3"> <img  style="float:right" src="assets/img/ProductList/two.png" height="60"></ion-col>
+    <ion-col col-4 *ngIf="pic1==4"> <img  style="float:right" src="assets/img/ProductList/three.png" height="60"></ion-col>
+    <ion-col col-4 *ngIf="pic1==5"> <img  style="float:right" src="assets/img/ProductList/four.png" height="60"></ion-col>
+    <ion-col col-4 *ngIf="pic1==6"> <img  style="float:right" src="assets/img/ProductList/five.png" height="60"></ion-col>
+    <ion-col col-4 *ngIf="pic1==7"> <img  style="float:right" src="assets/img/ProductList/six.png" height="60"></ion-col>
+    <ion-col col-4 *ngIf="pic1==8"> <img  style="float:right" src="assets/img/ProductList/seven.png" height="60"></ion-col>
+    <ion-col col-4 *ngIf="pic1==9"> <img  style="float:right" src="assets/img/ProductList/eight.png" height="60"></ion-col>
+    </ion-row>
+  </ion-item>
+
+  <ion-item>
+    <ion-row>
+      <ion-col col-5>
+        <p class="text-size-1" text-left>月月盈Z5414</p>
+        <ion-row>
+            <ion-row><p text-left class="text-color-1 text-size-5 height-40" style="margin-top:8px">{{percent2}}%</p>
+              <p class="text-color-1 text-size-1" style="margin-top:16px">+1.68%</p></ion-row>
+        </ion-row>
+        <p class="text-size-4" text-left>期望年均回报率</p>
+      </ion-col>
+      <ion-col col-3>
+        <p class="text-size-1 text-color-1" text-center>10:00开售</p>
+        <ion-row><p class="text-size-5 height-40" style="margin-left:13px;margin-top:8px">43</p>
+          <p class="text-size-1" style="margin-top:16px">天</p></ion-row>
+        <p class="text-size-4" text-center>1000元起购</p>
+      </ion-col>
+      <ion-col col-4 *ngIf="pic2==1"> <img  style="float:right" src="assets/img/ProductList/unStart.png" height="60"></ion-col>
+      <ion-col col-4 *ngIf="pic2==2"> <img  style="float:right" src="assets/img/ProductList/one.png" height="60"></ion-col>
+      <ion-col col-4 *ngIf="pic2==3"> <img  style="float:right" src="assets/img/ProductList/two.png" height="60"></ion-col>
+      <ion-col col-4 *ngIf="pic2==4"> <img  style="float:right" src="assets/img/ProductList/three.png" height="60"></ion-col>
+      <ion-col col-4 *ngIf="pic2==5"> <img  style="float:right" src="assets/img/ProductList/four.png" height="60"></ion-col>
+      <ion-col col-4 *ngIf="pic2==6"> <img  style="float:right" src="assets/img/ProductList/five.png" height="60"></ion-col>
+      <ion-col col-4 *ngIf="pic2==7"> <img  style="float:right" src="assets/img/ProductList/six.png" height="60"></ion-col>
+      <ion-col col-4 *ngIf="pic2==8"> <img  style="float:right" src="assets/img/ProductList/seven.png" height="60"></ion-col>
+      <ion-col col-4 *ngIf="pic2==9"> <img  style="float:right" src="assets/img/ProductList/eight.png" height="60"></ion-col>
+      </ion-row>
+  </ion-item>
+
+  <ion-item>
+    <ion-row>
+      <img class="img_tu" src="assets/img/tu.png" class="height-20">
+      <span class="font-2">新手专享</span>
+    </ion-row>
+      <ion-row>
+      <ion-col col-5>
+        <p class="text-size-1" text-left>月月盈Z5414</p>
+        <ion-row><p text-left class="text-color-1 text-size-5 height-40" style="margin-top:8px">{{percent3}}%</p>
+          <p class="text-color-1 text-size-1" style="margin-top:16px">+1.68%</p></ion-row>
+        <p class="text-size-4" text-left>期望年均回报率</p>
+      </ion-col>
+      <ion-col col-3>
+        <p class="text-size-1 text-color-1" text-center>新手标</p>
+        <ion-row><p class="text-size-5 height-40" style="margin-left:13px;margin-top:8px">43</p>
+          <p class="text-size-1" style="margin-top:16px">天</p></ion-row>
+        <p class="text-size-4" text-center>1000元起购</p>
+      </ion-col>
+      <ion-col col-4 *ngIf="pic3==1"> <img  style="float:right" src="assets/img/ProductList/unStart.png" height="60"></ion-col>
+      <ion-col col-4 *ngIf="pic3==2"> <img  style="float:right" src="assets/img/ProductList/one.png" height="60"></ion-col>
+      <ion-col col-4 *ngIf="pic3==3"> <img  style="float:right" src="assets/img/ProductList/two.png" height="60"></ion-col>
+      <ion-col col-4 *ngIf="pic3==4"> <img  style="float:right" src="assets/img/ProductList/three.png" height="60"></ion-col>
+      <ion-col col-4 *ngIf="pic3==5"> <img  style="float:right" src="assets/img/ProductList/four.png" height="60"></ion-col>
+      <ion-col col-4 *ngIf="pic3==6"> <img  style="float:right" src="assets/img/ProductList/five.png" height="60"></ion-col>
+      <ion-col col-4 *ngIf="pic3==7"> <img  style="float:right" src="assets/img/ProductList/six.png" height="60"></ion-col>
+      <ion-col col-4 *ngIf="pic3==8"> <img  style="float:right" src="assets/img/ProductList/seven.png" height="60"></ion-col>
+      <ion-col col-4 *ngIf="pic3==9"> <img  style="float:right" src="assets/img/ProductList/eight.png" height="60"></ion-col>
+      </ion-row>
+  </ion-item>
+
+  <ion-item>
+      <ion-row>
+      <ion-col col-5>
+        <p class="text-size-1" text-left>月月盈Z5414</p>
+        <ion-row><p text-left class="text-color-1 text-size-5 height-40" style="margin-top:8px">{{percent4}}%</p>
+          <p class="text-color-1 text-size-1" style="margin-top:16px">+1.68%</p></ion-row>
+        <p class="text-size-4" text-left>期望年均回报率</p>
+      </ion-col>
+      <ion-col col-3>
+        <p class="text-size-1" text-center>新手标</p>
+        <ion-row><p class="text-size-5 height-40" style="margin-left:13px;margin-top:8px">43</p>
+          <p class="text-size-1" style="margin-top:16px">天</p></ion-row>
+        <p class="text-size-4" text-center>1000元起购</p>
+      </ion-col>
+      <ion-col col-4 *ngIf="pic4==1"> <img  style="float:right" src="assets/img/ProductList/unStart.png" height="60"></ion-col>
+      <ion-col col-4 *ngIf="pic4==2"> <img  style="float:right" src="assets/img/ProductList/one.png" height="60"></ion-col>
+      <ion-col col-4 *ngIf="pic4==3"> <img  style="float:right" src="assets/img/ProductList/two.png" height="60"></ion-col>
+      <ion-col col-4 *ngIf="pic4==4"> <img  style="float:right" src="assets/img/ProductList/three.png" height="60"></ion-col>
+      <ion-col col-4 *ngIf="pic4==5"> <img  style="float:right" src="assets/img/ProductList/four.png" height="60"></ion-col>
+      <ion-col col-4 *ngIf="pic4==6"> <img  style="float:right" src="assets/img/ProductList/five.png" height="60"></ion-col>
+      <ion-col col-4 *ngIf="pic4==7"> <img  style="float:right" src="assets/img/ProductList/six.png" height="60"></ion-col>
+      <ion-col col-4 *ngIf="pic4==8"> <img  style="float:right" src="assets/img/ProductList/seven.png" height="60"></ion-col>
+      <ion-col col-4 *ngIf="pic4==9"> <img  style="float:right" src="assets/img/ProductList/eight.png" height="60"></ion-col>
+      </ion-row>
+  </ion-item>
+</ion-content>

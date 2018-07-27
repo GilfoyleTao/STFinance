@@ -1,0 +1,75 @@
+
+import { Component } from '@angular/core';
+import { NavController, NavParams, ViewController, ModalController } from 'ionic-angular';
+import { StorageService } from "../../../providers/StorageService";
+import { STProductService } from "../STProductService";
+import { ProductPaymentPage } from './../ProductPayment/ProductPayment';
+import { GetMyCoupon } from '../STProductModel';
+import { USER_INFO,isLogin } from './../../../providers/Constants';
+
+@Component({
+    selector: 'Page-ProductCoupons',
+    templateUrl: 'ProductCoupons.html',
+})
+export class ProductCouponsPage {
+    _GetMyCoupon: GetMyCoupon;
+    UserId:string;
+    ProductId:string;
+    PhotoList: any;
+    isLogin:boolean;
+    USER_INFO:any;
+    ProductStartMoney:any;
+    constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public modalCtrl: ModalController, private _STProductService: STProductService,public _StorageService:StorageService) {
+        this._GetMyCoupon = {
+            L_CouponList: [
+                {
+                    CouponId: "",
+                    CouponName: "",
+                    CouponType: "",
+                    CouponMoney: "",
+                    CouponStartDate: "",
+                    CouponEndDate: "",
+                }
+            ]
+        }
+        this.ProductId = this.navParams.get('ProductId');
+        this.ProductStartMoney = this.navParams.get('ProductStartMoney');
+        this.isLogin = this._StorageService.read(isLogin);
+        if(this.isLogin){
+            this.USER_INFO = this._StorageService.read(USER_INFO);
+            this.UserId = this.USER_INFO.UserId;
+        }else{
+            this.UserId = '0';
+        }
+
+    }
+
+
+    ionViewDidLoad() {
+
+    }
+
+    ionViewDidEnter() {
+        this.GetMyCoupon();
+    }
+
+    GetMyCoupon(){
+        this._STProductService.GetMyCoupon(this.UserId,this.ProductId).subscribe((data:any)=>{
+            if(data.Code == 0){
+                this._GetMyCoupon = data.Data;
+            }
+        })
+    }
+
+    MoveProductPaymentFromProductCoupons() {
+        this.viewCtrl.dismiss();
+        let ProductPaymentModal = this.modalCtrl.create(ProductPaymentPage);
+        ProductPaymentModal.present();
+
+    }
+
+    return(ProductCoupons){
+        this.navCtrl.push(ProductPaymentPage,{ProductCoupons:ProductCoupons,ProductId:this.ProductId,ProductStartMoney:this.ProductStartMoney});
+    }
+
+}

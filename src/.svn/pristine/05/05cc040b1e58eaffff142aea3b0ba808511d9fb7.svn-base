@@ -1,0 +1,195 @@
+import { Component } from '@angular/core';
+import { NavController, NavParams, ViewController, ModalController } from 'ionic-angular';
+import { StorageService } from "../../../providers/StorageService";
+import { STLoginService } from "../STLoginService";
+import { LoginPage } from './../Login/Login';
+import { Utils } from './../../../providers/Utils';
+import { FILE_SERVE_URL, USER_INFO } from './../../../providers/Constants';
+import { AlertController } from 'ionic-angular/components/alert/alert-controller'; 
+
+@Component({
+    selector: 'Page-Modifypassword',
+    templateUrl: 'Modifypassword.html',
+})
+export class ModifypasswordPage {
+    Enter: boolean;//判断按钮是否可点击
+    ValCodePicture: any;
+    Validation: boolean;//判断获取验证码是否变色
+    timer: any;//定时器
+    MobilePhone: string;
+    length: any;
+    ValidationCode: string;
+    Passwords: string;
+    username: any;
+    Messagecode: string;
+    password: any;
+    backdrop: any;
+    ImgUrl: string;//图片路径
+    ImgCode:string;
+    constructor(public navCtrl: NavController,
+        public navParams: NavParams,
+        public viewCtrl: ViewController,
+        public modalCtrl: ModalController,
+        private _STLoginService: STLoginService,
+        public alertCtrl: AlertController,
+        public _StorageService: StorageService,
+        public alerCtrl: AlertController,
+    ) {
+        this.MobilePhone = this.navParams.get('MobilePhone');
+        this.ImgUrl = FILE_SERVE_URL;
+        this.backdrop = "aq-overlay-backdrop" + Math.floor(Math.random() * 100);
+    }
+    // 弹窗
+    OpenOverlay(OverlayId) {
+        document.getElementById(OverlayId).setAttribute('style', 'display:block');
+        document.getElementById(this.backdrop).setAttribute('style', 'display:block');
+    }
+    CloseOverlay() {
+        let overlay = document.getElementsByClassName('aq-common-overlay');
+        for (let i = 0; i < overlay.length; i++) {
+            overlay[i].setAttribute('style', 'display:none');
+        }
+        document.getElementById(this.backdrop).setAttribute('style', 'display:none');
+        this.navCtrl.push(LoginPage);
+    }
+    ionViewDidLoad() {
+        this.Enter = true;
+        this.Validation = false;
+        // this.CountOn = false;
+        // this.Count = 60;
+    }
+    checkInput() {
+        if (this.MobilePhone.length === 11
+            && Utils.isNotEmpty(this.ValidationCode)
+            && Utils.isNotEmpty(this.Passwords)
+            && Utils.isNotEmpty(this.Messagecode)) {
+            this.Enter = false;
+            this.Validation = true;
+        }
+        else {
+            this.Enter = true;
+        }
+    }
+    ionViewDidEnter() {
+        this.ImgCode = "http://www.dlstzc.com:8080/api/STAccount/imgStream?" + Math.floor(Math.random()*100);
+    }
+    //弹窗跳到登录页
+    MoveLogin() {
+        this.navCtrl.push(LoginPage);
+    }
+    // s
+    verifyCode: any = {
+        verifyCodeTips: "获取验证码",
+        countdown: 60,
+        disable: true
+    }
+    // 倒计时
+    settime() {
+        if (this.verifyCode.countdown == 1) {
+            this.verifyCode.countdown = 60;
+            this.verifyCode.verifyCodeTips = "获取验证码";
+            this.verifyCode.disable = true;
+            return;
+        } else {
+            this.verifyCode.countdown--;
+        }
+        this.verifyCode.verifyCodeTips = "重新获取(" + this.verifyCode.countdown + ")";
+        setTimeout(() => {
+            this.verifyCode.verifyCodeTips = "重新获取(" + this.verifyCode.countdown + ")";
+            this.settime();
+        }, 1000);
+    }
+    getCode() {
+        if (Utils.isEmpty(this.MobilePhone) || this.MobilePhone.length < 11) {
+            let alert = this.alerCtrl.create({
+                title: '请输入11位手机号', 
+                buttons: ['确定']
+                });
+                alert.present();
+        }
+        if (this.MobilePhone.length === 11 && Utils.isEmpty(this.ValidationCode)) {
+            let alert = this.alerCtrl.create({
+                title: '请输入图形验证码', 
+                buttons: ['确定']
+                });
+                alert.present();
+        }
+        else if (this.MobilePhone.length === 11 && Utils.isNotEmpty(this.ValidationCode)) {
+            this.SendCode();
+        }  
+    }
+    //点击提交
+    Submit() {
+        if (Utils.isNotEmpty(this.Passwords)
+            && this.MobilePhone.length === 11
+            && Utils.isNotEmpty(this.Messagecode)
+            && Utils.isNotEmpty(this.ValidationCode)
+        ) {
+            this.Passwordverification();
+        }
+        else {
+            //弹窗：请填写完整信息
+            let alert = this.alerCtrl.create({
+                title: '请填写完整信息', 
+                buttons: ['确定']
+                });
+                alert.present();
+        }
+    }
+      //密码正则表达式验证
+      Passwordverification() {
+        var  myreg  =  /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+        if (!myreg.test(this.Passwords)) {
+            let alert = this.alerCtrl.create({
+                title: '密码不符合规定', 
+                buttons: ['确定']
+                });
+                alert.present();
+        }
+        else {
+            this.CheckValidationCode();
+        }
+    }
+    //获取图片验证码接口
+   
+    //发送验证码接口
+    SendCode() {
+        this._STLoginService.SendCode(this.MobilePhone, this.ValidationCode).subscribe((data: any) => {
+            if (data.Code == 1) {
+                let alert = this.alerCtrl.create({
+                    title: '请填正确的图形验证码', 
+                    buttons: ['确定']
+                    });
+                    alert.present();
+            }
+            else {
+                this.verifyCode.disable = false;
+                this.settime();
+            }
+        });
+    }
+    //判读校验码成功还是失败
+    CheckValidationCode() {
+        this._STLoginService.CheckValidationCode(this.MobilePhone, this.Messagecode).subscribe((data: any) => {
+            // 请求成功
+            if (data.Data.Status == true) {
+                console.log('修改成功')
+                this.ChangeUserPassword();
+            }
+            if (data.Data.Status == false) {
+                let alert = this.alerCtrl.create({
+                    title: '请认真填写修改信息', 
+                    buttons: ['确定']
+                    });
+                    alert.present();
+            }
+        });
+    }
+    //改密码
+    ChangeUserPassword() {
+        this._STLoginService.ChangeUserPassword(this.MobilePhone, this.Passwords).subscribe((data: any) => {
+            this._StorageService.write(USER_INFO, data.Data);//存储信息 key value
+            this.OpenOverlay('overlay1');
+        });
+    }
+}

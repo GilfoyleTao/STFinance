@@ -1,0 +1,28 @@
+<ion-header>
+    <ion-navbar color="MintCream">
+        <ion-title>
+            <span class="aq-title-LoginPwd">常见问题</span>
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content>
+    <ion-grid no-padding class="aq-bgcolor-white-core">
+                <ion-row no-padding>
+                  <ion-col no-padding>
+                    <ion-slides pager autoplay="600" speed="2000" loop="true" autoplayDisableOnInteration="true" *ngIf="_CommonQuestionsModel?.L_BannerUrl?.length> 1">
+                      <ion-slide *ngFor="let bannerlist of _CommonQuestionsModel?.L_BannerUrl">
+                        <img [src]="ImgUrl + _CommonQuestionsModel?.BannerUrl"  class="CommonQuestionPic">
+                        <!-- <img src="assets/img/CommonQuestion.png" alt="" class="CommonQuestionPic"> -->
+                      </ion-slide>
+                    </ion-slides>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+    <ion-list *ngFor="let item of _CommonQuestionsModel?.Questions; let i=index" class="InputList">
+        <button ion-item (click)="ShowContain(i)">
+          {{item?.RiskTitle}}
+          <!-- <ion-icon ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon> -->
+        </button>
+        <p class="aq-textsize-13" *ngIf="show == i">{{item?.RiskDescription}}</p>
+    </ion-list>
+</ion-content>

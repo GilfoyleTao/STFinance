@@ -1,0 +1,48 @@
+import { Component } from '@angular/core';
+import { NavController, NavParams, ViewController, ModalController } from 'ionic-angular';
+import { STHomeService } from "../STHomeService";
+import { GetHomeNoticeDetailModel } from '../STHomeModel';
+import { ReadNoticeModel } from './../STHomeModel';
+import { HomeNoticePage } from './../HomeNotice/HomeNotice';
+@Component({
+    selector: 'Page-HomeNoticeDetails',
+    templateUrl: 'HomeNoticeDetails.html',
+})
+export class HomeNoticeDetailsPage {
+    PageNum: any;//页数
+    RecordNum: any;//每页获取的数量
+    _GetHomeNoticeDetailModel: GetHomeNoticeDetailModel;
+    NoticeId: any;
+    _ReadNoticeModel: ReadNoticeModel;
+    Status:any;
+    constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public modalCtrl: ModalController, private _STHomeService: STHomeService) {
+        this.NoticeId = this.navParams.get("NoticeId");
+        this.Status = this.navParams.get("Status");
+    }
+    ionViewDidLoad() {
+        this.GetHomeNoticeDetail();
+    }
+    ionViewDidEnter() {
+        this.ReadNotice();
+    }
+    // 阅读消息
+    ReadNotice() {
+        this._STHomeService.ReadNotice(this.NoticeId).subscribe((data: any) => {
+            if (data.Code == 0) {
+                this._ReadNoticeModel = data.Data;
+            }
+        });
+    }
+    GetHomeNoticeDetail() {
+        this._STHomeService.GetHomeNoticeDetail(this.NoticeId).subscribe((data: any) => {
+            if (data.Code == 0) {
+                this._GetHomeNoticeDetailModel = data.Data;
+            }
+        });
+    }
+
+    OpenHomeNotice(){
+        this.navCtrl.push(HomeNoticePage,{Status:this.Status});
+    }
+
+}

@@ -1,0 +1,119 @@
+import { Component } from '@angular/core';
+import { NavController, NavParams, ViewController, ModalController } from 'ionic-angular';
+import { StorageService } from "../../../providers/StorageService";
+import { STMineService } from "../STMineService";
+import { LoginPage } from './../../STLogin/Login/Login';
+import { MineInfoPage } from './../MineInfo/MineInfo';
+import { MineCouponPage } from './../MineCoupon/MineCoupon';
+import { MineFeedbackPage } from './../MineFeedback/MineFeedback';
+import { CommonQuestionPage } from './../CommonQuestion/CommonQuestion';
+import { AboutAppPage } from './../AboutApp/AboutApp';
+import { HomeRiskManagementPage } from './../../STHome/HomeRiskManagement/HomeRiskManagement';
+import { MineBankCardPage } from './../MineBankCard/MineBankCard';
+import { GetUserInfoModel } from './../STMineModel';
+import { FILE_SERVE_URL, isLogin } from './../../../providers/Constants';
+import { AuthenticationPage } from './../Authentication/Authentication';
+
+@Component({
+    selector: 'Page-MineCenter',
+    templateUrl: 'MineCenter.html',
+})
+export class MineCenterPage {
+    ImgUrl: string;
+    isLogin: any;
+    RealName: boolean;
+    NoRealName: boolean;
+    _GetUserInfoModel: GetUserInfoModel;
+    BankCardNum: number;
+    CouponNumber: number;
+    constructor(public navCtrl: NavController, private _STMineService: STMineService, public _StorageService: StorageService) {
+        // 图片路径
+        this.ImgUrl = FILE_SERVE_URL;
+        this.isLogin = this._StorageService.read(isLogin);
+    }
+
+    ionViewDidLoad() {
+    }
+
+    ionViewDidEnter() {
+        this.isLogin = this._StorageService.read(isLogin);
+        if (this.isLogin) {
+            this.GetUserInfo();
+        }
+        else {
+            this.navCtrl.push(LoginPage)
+        }
+
+    }
+
+    GetUserInfo() {
+        this._STMineService.GetUserInfo().subscribe((data: any) => {
+            if (data.Code == 0) {
+                this._GetUserInfoModel = data.Data;
+                if (!this._GetUserInfoModel.L_BankCardList) {
+                    this.BankCardNum = 0;
+                }
+                else {
+                    this.BankCardNum = this._GetUserInfoModel.L_BankCardList.length;
+                }
+                if (!this._GetUserInfoModel.L_CouponList) {
+                    this.CouponNumber = 0;
+                }
+                else {
+                    this.CouponNumber = this._GetUserInfoModel.L_CouponList.length;
+                }
+
+            }
+        });
+    }
+
+    // 跳到用户详情信息页 设置页
+    goMineInfo() {
+        this.navCtrl.push(MineInfoPage, { GetUserInfoModel: this._GetUserInfoModel });
+    }
+
+    // 跳到我的钱包
+    MoveMineBankCardPage() {
+        if (this._GetUserInfoModel.UserAuthNameCode == 0) {
+            this.navCtrl.push(AuthenticationPage);
+        } else {
+            this.navCtrl.push(MineBankCardPage);
+
+        }
+
+    }
+
+    // 跳转到优惠券
+    goMineCoupon(_GetUserInfoModel) {
+        this.navCtrl.push(MineCouponPage, { _GetUserInfoModel: this._GetUserInfoModel });
+    }
+
+    // 跳转实名认证
+    MoveAuthentication() {
+        if (this._GetUserInfoModel.UserAuthNameCode == 0) {
+            this.navCtrl.push(AuthenticationPage);
+        } else {
+
+        }
+    }
+
+    // 跳到用户反馈
+    MoveMineFeedback() {
+        this.navCtrl.push(MineFeedbackPage);
+    }
+
+    // 跳到常见问题
+    MoveCommonQuestion() {
+        this.navCtrl.push(CommonQuestionPage);
+    }
+
+    // 跳到关于app
+    MoveAboutApp() {
+        this.navCtrl.push(AboutAppPage);
+    }
+    // 跳转到安全保障
+    MoveHomeRiskManagement() {
+        this.navCtrl.push(HomeRiskManagementPage);
+    }
+
+}

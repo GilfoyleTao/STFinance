@@ -1,0 +1,62 @@
+import { Component } from '@angular/core';
+import { NavController, NavParams, ViewController, ModalController } from 'ionic-angular';
+import { STMineService } from './../STMineService';
+import { AlertController } from 'ionic-angular/components/alert/alert-controller';
+
+@Component({
+    selector: 'Page-Authentication',
+    templateUrl: 'Authentication.html',
+})
+export class AuthenticationPage {
+    UserId: any;
+    IdNumber: any;
+    Name: any;
+    constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public modalCtrl: ModalController, public _STMineService: STMineService, public alertCtrl: AlertController) {
+        this.UserId = this.navParams.get('UserId')
+    }
+
+    ionViewDidLoad() {
+    }
+
+    ionViewDidEnter() {
+
+    }
+
+    
+
+    GetAuthStatus() {
+        if(this.UserId != null && this.Name != null && this.IdNumber != null){
+            this._STMineService.GetAuthStatus(this.Name, this.IdNumber).subscribe((data: any) => {
+                if (data.Code == 0) {
+                    let alert = this.alertCtrl.create({
+                        title: '已提交审核',
+                        buttons: [
+                            {
+                                text: '确认',
+                                handler: () => {
+                                    this.navCtrl.parent.select(3);
+                                }
+                            }
+                        ]
+                    });
+                    alert.present();
+                } else {
+                    let alert = this.alertCtrl.create({
+                        title: '提交审核失败',
+                        buttons:  ['确定']
+                    });
+                    alert.present();
+                }
+            })
+        }else{
+            let alert = this.alertCtrl.create({
+                title: '请填写全部信息',
+                buttons: ['确定']
+            });
+            alert.present();
+        }
+        
+    }
+    
+
+}

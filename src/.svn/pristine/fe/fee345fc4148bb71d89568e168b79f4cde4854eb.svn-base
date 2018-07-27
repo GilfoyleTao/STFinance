@@ -1,0 +1,89 @@
+import { NativeService } from './../../../providers/NativeService';
+import { AlertController } from 'ionic-angular/components/alert/alert-controller';
+import { Component } from '@angular/core';
+import { NavController, NavParams, ViewController, ModalController } from 'ionic-angular';
+import { FillinBankCardPage } from './../FillinBankCard/FillinBankCard';
+import { STMineService } from "../STMineService";
+import { GetUserInfoModel } from './../STMineModel';
+import { USER_INFO, isLogin } from './../../../providers/Constants';
+import { StorageService } from "../../../providers/StorageService";
+@Component({
+    selector: 'Page-MineBankCard',
+    templateUrl: 'MineBankCard.html',
+})
+export class MineBankCardPage {
+    // _GetUserInfoModel:any;
+    IsShow: boolean;
+    UserId: any;
+    isLogin: any;
+    USER_INFO: any;
+    _GetUserInfoModel: GetUserInfoModel;
+    constructor(public navCtrl: NavController,public navParams: NavParams,private _STMineService: STMineService,public _StorageService: StorageService,public alertCtrl: AlertController,public nativeService: NativeService) {
+        this._GetUserInfoModel = this.navParams.get('_GetUserInfoModel');
+        this.isLogin = this._StorageService.read(isLogin);
+        if (this.isLogin) {
+            this.IsShow = true;
+        }
+        else {
+            this.IsShow = false;
+        }
+    }
+
+    ionViewDidLoad() {
+
+    }
+
+    ionViewDidEnter() {
+        this.GetUserInfo();
+    }
+    // 跳到添加银卡行卡
+    MoveFillinBankCard() {
+        this.navCtrl.push(FillinBankCardPage);
+    }
+    // 跳回个人中心
+    MoveMineCenterPage() {
+        this.navCtrl.parent.select(3);
+    }
+    //接口
+    GetUserInfo() {
+        this._STMineService.GetUserInfo().subscribe((data: any) => {
+            if (data.Code == 0) {
+                this._GetUserInfoModel = data.Data;
+            }
+        });
+    }
+
+    DeleteBankCard(BankCardId) {
+        let DeleteAlert = this.alertCtrl.create({
+            title: '是否确定删除此银行卡',
+            buttons: [
+                {
+                    text: '取消',
+                    role: 'cancel',
+                    handler: () => {
+
+                    }
+                },
+                {
+                    text: '确定',
+                    handler: () => {
+                        this._STMineService.DeleteBankCard(BankCardId).subscribe((data: any) => {
+                            if (data.Code == 0) {
+                                if (data.Data.Status == "Success") {
+                                    this.nativeService.alert(data.Message);
+                                    this.GetUserInfo();
+                                }
+                            } else {
+                                this.nativeService.alert(data.Message);
+                            }
+                        })
+                    }
+                }
+            ]
+        });
+        DeleteAlert.present();
+    }
+
+
+
+}

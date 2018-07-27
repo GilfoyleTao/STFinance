@@ -1,0 +1,225 @@
+
+import { Component } from '@angular/core';
+import { NavController, NavParams, ViewController, ModalController } from 'ionic-angular';
+import { StorageService } from "../../../providers/StorageService";
+import { STProductService } from "../STProductService";
+
+import { ProductIncomeDisplayPage } from './../ProductIncomeDisplay/ProductIncomeDisplay';
+import { ProductCouponsPage } from './../ProductCoupons/ProductCoupons';
+import { ProductRiskStatementPage } from './../ProductRiskStatement/ProductRiskStatement';
+import { ProductServiceAgreementPage } from './../ProductServiceAgreement/ProductServiceAgreement';
+
+
+import { ProductPayment } from './../STProductModel';
+import { Utils } from '../../../providers/Utils';
+import { USER_INFO, isLogin } from '../../../providers/Constants';
+import { AlertController } from 'ionic-angular/components/alert/alert-controller';
+import { TabsPage } from './../../../app/tabs/tabs';
+
+@Component({
+    selector: 'Page-ProductPayment',
+    templateUrl: 'ProductPayment.html',
+
+})
+export class ProductPaymentPage {
+    _ProductPayment: ProductPayment;
+    selectedStatus: any;
+    PayCardStatus: any;
+    PayWXStatus: any;
+    UserId: string;
+    ProductId: string;
+    Payment: any;
+    CouponId: string;
+    ProductCoupons: any;
+    ProductStartMoney: any;
+    StartDate: any;
+    EndDate: any;
+    USER_INFO: any;
+    isLogin: any;
+    ProductName: any;
+
+    constructor(public navCtrl: NavController,
+        public navParams: NavParams,
+        public viewCtrl: ViewController,
+        public modalCtrl: ModalController,
+        private _STProductService: STProductService,
+        public _StorageService: StorageService,
+        public alerCtrl: AlertController) {
+
+
+        this.selectedStatus = false;    //默认协议未选中
+        this.PayCardStatus = true;      //默认银行卡选中
+        this.PayWXStatus = false;       //默认微信未选中
+
+        var date = new Date;
+        //获取x月x日格式日期
+        this.StartDate = (date.getMonth() + 1) + "月" + date.getDate() + "日";
+        this.StartDate = (date.getMonth() + 1) + "月" + (date.getDate() + 1) + "日";
+
+        this.ProductStartMoney = this.navParams.get('ProductStartMoney');
+        this.ProductId = this.navParams.get('ProductId');    //获取商品id
+        this.ProductCoupons = this.navParams.get('ProductCoupons');
+        this.ProductName = this.navParams.get('ProductName');
+
+        this.isLogin = this._StorageService.read(isLogin);
+        if (this.isLogin) {
+            this.USER_INFO = this._StorageService.read(USER_INFO);
+            this.UserId = this.USER_INFO.UserId;
+        } else {
+            this.UserId = '0';
+        }
+
+        if (this.ProductCoupons != null) {
+            this.CouponId = this.ProductCoupons.CouponId;
+        } else {
+            this.CouponId = '0';
+        }
+
+    }
+
+
+    ionViewDidLoad() {
+
+    }
+
+
+    ionViewDidEnter() {
+
+    }
+
+
+    // 选中协议
+    swithSelected(status) {
+        if (status == "false") {
+            this.selectedStatus = true;
+        } else if (status == "true") {
+            this.selectedStatus = false;
+        }
+    }
+
+    // 选择支付方式
+    swithPayMethod(CheckStatus) {
+        if (CheckStatus == "CardTrue") {      //银行卡选中状态点击,银行卡取消选中,微信选中
+            this.PayCardStatus = false;
+            this.PayWXStatus = true;
+        } else if (CheckStatus == "CardFalse") {     //银行卡未选中状态点击,银行卡选中,微信取消选中
+            this.PayCardStatus = true;
+            this.PayWXStatus = false;
+        } else if (CheckStatus == "WXTrue") {     //微信选中状态点击,银行卡选中,微信取消选中
+            this.PayCardStatus = true;
+            this.PayWXStatus = false;
+        } else if (CheckStatus == "WXFalse") {        //微信未选中状态点击,银行卡取消选中,微信选中
+            this.PayCardStatus = false;
+            this.PayWXStatus = true;
+        }
+    }
+
+
+    // 调用买入提交订单
+    ProductPayment() {
+        let result;
+        if (Utils.isEmpty(this.Payment)) {
+            let alert = this.alerCtrl.create({
+                title: '请输入购买金额',
+                buttons: ['确定']
+            });
+            alert.present();
+            return;
+        }
+        if (!result) {
+            if (this.Payment >= this.ProductStartMoney - 0.1) {
+                if (this.selectedStatus) {
+                    this._STProductService.ProductPayment(this.UserId, this.ProductId, this.Payment, this.CouponId).subscribe((data: any) => {
+                        if (data.Code == 0) {
+                            let alert = this.alerCtrl.create({
+                                title: '下单成功',
+                                buttons: [
+                                    {
+                                        text: '确认',
+                                        handler: () => {
+                                            this.navCtrl.push(TabsPage, { Sign: 2 });    //跳转资产
+                                        }
+                                    }
+                                ]
+                            });
+                            alert.present();
+
+                        } else {
+                            let alert = this.alerCtrl.create({
+                                title: data.Message,
+                                buttons: ['确定']
+                            });
+                            alert.present();
+                        }
+                    })
+                } else {
+                    let alert = this.alerCtrl.create({
+                        title: '请同意服务协议及风险提示',
+                        buttons: ['确定']
+                    });
+                    alert.present();
+                }
+            } else {
+                let alert = this.alerCtrl.create({
+                    title: '最低起购金额为' + this.ProductStartMoney + '元',
+                    buttons: ['确定']
+                });
+                alert.present();
+            }
+        }
+
+    }
+
+
+
+    /* payApp() {
+        this._STProductService.payApp(this.OrderID, this.Payment).subscribe((data: any) => {
+            this._payAppModel = data;
+            alert(JSON.stringify(this._payAppModel));
+            var params = {
+                partnerid: this._payAppModel.partnerid, // merchant id
+                prepayid: this._payAppModel.prepayid, // prepay id returned from server
+                noncestr: this._payAppModel.nonceStr, // nonce string returned from server
+                timestamp: this._payAppModel.timeStamp, // timestamp
+                sign: this._payAppModel.sign // signed string
+            }
+            alert(JSON.stringify(params));
+            Wechat.sendPaymentRequest(params, function () {
+                alert('success')
+            }, function (reason) {
+                alert("Failedpay: " + reason);
+            });
+        })
+    } */
+
+
+    // 收益取出跳转
+    MoveProductIncomeDisplay() {
+        this.navCtrl.push(ProductIncomeDisplayPage);
+
+    }
+
+    // 跳转优惠券
+    MoveProductCoupons() {
+        this.navCtrl.push(ProductCouponsPage, { ProductId: this.ProductId, ProductStartMoney: this.ProductStartMoney });
+
+    }
+
+    // 风险声明
+    MoveProductRiskStatement() {
+        this.navCtrl.push(ProductRiskStatementPage, { ProductId: this.ProductId });
+
+    }
+
+    // 服务协议
+    MoveProductServiceAgreement() {
+        this.navCtrl.push(ProductServiceAgreementPage, { ProductId: this.ProductId });
+
+    }
+
+    MoveAssetsHomepage() {
+
+
+    }
+
+}

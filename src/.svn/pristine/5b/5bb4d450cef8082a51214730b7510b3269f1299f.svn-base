@@ -1,0 +1,26 @@
+Page-Authentication{
+    .Message {
+        border-bottom: 1px solid #EEEEEE;
+        height: 50px;
+    } 
+    // 其他个人信息文字
+    .User {
+        display: block;
+        margin-left: 20px;
+        margin-top: 15px;
+    } 
+     // 用户名姓名
+    .Username {
+        display: block;
+        margin-top: 6px;
+        letter-spacing: 1px;
+        float: right;
+    }
+    .no-border{
+        border:none;
+    }
+    .text-align-right{
+        text-align: right;
+    }
+    
+}

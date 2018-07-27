@@ -1,0 +1,82 @@
+import { Injectable } from '@angular/core';
+import { Response, } from '@angular/http';
+import { Observable } from "rxjs";
+import { HttpService } from "../../providers/HttpService";
+// import { Result } from "../../model/Result";
+// import { APP_SERVE_URL, PAGE_SIZE } from "../../providers/Constants";
+
+
+@Injectable()
+export class STPropertyService {
+    
+
+    constructor(public httpService: HttpService) {
+
+    }
+    // 获取产品资产详情
+    GetMyPropertyDetails(UserId: string, ProductId: string, OrderId:string): any {
+        let url = 'STProperty/GetMyPropertyDetails';
+        let paramMap = {
+            UserId: UserId,
+            ProductId: ProductId,
+            OrderId: OrderId
+        }
+        return this.httpService.getWebApi(url, paramMap).map((res: Response) => res);
+    }
+
+    // 获取提现金额
+    GetWithdrawMoney(UserId: string): any {
+        let url = 'STProperty/GetWithdrawMoney';
+        let paramMap = {
+            UserId: UserId,
+        }
+        return this.httpService.getWebApi(url, paramMap).map((res: Response) => res);
+    }
+
+    // 提现
+    WithdrawMoney(UserId: string, WithdrawMoney: string): any {
+        let url = 'STProperty/WithdrawMoney';
+        let paramMap = {
+            UserId: UserId,
+            WithdrawMoney: WithdrawMoney
+        }
+        return this.httpService.postFormData(url, paramMap).map((res: Response) => res);
+    }
+
+    // 获取可赎回金额
+    GetRedeemMoney(UserId: string, ProductId: string): any {
+        let url = 'STProperty/GetRedeemMoney';
+        let paramMap = {
+            UserId: UserId,
+            ProductId: ProductId
+        }
+        return this.httpService.getWebApi(url, paramMap).map((res: Response) => res);
+    }
+
+    // 赎回
+    RedeemMoney(UserId: string, ProductId: string, RedeemMoney: string): any {
+
+        let url = 'STProperty/RedeemMoney';
+        let paramMap = {
+            UserId: UserId,
+            ProductId: ProductId,
+            RedeemMoney: RedeemMoney,
+        }
+
+        return this.httpService.postFormData(url, paramMap).map((res: Response) => res);
+    }
+
+    addCustomerFavorite(postBody: any): Observable<any> {
+        let url = 'QSTCustomerProfile/addCustomerFavorite';
+
+        return this.httpService.postWebApi(url, postBody).map((res: Response) => res);
+    }
+  
+    GetMyProperty(UserId: string): any {
+        let url = 'STProperty/GetMyProperty';
+        let paramMap = {
+            UserId: UserId
+        }
+        return this.httpService.getWebApi(url, paramMap).map((res: Response) => res);
+    }
+}

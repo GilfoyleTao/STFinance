@@ -1,0 +1,75 @@
+import { Component } from '@angular/core';
+import { NavController, NavParams, ViewController, ModalController } from 'ionic-angular';
+// import { StorageService } from "../../../providers/StorageService";
+import { STLoginService } from "../STLoginService";
+import { RegisterPage } from './../Register/Register';
+import { FillinpasswordPage } from './../Fillinpassword/Fillinpassword';
+import { Utils } from './../../../providers/Utils';
+// import { STLoginPage } from './../STLogin';
+// import { ModifypasswordPage } from './../Modifypassword/Modifypassword';
+import { AlertController } from 'ionic-angular/components/alert/alert-controller';
+import { TabsPage } from './../../../app/tabs/tabs';
+import { Validators } from './../../../providers/Validators';
+@Component({
+    selector: 'Page-Login',
+    templateUrl: 'Login.html',
+})
+export class LoginPage {
+    Phone: any;
+    constructor(
+        public navCtrl: NavController,
+        public navParams: NavParams,
+        public viewCtrl: ViewController,
+        public modalCtrl: ModalController,
+        public alerCtrl: AlertController,
+        private _STLoginService: STLoginService) {
+    }
+    ionViewDidLoad() {
+
+    }
+
+    ionViewDidEnter() {
+        this.Phone = "";
+    }
+
+    GoBackHomePage() {
+        this.navCtrl.push(TabsPage)
+    }
+
+    SubmitphonenumberMoveRegister() {
+        this.viewCtrl.dismiss();
+        let RegisterModal = this.modalCtrl.create(RegisterPage);
+        RegisterModal.present();
+    }
+
+    // 跳转输入密码页
+    goFillinpassword() {
+        if (!Validators.Phone(this.Phone)) {
+            let alert = this.alerCtrl.create({
+                title: '请输入正确手机号',
+                buttons: ['确定']
+            });
+            alert.present();
+        }
+        else {
+            this.GetUserStatus();
+        }
+    }
+    // 判断是否注册
+    GetUserStatus() {
+        this._STLoginService.GetUserStatus(this.Phone).subscribe((data: any) => {
+            if (data.Data.Status == true) {
+                this.navCtrl.push(FillinpasswordPage, { Phone: this.Phone });
+            }
+            else if (data.Data.Status == false) {
+                this.navCtrl.push(RegisterPage, { MobilePhone: this.Phone });
+            }
+        });
+    }
+    // 跳转注册页
+    MoveRegister() {
+        this.navCtrl.push(RegisterPage);
+
+    }
+}
+

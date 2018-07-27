@@ -1,0 +1,25 @@
+import { Component } from '@angular/core';
+import { NavController, NavParams, ViewController, ModalController } from 'ionic-angular';
+
+@Component({
+    selector: 'Page-RelieveBankCard',
+    templateUrl: 'RelieveBankCard.html',
+})
+export class RelieveBankCardPage {
+   
+    constructor(public navCtrl: NavController,
+        // private alertCtrl: AlertController,
+        public navParams: NavParams,
+        public viewCtrl: ViewController,
+        public modalCtrl: ModalController,
+    ) {
+    }
+
+    ionViewDidLoad() {
+    }
+
+    ionViewDidEnter() {
+        
+    }
+
+}

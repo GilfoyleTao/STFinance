@@ -1,0 +1,28 @@
+<ion-header>
+    <ion-navbar color="MintCream">
+        <ion-title class="aq-textsize-16">我的优惠券</ion-title>
+    </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+    <ion-grid no-padding>
+        <!-- ticket：优惠券 -->
+        <ion-row class="Ticket" (click)="goMineCouponDetail(List.CouponId)" *ngFor="let List of _GetUserInfoModel?.L_CouponList">
+            <!-- ticketpic：优惠券图片 -->
+            <ion-col col-1>
+                <img src="assets/img/Mine/FavorableTicket.png" class="Ticketpic">
+            </ion-col>
+            <!-- ticketfont： 优惠券文字 -->
+            <ion-col col-10>
+                <span class="aq-textsize-14 aq-textcolor-grey-60 Ticketfont">{{List.CouponName}}</span>
+            </ion-col>
+            <!-- arrows：箭头 -->
+            <ion-col col-1>
+                <img src="assets/img/Mine/More.png" class="Arrows">
+            </ion-col>
+        </ion-row>
+
+    </ion-grid>
+
+</ion-content>

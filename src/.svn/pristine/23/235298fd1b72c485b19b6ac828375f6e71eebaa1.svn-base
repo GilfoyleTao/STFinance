@@ -1,0 +1,84 @@
+<ion-header>
+    <ion-navbar color="light">
+        <ion-title>资产</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content class="background">
+    <ion-grid no-padding>
+        <ion-row>
+            <ion-col class="height-210 widht-375">
+                <ion-row>
+                    <ion-col col-12 class="text-align-center aq-textcolor-white-core font-size-16 margin-top-13">昨日收益（元）</ion-col>
+                    <ion-col col-12 class="text-align-center aq-textcolor-white-core font-size-32 margin-top-6">{{_GetMyPropertyModel?.yesterdayTotalMoney}}</ion-col>
+                    <ion-col col-6 class=" background-img font-size-15">
+                        <p class="text-align-center font-size-13 aq-textcolor-white-core padding-top-6 padding-left">我的总资产（元）</p>
+                        <p class="text-align-center font-size-30 aq-textcolor-white-core padding-top-12 padding-left">{{_GetMyPropertyModel?.UserTotalmoney}}</p>
+                    </ion-col>
+                    <ion-col col-6 >
+                        <p class="text-align-center font-size-13 aq-textcolor-white-core padding-top-6 padding-left-10">累计收益（元）</p>
+                        <p class="text-align-center font-size-30 aq-textcolor-white-core padding-top-12 padding-left-10">{{_GetMyPropertyModel?.UserAccumulateMoney}}</p>
+                    </ion-col>
+                </ion-row>
+            </ion-col>
+        </ion-row>
+
+        <ion-row class="background-white" (click)="openPropertyWithdrawPage(_GetMyPropertyDetailsModel?.ProductId)">
+            <ion-col col-1>
+                <img class="width-18 height-15 margin-top-13 margin-left-12 " src="assets/img/deposit.png">
+            </ion-col>
+            <ion-col col-2>
+                <p class="font-size-15 line-height-43 margin-left-9 color-626262">可提现</p>
+            </ion-col>
+            <ion-col col-8 text-right>
+                <p class="aq-text-size-normal line-height-43  color-FC3131">￥{{UserWithdrawMoney}}</p>
+            </ion-col>
+            <ion-col col-1>
+                <img class="width-6 height-15 margin-top-13 margin-left-8 " src="assets/img/More.png">
+            </ion-col>
+        </ion-row>
+
+        <ion-row class="background-white margin-top-5 height-43">
+            <ion-col col-1>
+                <img class="width-6 height-13 margin-left-9 margin-top-14" src="assets/img/tu.png">
+            </ion-col>
+            <ion-col col-11>
+                <p class="aq-text-size-normal margin-top-11 margin-left--10 aq-textcolor-grey-40">我的理财</p>
+            </ion-col>
+        </ion-row>
+
+        <ion-row>
+            <img src="assets/img/Line.png">
+        </ion-row>
+
+        <ion-row class="aq-bgcolor-white-core" (click)="openPropertyDetails(Propetrylist?.ProductId , Propetrylist?.OrderId)" *ngFor="let Propetrylist of _GetMyPropertyModel?.L_RecommondProductList">
+            <ion-col col-12 class="height-130 widht-375">
+                <ion-row>
+                    <ion-col col-11>
+                        <span class="font-size-12 line-height-33 margin-left-15 color-070707">{{Propetrylist?.ProductName}}</span>
+                    </ion-col>
+                    <ion-col col-1>
+                        <img class="width-6 height-12 margin-top-10 " src="assets/img/More.png">
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <img class="margin-left-15 width-400 " src="assets/img/Line.png">
+                </ion-row>
+                <ion-col no-padding>
+                    <ion-row no-padding class="margin-left-20 margin-right-16">
+                        <ion-col class="color-626262" col-6>当前价值</ion-col>
+                        <ion-col class="text-align aq-textcolor-black-core" col-6>{{Propetrylist?.ProductCurrentMoney}}元</ion-col>
+                        <ion-col class="color-626262" col-6>累计收益</ion-col>
+                        <ion-col class="text-align aq-textcolor-black-core" col-6>{{Propetrylist?.ProductAccumulateMoney}}元</ion-col>
+                        <ion-col class="color-626262" col-6>昨日收益</ion-col>
+                        <ion-col class="text-align color-FC3131" col-6>{{Propetrylist?.yesterdayMoney}}元</ion-col>
+                    </ion-row>
+                    <ion-row no-padding>
+                        <img src="assets/img/Line.png">
+                    </ion-row>
+                </ion-col>
+            </ion-col>
+        </ion-row>
+
+    </ion-grid>
+</ion-content>

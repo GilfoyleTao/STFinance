@@ -1,0 +1,82 @@
+<ion-content class="bgcolor-grey-22">
+  <ion-slides class="banner-height" pager autoplay="600" speed="2000" loop="true" autoplayDisableOnInteration="true" *ngIf="_InitHomePageModel?.L_BannerList?.length> 1">
+    <ion-slide *ngFor="let bannerlist of _InitHomePageModel?.L_BannerList">
+      <img [src]="ImgUrl+bannerlist">
+    </ion-slide>
+  </ion-slides>
+  <ion-grid no-padding class="aq-bgcolor-white-core">
+    <ion-row no-padding class="aq-textcolor-grey-62 aq-textsize-13 ">
+      <ion-col col-3 text-center (click)="MoveHomeSign()">
+        <p>
+          <img src="assets/icon/icon1.png" class="aq-icon-42">
+        </p>
+        <p>签到</p>
+      </ion-col>
+      <ion-col col-3 text-center (click)="MoveHomeBonus()">
+        <p>
+          <img src="assets/icon/icon2.png" class="aq-icon-42">
+        </p>
+        <p>红包</p>
+      </ion-col>
+      <ion-col col-3 text-center (click)="MoveHomeRiskManagement()">
+        <p>
+          <img src="assets/icon/icon3.png" class="aq-icon-42">
+        </p>
+        <p>风险</p>
+      </ion-col>
+      <ion-col col-3 text-center (click)="MoveHomeNotice()">
+        <p>
+          <img src="assets/icon/icon4.png" class="aq-icon-42">
+        </p>
+        <p>公告</p>
+        <div class="readpoint" *ngIf="IsShow"></div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid>
+    <ion-row no-padding *ngFor="let list of _InitHomePageModel?.L_ProductList" class="aq-bgcolor-white-core margin-top-12" (click)="MoveProductDetails(list.ProductId)">
+      <ion-col col-12>
+        <div class="aq-height-14 border-radius-L-R"></div>
+        <p class="aq-text-size-normal aq-textcolor-grey-40 aq-padding-left-8 aq-margin-top-m17 aq-padding-left-15">{{list.CategoryName}}</p>
+      </ion-col>
+      <ion-col col-3></ion-col>
+      <ion-col col-6 text-center class="aq-textsize-16 textcolor-grey-35">{{list?.ProductName}}</ion-col>
+      <ion-col col-3></ion-col>
+      <ion-col col-3></ion-col>
+      <ion-col col-6 text-center class="aq-textsize-36 textcolor-red-30">{{list?.ProductRate}}%</ion-col>
+      <ion-col col-3></ion-col>
+      <ion-col col-4 text-center>
+        <p class="aq-text-size-normal textcolor-red-10 aq-margin-top-bottom-clear">{{list?.ProductTotalMoney}}元</p>
+      </ion-col>
+      <ion-col col-4 text-center>
+        <p class="aq-text-size-normal textcolor-red-10 aq-margin-top-bottom-clear">{{list?.ProductInvestMoney}}元</p>
+      </ion-col>
+      <ion-col col-4 text-center>
+        <p class="aq-text-size-normal textcolor-red-10 aq-margin-top-bottom-clear">{{list?.ProductLockPeriod}}天</p>
+      </ion-col>
+
+      <ion-col col-4 text-center>
+        <p class="aq-text-size-normal aq-textcolor-grey-50  aq-margin-top-bottom-clear  ">总金额</p>
+      </ion-col>
+      <ion-col col-4 text-center>
+        <p class="aq-text-size-normal aq-textcolor-grey-50  aq-margin-top-bottom-clear  ">已投资</p>
+      </ion-col>
+      <ion-col col-4 text-center>
+        <p class="aq-text-size-normal aq-textcolor-grey-50 aq-margin-top-bottom-clear ">锁定期限</p>
+      </ion-col>
+
+      <ion-col col-1></ion-col>
+      <ion-col col-10 text-center class="aq-textsize-16">
+        <button ion-button full class="aq-border-radius-5 button-color" style="height:32px;">立即体验</button>
+      </ion-col>
+      <ion-col col-1></ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid>
+    <ion-row>
+      <ion-col col-1></ion-col>
+      <ion-col col-10 class="textsize-9 aq-margin-top-8 " text-center>{{this._InitHomePageModel?.PageDescription}}</ion-col>
+      <ion-col col-1></ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

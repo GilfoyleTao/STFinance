@@ -1,0 +1,40 @@
+import { Component } from '@angular/core';
+import { NavController, NavParams, ViewController, ModalController } from 'ionic-angular';
+import { STProductService } from "../STProductService";
+import { GetProductServiceAgreement } from "../STProductModel";
+
+
+@Component({
+    selector: 'Page-ProductRiskStatement',
+    templateUrl: 'ProductRiskStatement.html',
+})
+export class ProductRiskStatementPage {
+
+    _GetProductServiceAgreement: GetProductServiceAgreement;
+    ProductId: string;
+    Status = '2';
+    constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public modalCtrl: ModalController, private _STProductService: STProductService) {
+        this.ProductId = this.navParams.get('ProductId');
+    }
+
+
+    ionViewDidLoad() {
+
+    }
+
+    ionViewDidEnter() {
+        this.GetProductServiceAgreement();
+    }
+
+    GetProductServiceAgreement() {
+        this._STProductService.GetProductServiceAgreement(this.ProductId, this.Status).subscribe((data: any) => {
+            if (data.Code == 0) {
+                this._GetProductServiceAgreement = data.Data;
+                this._GetProductServiceAgreement.ProductServiceAgreement = this._GetProductServiceAgreement.ProductServiceAgreement.replace(/src=\"\/upload/gi, "src=\"http://www.dlstzc.com:8080/upload/");
+            }
+        })
+    }
+
+
+
+}

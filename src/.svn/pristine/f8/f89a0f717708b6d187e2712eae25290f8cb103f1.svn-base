@@ -1,0 +1,44 @@
+<ion-header>
+    <ion-navbar hideBackButton color="MintCream">
+        <ion-title class=" aq-textsize-16">登录或注册</ion-title>
+        <ion-buttons start>
+            <button ion-button icon-only color="danger" (tap)='GoBackHomePage()'>
+                <ion-icon name="ios-arrow-back-outline"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <ion-grid>
+        <ion-row>
+            <ion-col col-12>
+                <img src="assets/img/login/logo.png" alt="" class="Logo">
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+    <ion-grid>
+        <ion-row>
+            <ion-col col-10 class="Phone">
+                <img src="assets/img/login/phone.png" alt="" class="phonelogo">
+                <ion-input [ngClass]="{'border-color-red-core': Phone}" type="tel" maxlength="11" placeholder="请输入您的手机号" class="border-color-grey aq-textsize-16 Phoneinput"
+                    [(ngModel)]="Phone" ></ion-input>
+            </ion-col>
+            <ion-col col-2></ion-col>
+        </ion-row>
+    </ion-grid>
+    <ion-grid>
+        <ion-row>
+            <ion-col col-10>
+                <button ion-button full class="aq-height-35 aq-bgcolor-grey-30 aq-textsize-18 Nextstep" (click)="goFillinpassword()" [ngClass]="{'aq-bgcolor-red-10':Phone,'aq-bgcolor-grey-30':!Phone}">
+                    <span class="next">下一步</span>
+                </button>
+            </ion-col>
+            <ion-col col-2></ion-col>
+        </ion-row>
+        <!-- <ion-row>
+            <ion-col col-12 class="register"  (click)="MoveRegister()"> 立即注册</ion-col>
+        </ion-row> -->
+    </ion-grid>
+</ion-content>

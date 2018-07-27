@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-navbar color="MintCream">
+    <ion-title class=" aq-textsize-16">
+      <span text-center>个人信息</span>
+    </ion-title>
+    <ion-buttons end>
+        <button (click)="saveUserInfo()" ion-button icon-only>
+            保存
+        </button>
+      </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-label fixed>姓名</ion-label>
+      <ion-input type="text" placeholder="请输入姓名" [(ngModel)]="UserTrueName"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label fixed>身份证码</ion-label>
+      <ion-input type="text" placeholder="请输入身份证码" [(ngModel)]="UserIdentityCode"></ion-input>
+    </ion-item>
+  </ion-list>
+</ion-content>

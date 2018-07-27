@@ -1,0 +1,150 @@
+import { Injectable } from '@angular/core';
+import { Response } from '@angular/http';
+import { Observable } from "rxjs";
+import { HttpService } from "../../providers/HttpService";
+import { USER_INFO } from '../../providers/Constants';
+import { StorageService } from './../../providers/StorageService';
+
+
+@Injectable()
+export class STHomeService {
+    UserInfo: any;
+    UserId: any;
+    constructor(public httpService: HttpService, public _StorageService: StorageService) {
+        this.UserInfo = this._StorageService.read(USER_INFO);
+        this.UserId = this.UserInfo ? this.UserInfo.UserId : 0;
+    }
+    //初始化页面
+    InitHomepage(): Observable<any> {
+        this.UserInfo = this._StorageService.read(USER_INFO);
+        this.UserId = this.UserInfo ? this.UserInfo.UserId : 0;
+        let url = 'STHome/InitHomePage';
+        let postBody = {
+            UserId: this.UserId
+        };
+
+        return this.httpService.getWebApi(url, postBody).map((res: Response) => res);
+    }
+
+    //初始化当月签到情况
+    InitSignPage(Year, Month): Observable<any> {
+        this.UserInfo = this._StorageService.read(USER_INFO);
+        this.UserId = this.UserInfo ? this.UserInfo.UserId : 0;
+        let url = 'STHome/InitSignPage';
+        let postBody = {
+            UserId: this.UserId,
+            Year: Year,
+            Month: Month
+        };
+
+        return this.httpService.getWebApi(url, postBody).map((res: Response) => res);
+    }
+
+    InitHomeSign(): Observable<any> {
+        let url = 'STHome/InitHomeSign';
+        let postBody = {
+        }
+
+        return this.httpService.getWebApi(url, postBody).map((res: Response) => res);
+    }
+
+    //是否领过新手券
+    GetNoviceCouStatus(): Observable<any> {
+        this.UserInfo = this._StorageService.read(USER_INFO);
+        this.UserId = this.UserInfo ? this.UserInfo.UserId : 0;
+        let url = 'STHome/GetNoviceCouStatus';
+        let postBody = {
+            Userid: this.UserId
+        };
+
+        return this.httpService.getWebApi(url, postBody).map((res: Response) => res);
+    }
+
+    //风控信息
+    GetRiskManagementInfo(PageNum: string, RecordNum: number): Observable<any> {
+        this.UserInfo = this._StorageService.read(USER_INFO);
+        this.UserId = this.UserInfo ? this.UserInfo.UserId : 0;
+        let url = 'STHome/GetRiskManagementInfo';
+        let postBody = {
+            currentUserID: this.UserId,
+            PageNum: PageNum,
+            RecordNum: RecordNum
+        }
+        return this.httpService.getWebApi(url, postBody).map((res: Response) => res);
+    }
+
+    GetOfficialNoticeList(): Observable<any> {
+        let url = 'STHome/GetOfficialNoticeList';
+        let postBody = {
+        }
+
+        return this.httpService.getWebApi(url, postBody).map((res: Response) => res);
+    }
+    //获得公告列表 
+    GetHomeNotice(Status: string): Observable<any> {
+        this.UserInfo = this._StorageService.read(USER_INFO);
+        this.UserId = this.UserInfo ? this.UserInfo.UserId : 0;
+        let url = 'STHome/GetHomeNotice';
+        let postBody = {
+            UserId: this.UserId,
+            Status: Status,
+        }
+
+        return this.httpService.getWebApi(url, postBody).map((res: Response) => res);
+    }
+    //获得公告详情
+    GetHomeNoticeDetail(NoticeId: string): Observable<any> {
+        let url = 'STHome/GetHomeNoticeDetail';
+        let postBody = {
+            NoticeId: NoticeId
+        }
+        return this.httpService.getWebApi(url, postBody).map((res: Response) => res);
+    }
+    //阅读消息
+    ReadNotice(NoticeId: string): Observable<any> {
+        this.UserInfo = this._StorageService.read(USER_INFO);
+        this.UserId = this.UserInfo ? this.UserInfo.UserId : 0;
+        let url = 'STHome/ReadNotice';
+        let postBody = {
+            UserId: this.UserId,
+            NoticeId: NoticeId,
+        }
+        return this.httpService.getWebApi(url, postBody).map((res: Response) => res);
+    }
+    // 签到
+    SignToday(UserId: string, Date: any): Observable<any> {
+        let url = 'STHome/SignToday';
+        let postBody = {
+            UserId: UserId,
+            Date: Date,
+        }
+        return this.httpService.getWebApi(url, postBody).map((res: Response) => res);
+    }
+    GetSignInfo(UserId: string): Observable<any> {
+        let url = 'STHome/GetSignInfo';
+        let postBody = {
+            UserId: UserId
+        }
+        return this.httpService.getWebApi(url, postBody).map((res: Response) => res);
+    }
+
+    // 领取随机红包
+    GetNoviceCou(CouponId: string): Observable<any> {
+        let url = 'STHome/GetNoviceCou';
+        let postBody = {
+            Userid: this.UserId,
+            CouponId: CouponId
+        }
+        return this.httpService.getWebApi(url, postBody).map((res: Response) => res);
+    }
+
+    // 获取随机红包金额
+    GetNoviceMoney(): Observable<any> {
+        let url = 'STHome/GetNoviceMoney';
+        let postBody = {
+
+        }
+        return this.httpService.getWebApi(url, postBody).map((res: Response) => res);
+    }
+
+}

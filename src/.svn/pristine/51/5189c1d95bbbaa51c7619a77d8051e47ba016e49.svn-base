@@ -1,0 +1,24 @@
+Page-ProductList {
+    .border-left-6{
+        border-left:6px solid #CB0101;
+    }
+
+    .border-bottom-F4F4F4{
+        border-bottom:1px solid #F4F4F4;
+    }
+
+    .border-F4F4F4{
+        border:2px solid #F4F4F4;
+    }
+
+    .border-radius-L-R {
+        border:3px solid #CB0101;
+        border-top-left-radius: 2.5px;
+        border-top-right-radius: 2.5px;
+        border-bottom-left-radius: 2.5px;
+        border-bottom-right-radius: 2.5px;
+        width:3px;
+    }
+
+
+}

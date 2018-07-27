@@ -1,0 +1,14 @@
+<ion-header>
+    <ion-navbar color="MintCream">
+        <ion-title>
+            <span class="aq-title-LoginPwd">解绑银行卡</span>
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content>
+    
+</ion-content>
+
+<ion-footer>
+   
+</ion-footer>

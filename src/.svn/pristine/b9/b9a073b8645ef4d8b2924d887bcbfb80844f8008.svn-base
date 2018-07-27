@@ -1,0 +1,115 @@
+import { Injectable } from '@angular/core';
+import { Response } from '@angular/http';
+import { HttpService } from "../../providers/HttpService";
+import { USER_INFO } from './../../providers/Constants';
+import { StorageService } from '../../providers/StorageService';
+
+@Injectable()
+export class STMineService {
+    UserInfo: any;
+    UserId: any;
+    constructor(public httpService: HttpService, public _StorageService: StorageService) {
+        this.UserInfo = this._StorageService.read(USER_INFO);
+        this.UserId = this.UserInfo ? this.UserInfo.UserId : 0;
+    }
+    //post 用户反馈
+    UserFeedBack(UserId: string, Feedback: string): any {
+        let url = 'STMine/UserFeedBack';
+        let paramMap = {
+            UserId: UserId,
+            Feedback: Feedback
+        };
+        return this.httpService.postFormData(url, paramMap).map((res: Response) => res);
+    }
+    //post 添加银行卡
+    AddBankCard(BankCardId: string, UserTrueName: string, Phone: string): any {
+        let url = 'STMine/AddBankCard';
+        let paramMap = {
+            BankCardId: BankCardId,
+            UserTrueName: UserTrueName,
+            Phone: Phone,
+        };
+        return this.httpService.postFormData(url, paramMap).map((res: Response) => res);
+    }
+    // 删除银行卡
+    DeleteBankCard(BankCardId: string) {
+        let url = 'STMine/DeleteBankCard';
+        let paramMap = {
+            BankCardId: BankCardId,
+        };
+        return this.httpService.postFormData(url, paramMap).map((res: Response) => res);
+    }
+    //post 实名认证
+    GetAuthStatus(Name: string, IdNumber: string): any {
+        let url = 'STAccount/GetAuthStatus';
+        let paramMap = {
+            UserId: this.UserId,
+            Name: Name,
+            IdNumber: IdNumber,
+        }
+        return this.httpService.postFormData(url, paramMap).map((res: Response) => res);
+    }
+    //常见问题
+    CommonQuestions(): any {
+        let url = 'STMine/CommonQuestions';
+        let paramMap = {
+
+        };
+        return this.httpService.getWebApi(url, paramMap).map((res: Response) => res);
+    }
+    // 获取用户信息
+    GetUserInfo(): any {
+        let url = 'STMine/GetUserInfo';
+        let paramMap = {
+            UserId: this.UserId
+        };
+        return this.httpService.getWebApi(url, paramMap).map((res: Response) => res);
+    }
+    //关于app
+    AboutApp(): any {
+        let url = 'STMine/AboutApp';
+        let paramMap = {
+        };
+        return this.httpService.getWebApi(url, paramMap).map((res: Response) => res);
+    }
+
+    //发送短信
+    SendCode(Phone: string, PictureCode: string): any {
+        let url = 'STAccount/SendCode';
+        let paramMap = {
+            Phone: Phone,
+            PictureCode: PictureCode
+        };
+        return this.httpService.getWebApi(url, paramMap).map((res: Response) => res);
+    }
+
+    // 修改用户信息
+    ModifyUserInfo(UserTrueName: string, UserIdentityCode: string): any {
+        this.UserInfo = this._StorageService.read(USER_INFO);
+        this.UserId = this.UserInfo ? this.UserInfo.UserId : 0;
+        let url = 'STMine/ModifyUserInfo';
+        let paramMap = {
+            UserId: this.UserId,
+            UserTrueName: UserTrueName,
+            UserIdentityCode: UserIdentityCode
+        };
+        return this.httpService.postFormData(url, paramMap).map((res: Response) => res);
+    }
+    //判读短信校验成功还是失败
+    CheckValidationCode(Phone: string, code: string): any {
+        let url = 'STAccount/ValidationCode';
+        let paramMap = {
+            Phone: Phone,
+            code: code
+        };
+        return this.httpService.postFormData(url, paramMap).map((res: Response) => res);
+    }
+    // 优惠券详情
+    GetCouponDetail(Couponid: string): any {
+        let url = 'STProduct/GetCouponDetail';
+        let paramMap = {
+            Couponid: Couponid
+        };
+        return this.httpService.getWebApi(url, paramMap).map((res: Response) => res);
+    }
+}

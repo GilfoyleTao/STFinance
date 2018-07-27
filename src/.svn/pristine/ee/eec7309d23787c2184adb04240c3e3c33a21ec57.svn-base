@@ -1,0 +1,27 @@
+<ion-header>
+    <ion-navbar color="MintCream" hideBackButton>
+        <ion-buttons start>
+            <button ion-button icon-only (tap)='MoveMineCenterPage()'>
+                <ion-icon name="ios-arrow-back"></ion-icon>
+            </button>
+        </ion-buttons>
+        <ion-title>
+            <span class="aq-title-LoginPwd">钱包</span>
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content text-center>
+    <ion-grid>
+        <ion-row>
+            <ion-col col-12 class="col_BankCardPic" text-center (click)="DeleteBankCard(List.BankCardId)"  *ngFor="let List of _GetUserInfoModel?.L_BankCardList">
+                <img src="assets/img/background1.png" style="width: 100%;height: 108px">
+                <p class="num_BankCardPic aq-textsize-24">{{List.BankCardNum}}</p>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>
+<ion-footer>
+    <button full class="aq-bgcolor-red-10" ion-button (click)="MoveFillinBankCard()">
+        <span class="CommitFeedback">添加银行卡</span>
+    </button>
+</ion-footer>

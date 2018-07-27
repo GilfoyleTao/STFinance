@@ -1,0 +1,26 @@
+Page-MineBankCard {
+    .button-inner {
+        color: #CB0101;
+        margin-left: 5px;
+    }
+    // .BankCardPic{
+    //     margin-left:-1px;
+    // }
+    .CommitFeedback {
+        color: #F4F4F4;
+    }
+    .aq-bgcolor-red-10 {
+        margin-top: -5px;
+        width: 100%;
+        margin-bottom: 0px;
+    }
+    .col_BankCardPic {
+        position: relative;
+    }
+    .num_BankCardPic {
+        position: absolute;
+        top: 48px;
+        left: 30px;
+        text-align: center; // border: 1px solid red;
+    }
+}

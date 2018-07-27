@@ -1,0 +1,16 @@
+Page-MineInfo {
+    .item-inner {
+        padding-right: 8px;
+        padding-right: 8px;
+        border-bottom: 0px solid #c8c7cc !important;
+    }
+    .item-ios{
+        border-bottom: 0.55px solid #c8c7cc !important;
+    }
+    .item-md {
+        border-bottom: 1px solid #c8c7cc !important;
+    }
+    .height-35{
+        height: 35px;
+    }
+}

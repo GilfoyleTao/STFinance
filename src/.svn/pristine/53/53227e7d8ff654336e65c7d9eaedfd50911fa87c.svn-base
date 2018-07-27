@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-navbar color="MintCream">
+    <ion-title>个人信息</ion-title>
+    <ion-buttons end *ngIf="GetUserInfoModel?.UserAuthNameCode == '0'">
+      <button ion-button icon-only (click)="Confirm(GetUserInfoModel)">
+        修改
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <!-- 真实姓名 -->
+  <ion-list no-margin>
+    <ion-item class="aq-text-color-grey-70 aq-text-size-big ">
+      <span>姓名</span>
+      <span item-end>{{GetUserInfoModel?.UserTrueName}}</span>
+    </ion-item>
+    <ion-item class="aq-text-color-grey-70 aq-text-size-big ">
+      <span>身份证码</span>
+      <span item-end>{{GetUserInfoModel?.UserIdentityCode}}</span>
+    </ion-item>
+    <ion-item class="aq-text-color-grey-70 aq-text-size-big ">
+      <span>我的生日</span>
+      <span item-end>{{GetUserInfoModel?.UserBirthday}}</span>
+    </ion-item>
+    <ion-item class="aq-text-color-grey-70 aq-text-size-big ">
+      <span>推荐码</span>
+      <span item-end>{{GetUserInfoModel?.UserRecommendCode}}</span>
+    </ion-item>
+  </ion-list>
+  <ion-row class="aq-padding-top-32">
+    <ion-col offset-2 col-8>
+      <button block ion-button color="danger" class="aq-radius-10 height-35" (click)="goExitlogon()">
+        退出登录
+      </button>
+    </ion-col>
+  </ion-row>
+</ion-content>

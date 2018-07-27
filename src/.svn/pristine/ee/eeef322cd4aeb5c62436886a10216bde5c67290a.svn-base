@@ -1,0 +1,57 @@
+Page-HomeNotice {
+    .bg-color-grey {
+        background-color: #F6F6F6;
+    }
+    .margin-top-bottom-18 {
+        margin: 18px 0px;
+    }
+    .text-color-grey-40 {
+        color: #3F3F3F;
+    }
+    .textsize-11 {
+        font-size: 11px;
+    }
+    .text-color-grey-32 {
+        color: #828282;
+    }
+    .textcolor-red-30 {
+        color: #CB0101 !important;
+    }
+    .border-bottom-red {
+        border-bottom: 2px solid #FC3131;
+    }
+    .margin-top-clear {
+        margin-top: 0px;
+    }
+    .margin-bottom-clear {
+        margin-bottom: 0px;
+    }
+    .margin-bottom-20 {
+        margin-bottom: 20px;
+    }
+    .margin-left-15 {
+        margin-left: 15px;
+    }
+    .list-ios[inset] {
+        margin: 16px;
+        border-radius: 0;
+    }
+    .border-width {
+        width: 75%;
+        margin: 0 auto;
+    }
+    .readpoint {
+        position: absolute;
+        top: 5px;
+        left: 0%;
+        height: 8px;
+        width: 8px;
+        border-radius: 50%;
+        background-color: red;
+    }
+
+    .textsize-30 {
+        font-size: 30px;
+        color: #D11E1E;
+    }
+}

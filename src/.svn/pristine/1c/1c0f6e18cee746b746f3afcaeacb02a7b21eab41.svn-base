@@ -1,0 +1,54 @@
+<ion-header>
+    <ion-navbar color="MintCream">
+        <ion-title class=" aq-textsize-16">
+            <span text-center>个人信息</span>
+        </ion-title>
+        <span (click)="save()" class="Confirm aq-textsize-16">保存</span>
+    </ion-navbar>
+</ion-header>
+<ion-content>
+    <!-- 头像 -->
+    <ion-grid no-padding>
+        <!-- message：具体个人信息 -->
+        <!-- <ion-row class="UserMessage ">
+            <ion-col col-3>
+                <span class="aq-textsize-14 aq-textcolor-grey-60 User-font">头像</span>
+            </ion-col>
+            <ion-col col-8 > -->
+                    <!-- (click)="UploadPhoto()" -->
+                <!-- userpic：头像图片 -->
+                <!-- <img [src]="UserPhoto" alt="" class="Userpic"> -->
+            <!-- </ion-col>
+            <ion-col col-1 class="Arrows"></ion-col>
+        </ion-row> -->
+        <!-- 用户名 -->
+        <!-- <ion-row class="Message ">
+            <ion-col col-3>
+                <span class="aq-textsize-14 aq-textcolor-grey-60 User">用户名</span>
+            </ion-col>
+            <ion-col col-8>
+                <ion-input type="text" class="aq-textsize-14 aq-textcolor-grey-50 Username" placeholder="请输入用户名" [(ngModel)]="UserName">{{GetUserInfoModel?.UserName}}</ion-input>
+            </ion-col>
+            <ion-col col-1 class="Arrows"></ion-col>
+        </ion-row> -->
+        <!-- 真实姓名 -->
+        <ion-row class="Message ">
+            <ion-col col-3>
+                <span class="aq-textsize-14 aq-textcolor-grey-60 User">姓名</span>
+            </ion-col>
+            <ion-col col-8>
+                <ion-input type="text" class="aq-textsize-14 aq-textcolor-grey-50 Username" placeholder="请输入姓名"  [(ngModel)]="UserTrueName">{{GetUserInfoModel?.UserTrueName}}</ion-input>            </ion-col>
+            <ion-col col-1 class="Arrows"></ion-col>
+        </ion-row>
+        <!-- 身份证码 -->
+        <ion-row class="Message ">
+            <ion-col col-3>
+                <span class="aq-textsize-14 aq-textcolor-grey-60 User">身份证码</span>
+            </ion-col>
+            <ion-col col-8>
+                <ion-input  class="aq-textsize-14 aq-textcolor-grey-50 Idcard" placeholder="请输入身份证码" [(ngModel)]="UserIdentityCode" maxlength="18">{{GetUserInfoModel?.UserIdentityCode}}</ion-input>
+            </ion-col>
+            <ion-col col-1 class="Arrows"></ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>

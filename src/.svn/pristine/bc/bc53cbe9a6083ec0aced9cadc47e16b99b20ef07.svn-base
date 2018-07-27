@@ -1,0 +1,50 @@
+
+export class GetMyPropertyDetailsModel {
+    ProductId: string;
+    ProductName: string;
+    UserYesterdayMoney: string;
+    UserEstimateMoney: string;
+    ProductRate: string;
+    ProductTotalMoney: string;
+    RedeemStatus:any;
+    ProductInvestMoney: string;
+    UserPurchaseDate: string;
+    ProductDeadlineDate: string;
+    InComeStartDate:string;
+    L_RecommondProductList: Array<L_RecommondProductList>
+}
+class L_RecommondProductList {
+    ProductId: string;
+    ProductName: string;
+    ProductStartDate: string;
+    ProductRate: string;
+    ProductRaiseRate: string;
+    ProductLockPeriod: string;
+    ProductMinPurchase: string;
+    ProductStatus: string;
+    ProductCurrentMoney: string;
+    ProductAccumulateMoney: string;
+    ProductSevenDayRate: string;
+    
+}
+
+export class GetMyPropertyModel {
+    OrderId:string;
+    UserTotalmoney: string;
+    UserAccumulateMoney: string;
+    UserWithdrawMoney: string;
+    yesterdayTotalMoney:string;
+    yesterdayMoney:string;
+    L_RecommondProductList: Array<L_RecommondProductList>
+}
+
+export class GetWithdrawMoneyMidel{
+    UserWithdrawMoney: string;
+}
+
+export class GetRedeemMoneyMidel{
+    UserRedeemMoney:any;
+}
+
+
+

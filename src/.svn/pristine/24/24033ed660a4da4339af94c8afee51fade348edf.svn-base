@@ -1,0 +1,141 @@
+<!-- 设置及用户头像 -->
+<ion-content>
+    <ion-grid no-padding>
+        <ion-row class="Userbackground">
+            <ion-col col-12>
+                <img src="assets/img/Mine/background.png" alt="" class="background">
+                <p class="aq-textsize-12 aq-textcolor-white-core Set" (click)="goMineInfo()">设置</p>
+                <!-- <p>
+                    <img class="Userpicture" [src]="ImgUrl + _GetUserInfoModel?.UserPhoto" alt="" *ngIf="IsShow">
+                    <img class="Userpicture" src="assets/img/usericon.png" alt="" *ngIf="!IsShow" >
+                </p> -->
+                <p class="aq-textsize-18 aq-textcolor-white-core Username">{{_GetUserInfoModel?.UserPhone}}</p>
+                <p class="aq-textsize-14 aq-textcolor-white-core UserRecommendCode">(推荐码:{{_GetUserInfoModel?.UserRecommendCode}})</p>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+    <!-- 我的钱包 -->
+    <ion-grid class="Totallist">
+        <!-- wallet：钱包 -->
+        <ion-row class="Wallet " (click)="MoveMineBankCardPage()">
+            <ion-col col-2>
+                <img src="assets/img/Mine/Wallet.png" alt="" class="Walletpic">
+            </ion-col>
+            <ion-col col-5>
+                <span class="aq-textsize-14 aq-textcolor-grey-60 Mywallet">我的钱包</span>
+            </ion-col>
+            <ion-col col-4>
+                <!-- before-arrows：箭头前文字 -->
+                <span class="aq-textsize-14 aq-textcolor-grey-50 Before-arrows"></span>
+            </ion-col>
+            <ion-col col-1>
+                <!-- arrows：箭头 -->
+                <img src="assets/img/Mine/More.png" alt="" class="Arrows">
+            </ion-col>
+        </ion-row>
+        <!-- 我的优惠券 -->
+        <ion-row class="Wallet" (click)="goMineCoupon(_GetUserInfoModel)">
+            <ion-col col-2>
+                <img src="assets/img/Mine/Favorable.png" alt="" class="Walletpic">
+            </ion-col>
+            <ion-col col-5>
+                <span class="aq-textsize-14 aq-textcolor-grey-60 Myticket">我的优惠券</span>
+            </ion-col>
+            <ion-col col-4>
+                <span class="aq-textsize-14 aq-textcolor-grey-50 Before-arrows"></span>
+            </ion-col>
+            <ion-col col-1>
+                <img src="assets/img/Mine/More.png" alt="" class="Arrows">
+            </ion-col>
+        </ion-row>
+        <!-- graycolor:灰色条部分 -->
+    </ion-grid>
+    <div class="aq-bgcolor-white-30 Graycolor"></div>
+    <ion-grid>
+        <!-- member:会员中心 -->
+        <ion-row class="WalletMymember">
+            <ion-col col-2>
+                <img src="assets/img/Mine/Member.png" alt="" class="Problempic">
+            </ion-col>
+            <ion-col col-5>
+                <span class="aq-textsize-14 aq-textcolor-grey-60 Mymember">会员中心</span>
+            </ion-col>
+            <ion-col col-4>
+                <span class="aq-textsize-14 aq-textcolor-grey-50 Before-arrows"></span>
+            </ion-col>
+            <ion-col col-1>
+                <img src="assets/img/Mine/More.png" alt="" class="Arrows">
+            </ion-col>
+        </ion-row>
+        <!-- 实名认证  0 = 未实名   1 = 已实名 -->
+        <ion-row class="WalletMymember" (click)="MoveAuthentication()">
+            <ion-col col-2>
+                <img src="assets/img/Mine/Member.png" alt="" class="Problempic">
+            </ion-col>
+            <ion-col col-5>
+                <span class="aq-textsize-14 aq-textcolor-grey-60 Mymember">实名认证</span>
+            </ion-col>
+            <ion-col col-4 text-right>
+                <img *ngIf="_GetUserInfoModel?.UserAuthNameCode == 1" src="assets/img/RealName.png" class="aq-margin-top-10">
+                <img *ngIf="_GetUserInfoModel?.UserAuthNameCode == 0" src="assets/img/NoRealName.png" class="aq-margin-top-10">
+            </ion-col>
+            <ion-col col-1>
+                <img src="assets/img/Mine/More.png" alt="" class="Arrows">
+            </ion-col>
+        </ion-row>
+        <!-- 安全保障 -->
+        <ion-row class="Wallet" (click)="MoveHomeRiskManagement()">
+            <ion-col col-2>
+                <img src="assets/img/Mine/Safe.png" alt="" class="Problempic">
+            </ion-col>
+            <ion-col col-9>
+                <span class="aq-textsize-14 aq-textcolor-grey-60 Mymember">安全保障</span>
+            </ion-col>
+            <ion-col col-1>
+                <img src="assets/img/Mine/More.png" alt="" class="Arrows">
+            </ion-col>
+        </ion-row>
+        <!-- 常见问题 -->
+        <ion-row class="Wallet" (click)="MoveCommonQuestion()">
+            <ion-col col-2>
+                <img src="assets/img/Mine/Problem.png" alt="" class="Walletpic">
+            </ion-col>
+            <ion-col col-9>
+                <span class="aq-textsize-14 aq-textcolor-grey-60 Mymember">常见问题</span>
+            </ion-col>
+            <ion-col col-1>
+                <img src="assets/img/Mine/More.png" alt="" class="Arrows">
+            </ion-col>
+        </ion-row>
+        <!-- 用户反馈 -->
+        <ion-row class="Wallet" (click)="MoveMineFeedback()">
+            <ion-col col-2>
+                <img src="assets/img/Mine/Feedback.png" alt="" class="Problempic">
+            </ion-col>
+            <ion-col col-9>
+                <span class="aq-textsize-14 aq-textcolor-grey-60 Mymember">用户反馈</span>
+            </ion-col>
+            <ion-col col-1>
+                <img src="assets/img/Mine/More.png" alt="" class="Arrows">
+            </ion-col>
+        </ion-row>
+        <!-- aboutAPP:关于app -->
+        <ion-row class="Wallet" (click)="MoveAboutApp()">
+            <ion-col col-2>
+                <img src="assets/img/Mine/About.png" alt="" class="Problempic">
+            </ion-col>
+            <ion-col col-9>
+                <span class="aq-textsize-14 aq-textcolor-grey-60 Mymember">关于app</span>
+            </ion-col>
+            <ion-col col-1>
+                <img src="assets/img/Mine/More.png" alt="" class="Arrows">
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+
+
+
+
+</ion-content>

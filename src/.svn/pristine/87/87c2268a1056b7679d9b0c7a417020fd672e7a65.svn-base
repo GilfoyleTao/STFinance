@@ -1,0 +1,43 @@
+Page-CommonQuestion {
+    .button-inner {
+        color: #CB0101;
+        margin-left: 5px;
+    }
+    .CommonQuestionPic {
+        width: 100%;
+        margin-bottom: -3px;
+    }
+    .CommonQuestion-arrow-forward {
+        float: right;
+        margin-right: -15px;
+        color: #B9B9B9;
+    }
+    .Total-Safty {
+        margin-top: -25px;
+        margin-left: -11px;
+    }
+    .aq-textsize-13 {
+ 
+        padding-left: 20px;
+        color: #626262;
+        // border: 1px solid red;
+    //    margin-top:-10px; 
+       width: 94%;
+    }
+    .Safe-or-not,.Other-functions,.How-to-connect {
+       margin-bottom: -2px;
+     margin-top:-4px;   
+        margin-left: -20px;
+        color: #404040;
+    }
+    .How-to-ensure {
+        margin-left: -20px;
+        margin-bottom: -6px;
+        margin-top: -1px;
+        color: #070707
+    }
+    .InputList{
+        margin-bottom: -4px;
+    }
+    
+}

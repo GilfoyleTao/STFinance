@@ -1,0 +1,14 @@
+.back-button-icon-ios {
+    margin: -1px 0 0;
+    display: inherit;
+    min-width: 18px;
+    font-size: 2.8rem;
+}
+
+.toolbar-title-ios {
+    text-align: center;
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: #000;
+    pointer-events: auto;
+}

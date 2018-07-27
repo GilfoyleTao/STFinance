@@ -1,0 +1,148 @@
+<ion-header>
+  <ion-navbar color="MintCream">
+    <ion-title>{{_getProductDetailModel?.ProductName}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid no-padding>
+    <ion-row>
+      <ion-col col-12 text-center>
+      <p class="aq-textsize-36 aq-textcolor-red-10">{{_getProductDetailModel?.ProductRate}}%</p>
+      </ion-col>
+      <ion-col col-12 text-center class="aq-margin-top-m50">
+        <p class="aq-textsize-10 aq-textcolor-grey-50">预计年化收益率</p>
+      </ion-col>
+    </ion-row>
+    <ion-row class="aq-padding-top-15">
+      <ion-col col-4 text-center class="border-right-B5B5B5-1">
+        <p class="aq-textcolor-pink-10 aq-textsize-12 aq-margin-top-m5">{{_getProductDetailModel?.ProductTotalMoney}}</p>
+      </ion-col>
+      <ion-col col-4 text-center class="border-right-B5B5B5-1">
+        <p class="aq-textcolor-pink-10 aq-textsize-12 aq-margin-top-m5">{{_getProductDetailModel?.ProductPlanEarnDate | date:"yyyy-MM-dd"}}</p>
+      </ion-col>
+      <ion-col col-4 text-center>
+        <p class="aq-textcolor-pink-10 aq-textsize-12 aq-margin-top-m5">{{_getProductDetailModel?.ProductLockPeriod}}天</p>
+      </ion-col>
+      <ion-col col-4 text-center>
+        <p class="aq-textcolor-grey-50 aq-textsize-12 aq-margin-top-m5">总金额</p>
+      </ion-col>
+      <ion-col col-4 text-center>
+        <p class="aq-textcolor-grey-50 aq-textsize-12 aq-margin-top-m5">截止日期</p>
+      </ion-col>
+      <ion-col col-4 text-center>
+        <p class="aq-textcolor-grey-50 aq-textsize-12 aq-margin-top-m5">锁定期限</p>
+      </ion-col>
+    </ion-row>
+    <ion-row class="aq-padding-top-15">
+      <ion-col col-1></ion-col>
+      <ion-col col-10 class="progress">
+        <div class="bg-progress progress-bar progress-bar-danger progress-bar-striped active"  [ngStyle]="{'width': _getProductDetailModel?.ProductStatus+'%'}">
+        </div>
+      </ion-col>
+      <ion-col col-1></ion-col>
+      <ion-col col-1></ion-col>
+      <ion-col col-10>
+        <p class="aq-textcolor-grey-50 aq-textsize-12 aq-margin-top-7">投资进度</p>
+      </ion-col>
+      <ion-col col-1></ion-col>
+    </ion-row>
+    <ion-row class="aq-border-radius-3 border-F4F4F4-3"></ion-row>
+  </ion-grid>
+  <ion-grid>
+    <ion-row>
+      <ion-col col-6 text-center *ngFor="let category of categorys" [ngClass]="{'aq-textcolor-red-10':category.selected,'aq-textcolor-grey-60':!category.selected}"
+        (tap)="switchCategory(category)">
+        {{category.CategoryName}}
+        <div class="aq-margin-top-12 " [ngClass]="{'aq-tab-border-active':category.selected}"></div>
+      </ion-col>
+    </ion-row>
+    <ion-row class="aq-border-bottom-white-10 aq-margin-top-m6"></ion-row>
+    <ion-row class="aq-padding-top-10 aq-border-bottom" *ngFor="let List of _GetProductdeclaration?.L_DeclarationList" [ngClass]="{'aq-none':!categorys[0].selected}">
+      <ion-col col-12>
+        <div class="aq-height-14 border-radius-L-R"></div>
+        <p class="aq-textsize-14 aq-textcolor-grey-40 aq-padding-left-8 aq-margin-top-m16 aq-padding-left-15">{{List.DeclarationName}}</p>
+      </ion-col>
+      <ion-col col-12 class="aq-margin-top-m25">
+        <p class="aq-textsize-12 aq-padding-left-13 aq-textcolor-grey-40 aq-line-height-20">{{List.DeclarationDescription}}</p>
+      </ion-col>
+    </ion-row>
+    <ion-row class="aq-border-bottom" *ngFor="let item of _GetProductdeclaration?.L_CreditList" [ngClass]="{'aq-none':!categorys[1].selected}">
+      <ion-col col-12 class="aq-margin-top-5">
+        <div class="aq-height-14 border-radius-L-R"></div>
+        <p class="aq-textsize-14 aq-textcolor-grey-40 aq-padding-left-8 aq-margin-top-m16 aq-padding-left-15">{{item.DeclarationName}}</p>
+      </ion-col>
+      <ion-col col-12 class="aq-margin-top-m25">
+        <p class="aq-textsize-12 aq-padding-left-13 aq-textcolor-grey-40 aq-line-height-20">{{item.CreditMsg}}</p>
+      </ion-col>
+      <!-- <ion-col col-12>
+        <p class="aq-textsize-12 aq-textcolor-grey-40">项目编号
+          <span class="aq-padding-left-5">{{item.CreditNum}}</span>
+        </p>
+      </ion-col>
+      <ion-col col-2 text-center class="aq-margin-top-m17">
+        <p class="aq-textsize-12 aq-textcolor-black-core">{{item.CreditorName}}</p>
+      </ion-col>
+      <ion-col col-5 text-center class="aq-margin-top-m17">
+        <p class="aq-textsize-12 aq-textcolor-black-core">{{item.CreditorNum}}</p>
+      </ion-col>
+      <ion-col col-5 text-center class="aq-margin-top-m17">
+        <p class="aq-textsize-12 aq-textcolor-black-core">{{item.CreditorMoney}}元</p>
+      </ion-col>
+      <ion-col col-2 text-center class="aq-margin-top-m17">
+        <p class="aq-textsize-12 aq-textcolor-grey-40">融资人</p>
+      </ion-col>
+      <ion-col col-5 text-center class="aq-margin-top-m17">
+        <p class="aq-textsize-12 aq-textcolor-grey-40">证件号码</p>
+      </ion-col>
+      <ion-col col-5 text-center class="aq-margin-top-m17">
+        <p class="aq-textsize-12 aq-textcolor-grey-40">融资金额</p>
+      </ion-col> -->
+    </ion-row>
+  </ion-grid>
+
+</ion-content>
+<ion-footer>
+  <ion-row>
+    <ion-col col-5 class="aq-bgcolor-red-20 aq-height-50" (click)="OpenOverlay('ProductDetails')">
+      <div>
+        <img src="assets/img/ProductList/counter.png" class="aq-width-21 aq-height-21 aq-margin-top-10 aq-margin-left-10">
+        <p class="aq-textsize-16 aq-textcolor-white-10 aq-margin-top-m25 aq-margin-left-50">计算收益</p>
+      </div>
+    </ion-col>
+    <ion-col text-center col-7 class="aq-height-50 aq-bgcolor-red-10" (click)="MoveProductPaymentFromProductDetails()">
+      <p no-padding class="aq-textsize-16 aq-textcolor-white-10 aq-margin-top-10">立即购买</p>
+    </ion-col>
+  </ion-row>
+</ion-footer>
+
+<div id="{{backdrop}}"></div>
+<div id="ProductDetails" class="aq-common-overlay aq-border-radius-5">
+  <ion-list no-lines class="aq-height-190">
+    <ion-item item-start>
+      <p class="aq-textsize-14 aq-textcolor-grey-60">收益计算</p>
+      <ion-icon name="close" class="aq-textsize-36 aq-padding-top-3" (click)="CloseOverlay()" item-end></ion-icon>
+    </ion-item>
+    <div class="aq-border-bottom"></div>
+    <ion-item>
+      <ion-avatar item-start>
+        <img src="assets/img/ProductList/counters.png" class="aq-height-25 aq-width-25  aq-border-radius-clear aq-margin-top-10">
+      </ion-avatar>
+      <ion-input type="text" disabled=true class="aq-margin-top-10" placeholder="" value="{{_getProductDetailModel?.ProductLockPeriod}}"></ion-input>
+      <p class="aq-textsize-16 aq-textcolor-grey-60 aq-padding-top-5" item-end>天</p>
+    </ion-item>
+    <div class="aq-border-bottom"></div>
+    <ion-item>
+      <ion-avatar item-start>
+        <img src="assets/img/ProductList/savingPot.png" class="aq-height-25 aq-width-25 aq-border-radius-clear aq-margin-top-10">
+      </ion-avatar>
+      <ion-input type="number" class="aq-margin-top-10" [(ngModel)]="ProductStartMoney" (ionChange)="CalculateEarnings()" placeholder="{{_getProductDetailModel?.ProductStartMoney}}"></ion-input>
+      <p class="aq-textsize-16 aq-textcolor-grey-60 aq-padding-top-5" item-end>元</p>
+    </ion-item>
+    <div class="aq-border-bottom"></div>
+    <ion-item item-start>
+      <p class="aq-textsize-16 aq-textcolor-grey-60">产品预期收益</p>
+      <p class="aq-textsize-16 aq-textcolor-pink-30" item-end>{{Earnings}}元</p>
+    </ion-item>
+  </ion-list>
+</div>

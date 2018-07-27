@@ -1,0 +1,77 @@
+<!-- 设置及用户头像 -->
+<ion-content>
+  <ion-row class="height-200" style="background: url('assets/img/Mine/background.png');background-size: 100% 100%">
+    <ion-col col-12 class="height-50" padding-top>
+      <p class="aq-text-size-big aq-text-color-white-core" text-right padding-right (click)="goMineInfo()">设置</p>
+    </ion-col>
+    <ion-col offset-1 col-3 text-center>
+      <img class="aq-icon-80" src="assets/img/usericon.png">
+    </ion-col>
+    <ion-col col-8>
+      <p class="aq-text-size-large aq-textcolor-white-core">{{_GetUserInfoModel?.UserPhone}}</p>
+      <p class="aq-text-size-big aq-textcolor-white-core">(推荐码:{{_GetUserInfoModel?.UserRecommendCode}})</p>
+    </ion-col>
+  </ion-row>
+
+  <!-- 我的钱包 -->
+  <!-- wallet：钱包 -->
+  <ion-list no-margin>
+    <ion-item (click)="MoveMineBankCardPage()" detail-push class="aq-text-color-grey-70 aq-text-size-big ">
+      <img width="20px" height="15px" src="assets/img/Mine/Wallet.png" item-start> 我的钱包
+      <span item-end>{{BankCardNum}} 张已绑定</span>
+    </ion-item>
+  </ion-list>
+
+  <!-- 我的优惠券 -->
+  <ion-list no-margin>
+    <ion-item (click)="goMineCoupon(_GetUserInfoModel)" detail-push class="aq-text-color-grey-70 aq-text-size-big ">
+      <img width="20px" height="15px" src="assets/img/Mine/Favorable.png" item-start> 我的优惠券
+      <span item-end>{{CouponNumber}} 张可用</span>
+    </ion-item>
+  </ion-list>
+  <!-- member:会员中心 -->
+  <ion-list no-margin>
+    <ion-item (click)="goMineCoupon(_GetUserInfoModel)" detail-push class="aq-text-color-grey-70 aq-text-size-big ">
+      <img class="aq-icon-20" src="assets/img/Mine/Member.png" item-start> 会员中心
+    </ion-item>
+  </ion-list>
+
+  <!-- 实名认证  0 = 未实名   1 = 已实名 -->
+  <ion-list no-margin>
+    <ion-item (click)="MoveAuthentication()" detail-push class="aq-text-color-grey-70 aq-text-size-big  aq-vertical-middle">
+      <img width="20px" height="15px" src="assets/img/Mine/Problem.png" item-start> 实名认证&nbsp;&nbsp;
+      <img *ngIf="_GetUserInfoModel?.UserAuthNameCode == 1" src="assets/img/RealName.png">
+      <img *ngIf="_GetUserInfoModel?.UserAuthNameCode == 0" src="assets/img/NoRealName.png">
+    </ion-item>
+  </ion-list>
+
+  <!-- 安全保障 -->
+  <ion-list no-margin>
+    <ion-item (click)="MoveHomeRiskManagement()" detail-push class="aq-text-color-grey-70 aq-text-size-big ">
+      <img class="aq-icon-16" src="assets/img/Mine/Safe.png" item-start> 安全保障
+    </ion-item>
+  </ion-list>
+  <!-- 常见问题 -->
+  <ion-list no-margin>
+    <ion-item (click)="MoveCommonQuestion()" detail-push class="aq-text-color-grey-70 aq-text-size-big ">
+      <img width="20px" height="15px" src="assets/img/Mine/Problem.png" item-start> 常见问题
+    </ion-item>
+  </ion-list>
+  <!-- 用户反馈 -->
+  <ion-list no-margin>
+    <ion-item (click)="MoveMineFeedback()" detail-push class="aq-text-color-grey-70 aq-text-size-big ">
+      <img class="aq-icon-16" src="assets/img/Mine/Feedback.png" item-start> 用户反馈
+    </ion-item>
+  </ion-list>
+  <!-- aboutAPP:关于app -->
+  <ion-list no-margin>
+    <ion-item (click)="MoveAboutApp()" detail-push class="aq-text-color-grey-70 aq-text-size-big ">
+      <img class="aq-icon-16" src="assets/img/Mine/About.png" item-start> 关于app
+    </ion-item>
+  </ion-list>
+
+
+
+
+
+</ion-content>

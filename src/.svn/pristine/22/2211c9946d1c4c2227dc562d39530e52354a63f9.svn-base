@@ -1,0 +1,6 @@
+<ion-tabs #mainTabs>
+    <ion-tab [root]="STHomeRoot" tabTitle="首页" tabIcon="tab-home" [rootParams]="Sign"  tabsHideOnSubPages></ion-tab>
+    <ion-tab [root]="STProductRoot" tabTitle="理财" tabIcon="tab-product" [rootParams]="Sign"  tabsHideOnSubPages></ion-tab>
+    <ion-tab [root]="STPropertyRoot" tabTitle="资产" tabIcon="tab-property" [rootParams]="Sign"  tabsHideOnSubPages></ion-tab>
+    <ion-tab [root]="STMineRoot" tabTitle="个人中心" tabIcon="tab-mine" [rootParams]="Sign"  tabsHideOnSubPages></ion-tab>
+</ion-tabs>

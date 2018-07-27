@@ -1,0 +1,32 @@
+Page-MineFeedback {
+    .button-inner {
+        color: #CB0101;
+        margin-left: 8px;
+    }
+    .MineFeedbackBkground {
+        background-color: #F4F4F4;
+    }
+    .FeedbackArea {
+        background-color: white;
+        width: 95%;
+        margin-left: 10px;
+        margin-right: 10px;
+        margin-top: 10px;
+        height: 200px;
+        border-radius: 5px;
+    }
+    .FeedbackArea-textarea {
+        border: none;
+    }
+    .CommitFeedback{
+        color: #F4F4F4;
+    }
+    .aq-bgcolor-red-10{
+        margin-top: -5px;
+        width: 100%;
+        margin-bottom: 0px;
+    }
+   .submit{
+       color: white;
+   }
+}

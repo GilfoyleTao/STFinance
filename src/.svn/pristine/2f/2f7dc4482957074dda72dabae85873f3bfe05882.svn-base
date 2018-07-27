@@ -1,0 +1,124 @@
+import { Component } from '@angular/core';
+import { NavController, NavParams, ViewController, ModalController, ActionSheetController, AlertController } from 'ionic-angular';
+import { StorageService } from "../../../providers/StorageService";
+import { STMineService } from "../STMineService";
+import { HomepagePage } from './../../STHome/Homepage/Homepage';
+import { NativeService } from './../../../providers/NativeService';
+import { ModifyUserInfoModel } from './../STMineModel';
+
+@Component({
+  selector: 'Page-ModifyMineInfo',
+  templateUrl: 'ModifyMineInfo.html',
+})
+export class ModifyMineInfoPage {
+  UserId: any;
+  UserPhoto: any = '';
+  UserName: string;
+  UserTrueName: string;
+  UserIdentityCode: any;
+  UserRecommendCode: any = '';
+  GetUserInfoModel: any;
+  imageBase64: string;//保存头像base64,用于上传
+  isChange: boolean = false;//头像是否改变标识
+  avatarPath: string = './assets/img/qr_code.png';//用户默认头像
+  _ModifyUserInfoModel: ModifyUserInfoModel
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public viewCtrl: ViewController,
+    public modalCtrl: ModalController,
+    private _STMineService: STMineService,
+    public actionSheetCtrl: ActionSheetController,
+    public nativeService: NativeService,
+    public _StorageService: StorageService,
+    public alerCtrl: AlertController
+  ) {
+    this.GetUserInfoModel = this.navParams.get('GetUserInfoModel');
+    console.log(this.GetUserInfoModel);
+    this.UserId = this.GetUserInfoModel.UserId;
+    this.UserName = this.GetUserInfoModel.UserName;
+    console.log("1111111111111111");
+    console.log(this.UserName);
+  }
+  ionViewDidLoad() {
+
+  }
+  ionViewDidEnter() {
+
+  }
+  SubmitpasswordMoveHomepage() {
+    this.viewCtrl.dismiss();
+    let HomepageModal = this.modalCtrl.create(HomepagePage);
+    HomepageModal.present();
+  }
+  SubmitpasswordMoveModifypassword() {
+
+  }
+
+  // 上传照片提：拍照+相册
+  // UploadPhoto() {
+  //   // };
+  //   let actionSheet = this.actionSheetCtrl.create({
+  //     title: '',
+  //     buttons: [
+  //       {
+  //         text: '拍照',
+  //         handler: () => {
+  //           this.nativeService.getPictureByCamera(Option).then(imageBase64 => {
+  //             this.getPictureSuccess(imageBase64);
+  //           });
+  //         }
+  //       },
+  //       {
+  //         text: '相册',
+  //         handler: () => {
+  //           this.nativeService.getPictureByPhotoLibrary(Option).then(imageBase64 => {
+  //             this.getPictureSuccess(imageBase64);
+  //           });
+  //         }
+  //       }
+  //     ]
+  //   });
+  //   actionSheet.present();
+  // }
+
+  // private getPictureSuccess(imageBase64) {
+  //   this.isChange = true;
+  //   this.imageBase64 = <string>imageBase64;
+  //   this.avatarPath = 'data:image/jpeg;base64,' + imageBase64;
+  // }    // let options = {
+  //   targetWidth: 400,
+  //   targetHeight: 400
+
+
+  // saveAvatar() {
+  //   if (this.isChange) {
+  //     console.log(this.imageBase64);//这是头像数据.
+  //     this.nativeService.showLoading('正在上传....');
+  //     this.viewCtrl.dismiss({ avatarPath: this.avatarPath });//这里可以把头像传出去.
+  //   } else {
+  //     this.dismiss();
+  //   }
+  // }
+
+  // dismiss() {
+  //   this.viewCtrl.dismiss();
+  // }
+
+  // 修改用户信息
+  save() {
+    // alert(this.imageBase64);
+    this._STMineService.ModifyUserInfo(this.UserId, this.UserPhoto, this.UserName, this.UserTrueName, this.UserIdentityCode, this.UserRecommendCode)
+      .subscribe((data: any) => {
+        if (data.Code == 0) {
+          this._ModifyUserInfoModel = data.Data;
+        }
+        let alert = this.alerCtrl.create({
+          title: '保存成功',
+          buttons: ['确认']
+        });
+        alert.present();
+        this.navCtrl.parent.select(3);
+      });
+  }
+}

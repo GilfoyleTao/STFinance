@@ -1,0 +1,22 @@
+Page-MineCenter {
+  .background {
+    height: 180px;
+    width: 100%;
+  }
+  .height-200 {
+    height: 200px;
+  }
+  .height-50 {
+    height: 50px
+  }
+  p {
+    margin: 5px
+  }
+  ion-label {
+    display: flex !important;
+    align-items: center !important;
+  }
+  .list-ios>.item-block:first-child {
+    border-top: 0px solid #c8c7cc;
+  }
+}

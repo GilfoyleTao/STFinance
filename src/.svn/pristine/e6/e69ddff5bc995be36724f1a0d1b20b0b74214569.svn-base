@@ -1,0 +1,56 @@
+Page-ModifyMineInfo {
+    .Confirm {
+        float: right;
+        margin-right: 10px;
+    } // 头像信息部分
+    .UserMessage {
+        border-bottom: 1px solid #EEEEEE;
+        height: 52px;
+        margin-top: 10px;
+    } // 具体个人信息（row的样式）
+    .Message {
+        border-bottom: 1px solid #EEEEEE;
+        height: 50px;
+    } // 头像文字
+    .User-font {
+        display: block;
+        margin-left: 20px;
+        margin-top: 10px;
+    } // 其他个人信息文字
+    .User {
+        display: block;
+        margin-left: 20px;
+        margin-top: 15px;
+    } // 头像图片
+    .Userpic {
+        transform: scale(0.75, 0.75);
+        margin-top: -10px;
+        float: right;
+        display: inline-block;
+    } // 箭头
+    .Arrows {
+        transform: scale(0.5, 0.5);
+        top: 11px;
+        right: 10px;
+        position: absolute;
+    } // 用户名姓名
+    .Username {
+        display: block;
+        margin-top: 6px;
+        letter-spacing: 1px;
+        float: right;
+    }
+     // 身份证号+验证码
+    .Idcard {
+        display: block;
+        margin-top: 6px;
+        letter-spacing: 1px;
+        float: right;
+    }
+    .footer-button {
+        margin-top: 50px;
+    }
+    .text-input{
+        margin-top:8px;
+    }
+}

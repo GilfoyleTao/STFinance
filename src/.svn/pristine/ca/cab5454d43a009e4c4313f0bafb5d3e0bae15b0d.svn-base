@@ -1,0 +1,84 @@
+import { STHomeService } from './../STHomeService';
+import { Component } from '@angular/core';
+import { NavController } from 'ionic-angular';
+import { GetRedPacketMoneyModel } from '../STHomeModel';
+import { NativeService } from './../../../providers/NativeService';
+@Component({
+    selector: 'Page-HomeBonus',
+    templateUrl: 'HomeBonus.html',
+})
+export class HomeBonusPage {
+    Overlay: any = {};
+    backdrop: any;
+    _GetRedPacketMoneyModel: GetRedPacketMoneyModel
+    hideget: boolean;
+    timer: any;//定时器
+    Count: any;//倒计时秒数
+    CouMoney: any;
+    constructor(public navCtrl: NavController, public _NativeService: NativeService, public _STHomeService: STHomeService) {
+    }
+    ionViewDidLoad() {
+
+    }
+    ionViewDidEnter() {
+
+    }
+
+    OpenBonus() {
+        this._STHomeService.GetNoviceCouStatus().subscribe((data: any) => {
+            if (data.Code == 0) {
+                if (data.Data.Status == 0) {
+                    this.GetNoviceMoney();
+                }
+                else {
+                    this._NativeService.alert('您已领取过红包,不可重复领取!');
+                }
+            }
+        })
+    }
+
+    // 打开弹窗
+    OpenOverlay(OverlayId) {
+        this.Overlay[OverlayId] = true;
+        this.backdrop = true
+    }
+    //关闭弹窗
+    CloseOverlay() {
+        this.Overlay = false;
+        this.backdrop = false
+    }
+    //设置倒计时，3秒跳回首页,领取随机红包
+    GetBonus() {
+        this._STHomeService.GetNoviceCou(this._GetRedPacketMoneyModel.CouId).subscribe((data: any) => {
+            if (data.Code == 0) {
+                this.Count = 2;
+                this.OpenOverlay('overlay2');
+                this.timer = setInterval(() => {
+                    if (this.Count == 0) {
+                        clearInterval(this.timer);
+                        this.CloseOverlay();
+                    }
+                    else {
+                        this.Count = this.Count - 1;
+                    }
+                }, 1000);
+            }
+        })
+    }
+
+    // 获取红包随机金额
+    GetNoviceMoney() {
+        this._STHomeService.GetNoviceMoney().subscribe((data: any) => {
+            if (data.Code == 0) {
+                this._GetRedPacketMoneyModel = data.Data;
+                this.CouMoney = Number(this._GetRedPacketMoneyModel.CouMoney).toFixed(0);
+                this.OpenOverlay('overlay1');
+            }
+            else {
+
+            }
+        })
+    }
+
+
+}

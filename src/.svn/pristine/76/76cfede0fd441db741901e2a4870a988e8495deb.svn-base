@@ -1,0 +1,50 @@
+//Base
+import { NgModule } from '@angular/core';
+import { IonicPageModule } from 'ionic-angular';
+//Service
+import { StorageService } from './../../providers/StorageService';
+import { STProductService } from './STProductService';
+//Pages
+import { STProductPage } from './STProduct';
+import { ProductListPage } from './ProductList/ProductList';
+import { ProductDetailsPage } from './ProductDetails/ProductDetails';
+import { ProductPaymentPage } from './ProductPayment/ProductPayment';
+import { ProductCouponsPage } from './ProductCoupons/ProductCoupons';
+import { ProductServiceAgreementPage } from './ProductServiceAgreement/ProductServiceAgreement';
+import { ProductIncomeDisplayPage } from './ProductIncomeDisplay/ProductIncomeDisplay';
+import { ProductRiskStatementPage } from './ProductRiskStatement/ProductRiskStatement';
+
+
+
+@NgModule({
+    declarations: [
+        ProductListPage,
+        ProductDetailsPage,
+        ProductPaymentPage,
+        ProductCouponsPage,
+        ProductServiceAgreementPage,
+        ProductIncomeDisplayPage,
+        ProductRiskStatementPage,
+        STProductPage,
+        
+    ],
+    imports: [
+        IonicPageModule.forChild(STProductPage)
+    ],
+    entryComponents: [
+        ProductListPage,
+        ProductDetailsPage,
+        ProductPaymentPage,
+        ProductCouponsPage,
+        ProductServiceAgreementPage,
+        ProductIncomeDisplayPage,
+        ProductRiskStatementPage,
+        
+    ],
+    exports: [
+        STProductPage
+    ],
+    providers: [STProductService, StorageService]
+})
+
+export class STProductModule { }

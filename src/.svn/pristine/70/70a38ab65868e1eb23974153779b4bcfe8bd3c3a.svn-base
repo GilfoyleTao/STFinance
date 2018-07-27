@@ -1,0 +1,105 @@
+
+import { Component } from '@angular/core';
+import { NavController, NavParams, ViewController, ModalController } from 'ionic-angular';
+import { StorageService } from "../../../providers/StorageService";
+import { STHomeService } from "../STHomeService";
+import { FILE_SERVE_URL, isLogin, USER_INFO } from '../../../providers/Constants';
+import { HomeSignPage } from './../HomeSign/HomeSign';
+import { HomeBonusPage } from './../HomeBonus/HomeBonus';
+import { HomeRiskManagementPage } from './../HomeRiskManagement/HomeRiskManagement';
+import { HomeNoticePage } from './../HomeNotice/HomeNotice';
+import { ProductDetailsPage } from './../../STProduct/ProductDetails/ProductDetails';
+import { LoginPage } from './../../STLogin/Login/Login';
+import { InitHomePageModel } from './../STHomeModel';
+import { NativeService } from './../../../providers/NativeService';
+@Component({
+    selector: 'Page-Homepage',
+    templateUrl: 'Homepage.html',
+})
+export class HomepagePage {
+    // L_BannerList:any;
+    PageNum: any;//页数
+    RecordNum: any;//每页获取的数量
+    USER_ID: any;
+    _InitHomePageModel: InitHomePageModel;
+    ImgUrl: String;//获取图片的url前缀
+    L_ProductList: any;
+    isLogin: any;
+    UserId: any;
+    USER_INFO: any;
+    NoticeId: any;
+    ProductTotalMoney: any;
+    ProductInvestMoney: any;
+    IsShow: boolean = false;
+    constructor(public navCtrl: NavController, private _STHomeService: STHomeService, public _StorageService: StorageService,public nativeService:NativeService) {
+        this.ImgUrl = FILE_SERVE_URL;
+        this.isLogin = this._StorageService.read(isLogin);
+        // 获取用户Id
+        if (this.isLogin) {
+            this.USER_INFO = this._StorageService.read(USER_INFO);
+            this.UserId = this.USER_INFO.UserId;
+        }
+        else {
+            this.UserId = '0';
+        }
+    }
+
+    ionViewDidEnter() {
+        this.InitQSTHomepage();
+    }
+    //初始化首页
+    InitQSTHomepage() {
+        this._STHomeService.InitHomepage().subscribe((data: any) => {
+            if (data.Code == 0) {
+                this._InitHomePageModel = data.Data;
+                this.L_ProductList = this._InitHomePageModel.L_ProductList;
+                this.L_ProductList.forEach(item => {
+                    item.ProductTotalMoney = item.ProductTotalMoney > 9999 ? item.ProductTotalMoney / 10000 + "万" : item.ProductTotalMoney;
+                    item.ProductInvestMoney = item.ProductInvestMoney > 9999 ? item.ProductInvestMoney / 10000 + "万" : item.ProductInvestMoney;
+                });
+
+                if (this._InitHomePageModel.IsUnread == 0) {
+                    this.IsShow = false;
+                }
+                else if (this._InitHomePageModel.IsUnread == 1) {
+                    this.IsShow = true;
+                }
+            }
+        });
+    }
+
+    MoveHomeSign() {
+        if (this.isLogin) {
+            this.navCtrl.push(HomeSignPage);
+        } else {
+            this.navCtrl.push(LoginPage);
+        }
+    }
+    MoveHomeBonus() {
+        if (this.isLogin) {
+            this.navCtrl.push(HomeBonusPage);
+        } else {
+            this.navCtrl.push(LoginPage);
+        }
+        
+    }
+    MoveHomeRiskManagement() {
+        this.navCtrl.push(HomeRiskManagementPage);
+    }
+    MoveHomeNotice() {
+        if (this.isLogin) {
+            this.USER_INFO = this._StorageService.read(USER_INFO);
+            this.UserId = this.USER_INFO.UserId;
+            this.navCtrl.push(HomeNoticePage);
+        }
+        else {
+            this.navCtrl.push(LoginPage);
+        }
+    }
+    MoveProductDetailsFromHomepage() {
+    }
+    MoveProductDetails(ProductId) {
+        this.navCtrl.push(ProductDetailsPage, { ProductId: ProductId });
+    }
+
+}

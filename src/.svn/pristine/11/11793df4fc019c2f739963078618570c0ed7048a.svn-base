@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-navbar color="MintCream">
+    <ion-title>红包</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid no-padding>
+    <ion-row no-padding>
+      <ion-col col-2></ion-col>
+      <ion-col col-8 class="button-bonus" (click)="OpenBonus('overlay1')">
+      </ion-col>
+      <ion-col col-2></ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+<div id="overlay1" class="aq-common-overlay" (click)="GetBonus()">
+  <p class="getmoney">{{_GetRedPacketMoneyModel.Money}}
+    <span class="yuan">元</span>
+  </p>
+</div>
+
+<div class="getsucceed" *ngIf="hideget">
+  <p class="aq-textsize-18 aq-textcolor-red-10 ">领取成功</p>
+  <p class="aq-textsize-16 aq-margin-top-30">请到“个人中心-我的优惠券”中查看</p>
+</div>
+
+<div id="{{backdrop}}"></div>

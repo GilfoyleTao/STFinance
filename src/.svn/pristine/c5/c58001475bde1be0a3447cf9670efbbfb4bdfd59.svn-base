@@ -1,0 +1,122 @@
+import { Component } from '@angular/core';
+import { NavController, NavParams, ViewController, ModalController } from 'ionic-angular';
+import { STProductService } from "../STProductService";
+import { ProductDetailsPage } from './../ProductDetails/ProductDetails';
+import { GetProductListModel } from './../STProductModel';
+
+
+@Component({
+    selector: 'Page-ProductList',
+    templateUrl: 'ProductList.html',
+})
+export class ProductListPage {
+    ProductTitle: string;
+    ProductRatio: any;
+    productType: any;
+    ProductTotalMoney: any;
+    TotalMoney: any;
+    ProductInvestMoney:any;
+    
+    //_GetProductListModel = new GetProductListModel();
+    _GetProductListModel: GetProductListModel;
+
+    constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public modalCtrl: ModalController, private _STProductService: STProductService) {
+        // this._GetProductListModel = {
+        //     ProductId: "0",
+        //     CategoryName: "1",
+        //     ProductName: "新手标S0520",
+        //     ProductRate: "12.66%",
+        //     ProductTotalMoney: "10万",
+        //     ProductInvestMoney: "30",
+        //     ProductLockPeriod: "30",
+        //     L_Category: [
+        //         {
+        //             CategoryName: "爆款特惠",
+        //             Data: [
+        //                 {
+        //                     ProductId: "001",
+        //                     ProductName: "月月盈Z5414",
+        //                     ProductStartDate: "10:00开售",
+        //                     ProductRate: "6.6%",
+        //                     ProductRaiseRate: "1.68%",
+        //                     ProductLockPeriod: "43",
+        //                     ProductMinPurchase: "1000",
+        //                     ProductStatus: "0",
+        //                 },
+        //                 {
+        //                     ProductId: "002",
+        //                     ProductName: "月月盈Z5414",
+        //                     ProductStartDate: "10:00开售",
+        //                     ProductRate: "6.6%",
+        //                     ProductRaiseRate: "1.68%",
+        //                     ProductLockPeriod: "43",
+        //                     ProductMinPurchase: "1000",
+        //                     ProductStatus: "1",
+        //                 },
+        //             ]
+        //         },
+        //         {
+        //             CategoryName: "新手专享",
+        //             Data: [
+        //                 {
+        //                     ProductId: "0032",
+        //                     ProductName: "月月盈Z5414",
+        //                     ProductStartDate: "新手标",
+        //                     ProductRate: "6.6%",
+        //                     ProductRaiseRate: "1.68%",
+        //                     ProductLockPeriod: "43",
+        //                     ProductMinPurchase: "1000",
+        //                     ProductStatus: "2",
+        //                 },
+        //                 {
+        //                     ProductId: "0033",
+        //                     ProductName: "月月盈Z5414",
+        //                     ProductStartDate: "新手标",
+        //                     ProductRate: "6.6%",
+        //                     ProductRaiseRate: "1.68%",
+        //                     ProductLockPeriod: "43",
+        //                     ProductMinPurchase: "1000",
+        //                     ProductStatus: "3",
+        //                 },
+        //             ]
+        //         },
+        //     ],
+        // }
+    }
+
+
+    ionViewDidLoad() {
+        console.log(this._GetProductListModel)
+    }
+
+    ionViewDidEnter() {
+        this.GetProductList();
+    }
+
+    // 获取商品列表
+    GetProductList() {
+        this._STProductService.GetProductList().subscribe((data: any) => {
+            if (data.Code == 0) {
+                this._GetProductListModel = data.Data;
+                this.ProductTotalMoney = this._GetProductListModel.ProductTotalMoney;
+                this.ProductInvestMoney = this._GetProductListModel.ProductInvestMoney;
+                this._GetProductListModel.ProductTotalMoney = this.ProductTotalMoney > 9999 ? this.ProductTotalMoney/10000 + "万" : this.ProductTotalMoney;
+                this._GetProductListModel.ProductInvestMoney = this.ProductInvestMoney > 9999 ? this.ProductInvestMoney/10000 + "万" : this.ProductInvestMoney;
+
+            }
+        })
+    }
+
+
+    // 跳转商品详情页
+    MoveProductDetailsFromProductList(ProductId) {
+        this.navCtrl.push(ProductDetailsPage, { ProductId: ProductId });
+
+    }
+
+    // 跳转商品详情
+    ProductDetails(ProductId) {
+        this.navCtrl.push(ProductDetailsPage, { ProductId: ProductId });
+    }
+
+}

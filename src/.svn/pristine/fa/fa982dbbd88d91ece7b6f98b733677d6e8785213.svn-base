@@ -1,0 +1,138 @@
+import { Component } from '@angular/core';
+import { NavController, NavParams } from 'ionic-angular';
+//page
+import { LoginPage } from './../Login/Login';
+//service
+import { StorageService } from "../../../providers/StorageService";
+import { STLoginService } from "../STLoginService";
+import { AlertService } from '../../../providers/Alert.service';
+import { Utils } from './../../../providers/Utils';
+//model
+import { FILE_SERVE_URL, USER_INFO } from './../../../providers/Constants';
+
+
+@Component({
+    selector: 'Page-Modifypassword',
+    templateUrl: 'Modifypassword.html',
+})
+export class ModifypasswordPage {
+    Overlay: any = {};//弹窗
+    backdrop: any;//遮罩层
+    MobilePhone: any;//手机号
+    ImgValidationCode: any;//图形验证码
+    ValidationCode: any;//短信验证码
+    ImgCode: any;//图形验证码路径
+    //验证码倒计时
+    verifyCode: any = {
+        verifyCodeTips: "获取验证码",
+        countdown: 60,
+        disable: false
+    };
+    Password: any;//密码
+    ImgUrl: string;//图片路径
+    constructor(public navCtrl: NavController,public navParams: NavParams,public _AlertService: AlertService,private _STLoginService: STLoginService,public _StorageService: StorageService) {
+        this.MobilePhone = this.navParams.get('MobilePhone');
+        this.ImgUrl = FILE_SERVE_URL;
+    }
+
+    //打开弹窗
+    OpenOverlay(OverlayId) {
+        this.Overlay[OverlayId] = true;
+        this.backdrop = true;
+    }
+    //关闭弹窗
+    CloseOverlay() {
+        this.Overlay = {};
+        this.backdrop = false;
+        this.navCtrl.push(LoginPage);
+    }
+    
+    ionViewDidEnter() {
+        this.ImgCode = "http://www.dlstzc.com:8080/api/STAccount/imgStream?" + Math.floor(Math.random()*100);
+    }
+
+    //弹窗跳到登录页
+    MoveLogin() {
+        this.navCtrl.push(LoginPage);
+    }
+   
+    // 短信倒计时
+    setTime() {
+        this.verifyCode.disable = true;
+        if (this.verifyCode.countdown == 1) {
+            this.verifyCode.countdown = 60;
+            this.verifyCode.verifyCodeTips = "重新获取验证码";
+            this.verifyCode.disable = false;
+            return;
+        } else {
+            this.verifyCode.countdown--;
+        }
+
+        this.verifyCode.verifyCodeTips = "重新获取(" + this.verifyCode.countdown + ")";
+        setTimeout(() => {
+            this.verifyCode.verifyCodeTips = "重新获取(" + this.verifyCode.countdown + ")";
+            this.setTime();
+        }, 1000);
+    }
+    //获得短信验证码
+    getValidationCode() {
+        if (Utils.isEmpty(this.ImgValidationCode)) {
+            this._AlertService.presentAlert('', '请输入图形验证码');
+            return;
+        }
+        this.sendCode();
+    }
+
+    //发送验证码接口
+    sendCode() {
+        this._STLoginService.SendCode(this.MobilePhone, this.ImgValidationCode).subscribe((data: any) => {
+            if (data.Code == 1) {
+                this._AlertService.presentAlert('', '图形验证码不正确');
+                this.ImgCode = "http://www.dlstzc.com:8080/api/STAccount/imgStream?" + Math.floor(Math.random() * 100);
+            }
+            else {
+                this.verifyCode.disable = false;
+                this.setTime();
+            }
+        });
+    }
+   
+    //点击提交
+    submitToChangePassword() {
+        this.Passwordverification();
+    }
+
+    //密码正则表达式验证
+    Passwordverification() {
+        var myreg = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+        if (!myreg.test(this.Password)) {
+            this._AlertService.presentAlert('', '密码不符合规定');
+            return;
+        }
+        else {
+            this.CheckValidationCode();
+        }
+    }
+    //判断短信验码
+    CheckValidationCode() {
+        this._STLoginService.CheckValidationCode(this.MobilePhone, this.ValidationCode).subscribe((data: any) => {
+            // 请求成功
+            if (data.Code == 0) {
+                this.ChangeUserPassword();
+            }
+            else {
+                this._AlertService.presentAlert('', '请认真填写修改信息');
+            }
+        });
+    }
+    
+   
+   
+    //改密码
+    ChangeUserPassword() {
+        this._STLoginService.ChangeUserPassword(this.MobilePhone, this.Password).subscribe((data: any) => {
+            this._StorageService.write(USER_INFO, data.Data);//存储信息 key value
+            this.OpenOverlay('overlay1');
+        });
+    }
+}

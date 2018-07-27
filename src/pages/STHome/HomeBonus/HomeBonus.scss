@@ -1,0 +1,48 @@
+Page-HomeBonus {
+    .aq-common-overlay{
+        width: 75%;
+        border: 0px;
+        background: rgba(255,255,255,0);
+        opacity: 1;
+        display: none;
+        position: fixed;
+        text-align: left;
+        -webkit-transition: opacity .1s ease-in-out .1s;
+        -moz-transition: opacity .1s ease-in-out .1s;
+        -o-transition: opacity .1s ease-in-out .1s;
+        -ms-transition: opacity .1s ease-in-out .1s;
+        transition: opacity .1s ease-in-out .1s;
+        z-index: 905;
+        left: 50%;
+        top: 50%;
+        max-width: 500px;
+        min-width: 200px;
+        -ms-transform: translate(-50%, -50%);
+        transform: translate3d(-50%, -50%, 0);
+        overflow: auto;
+    }
+    
+    .aq-overlay-backdrop{
+        background: #111 none repeat scroll 0 0;
+        bottom: 0;
+        display: none;
+        left: 0;
+        opacity: 0.5;
+        position: fixed;
+        right: 0;
+        top: 0;
+        z-index: 800;
+    }
+    .congratulation{
+        text-align: center;
+        position:fixed;
+        left: 25%;
+        top: 55%;
+
+    }
+    .font{
+        font-size:60px;
+        font-weight: bold;
+        color: white;
+    }
+}

@@ -1,0 +1,19 @@
+<ion-header>
+    <ion-navbar color="MintCream" hideBackButton>
+        <ion-title>公告详情</ion-title>
+        <ion-buttons start>
+            <button ion-button icon-only (click)="OpenHomeNotice()">
+              <ion-icon class="aq-margin-left-8 aq-margin-bottom-16 textsize-30" name="ios-arrow-back-outline"></ion-icon>
+            </button>
+          </ion-buttons>
+    </ion-navbar>
+</ion-header>
+<ion-content>
+    <ion-grid>
+        <ion-row>
+            <ion-col>
+                <p>{{_GetHomeNoticeDetailModel?.NoticeDescription}}</p>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>

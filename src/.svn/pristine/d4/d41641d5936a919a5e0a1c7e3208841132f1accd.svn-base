@@ -1,0 +1,11 @@
+Page-MineCouponDetail{
+    
+    .Ticket{
+        margin-left: 25px;
+        margin-bottom: 5px;
+    }
+    .Userknow{
+        margin-top: -4px;
+    }
+    
+}

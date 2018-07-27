@@ -1,0 +1,40 @@
+import { Component } from '@angular/core';
+import { NavController, NavParams, ViewController, ModalController } from 'ionic-angular';
+import { STMineService } from "../STMineService";
+import { AboutAppModel } from './../STMineModel';
+import { FILE_SERVE_URL } from '../../../providers/Constants'
+@Component({
+    selector: 'Page-AboutApp',
+    templateUrl: 'AboutApp.html',
+})
+export class AboutAppPage {
+    _AboutAppModel: AboutAppModel;
+    ImgUrl: String;//获取图片的url前缀
+    constructor(
+        public navCtrl: NavController,
+        public navParams: NavParams,
+        public viewCtrl: ViewController,
+        public modalCtrl: ModalController,
+        private _STMineService: STMineService,
+    ) {
+        this.ImgUrl = FILE_SERVE_URL;
+    }
+    ionViewDidLoad() {
+    }
+    ionViewDidEnter() {
+        this.AboutApp();
+    }
+    AboutApp() {
+        this._STMineService.AboutApp().subscribe((data: any) => {
+            if (data.Code == 0) {
+                this._AboutAppModel = data.Data;
+                // this._AboutAppModel.LogoUrl = "http://"+ this._AboutAppModel.LogoUrl;
+                console.log(this._AboutAppModel.LogoUrl);
+            }
+        });
+    }
+}
+
+
+
+

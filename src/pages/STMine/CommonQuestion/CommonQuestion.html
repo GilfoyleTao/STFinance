@@ -1,0 +1,64 @@
+<ion-header>
+    <ion-navbar color="MintCream">
+        <ion-title>
+            <span class="aq-title-LoginPwd">常见问题</span>
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <img src="assets/img/Mine/来一碗鸡汤.png">
+    <ion-row style="height: 43px;"  no-padding (click)="change()">
+        <ion-col col-10  class="line-height-52" no-padding style="font-size: 15px;margin-left: 8px;">资产安全如何保障?</ion-col>
+        <ion-col col-1 text-center  style="margin-left: 5px;margin-top: 15px">
+                <img src="assets/img/Mine/More.png" height="13px" width="8px">
+        </ion-col>
+    </ion-row>
+    <ion-row class=" height-backgroundcolor2" ></ion-row>
+   
+
+        <ion-row style="height: 43px;" no-padding *ngIf="isShow" >
+            <ion-col class="line-height-52" text-left style="font-size: 15px;color: gray;margin-left: 10px;" >
+                资产安全的保障方法
+            </ion-col>
+        </ion-row>
+        
+
+        <ion-row style="height: 43px;" no-padding *ngIf="isShow">
+                <ion-col class="line-height-52" text-left style="font-size: 15px;color: gray;margin-left: 10px;">
+                资产安全的保障方法
+                </ion-col>
+        </ion-row>
+        
+        <ion-row style="height: 43px;"no-padding *ngIf="isShow">
+                <ion-col class="line-height-52" text-left style="font-size: 15px;color: gray;margin-left: 10px;">
+                资产安全的保障方法
+                </ion-col>
+        </ion-row>   
+ 
+
+    <ion-row  no-padding>
+        <ion-col col-10  class="line-height-52" no-padding style="font-size: 15px;margin-left: 8px;">个人信息是否安全？</ion-col>
+        <ion-col col-1 text-center  style="margin-left: 5px;margin-top: 15px">
+                <img src="assets/img/Mine/More.png" height="13px" width="8px">
+        </ion-col>
+    </ion-row>
+    <ion-row class=" height-backgroundcolor2" ></ion-row>
+
+    <ion-row  no-padding>
+        <ion-col col-10  class="line-height-52" no-padding style="font-size: 15px;margin-left: 8px;">怎么样联系后台客服？</ion-col>
+        <ion-col col-1 text-center  style="margin-left: 5px;margin-top: 15px">
+                <img src="assets/img/Mine/More.png" height="13px" width="8px">
+        </ion-col>
+    </ion-row>
+    <ion-row class=" height-backgroundcolor2" ></ion-row>
+
+    <ion-row  no-padding>
+        <ion-col col-10  class="line-height-52" no-padding style="font-size: 15px;margin-left: 8px;">其他功能</ion-col>
+        <ion-col col-1 text-center  style="margin-left: 5px;margin-top: 15px">
+                <img src="assets/img/Mine/More.png" height="13px" width="8px">
+        </ion-col>
+    </ion-row>
+    <ion-row class=" height-backgroundcolor2" ></ion-row>
+        
+</ion-content>

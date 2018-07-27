@@ -1,0 +1,70 @@
+<ion-header>
+  <ion-navbar color="MintCream" hideBackButton>
+    <ion-col *ngIf="data" (click)="goProductList()"><img src="assets/img/backward.png"></ion-col>
+    <ion-col *ngIf="!data" (click)="goProductCoupons()"><img src="assets/img/backward.png"></ion-col>
+    <ion-title>买入</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="aq-bgcolor-grey-F4F4F4">
+  <ion-item>
+    <ion-col col-8 style="float:left">买入月月盈新手标</ion-col>
+    <ion-col col-4 class="text-size-2 text-color-red" style="float:right" (click)="goProductIncomeDisplay()">收益及取出规则</ion-col>
+  </ion-item>
+
+  <ion-item class="text-size-1">
+    <ion-col col-3><img src="assets/img/RMB.png" class="height-36 width-24" style="vertical-align:middle"></ion-col>
+    <ion-col col-9> 
+      <input style="border:none" type="text" name="user_name" placeholder="1000元起购" id="user_name">
+    </ion-col>
+  </ion-item>
+
+  <ion-item>
+    <ion-row>
+      <p>预计</p><p class="text-color-red">3月27日</p><p>产生收益，</p><p class="text-color-red">3月28日</p><p>收益到账</p>
+    </ion-row>
+  </ion-item>
+  <ion-row class="bg-color-grey height-5" style="margin-top: 0px"></ion-row>
+  <ion-item>支付方式</ion-item>
+
+  <ion-item>
+    <ion-row>
+      <ion-col col-2 *ngIf="!paym"><img src="assets/img/ProductList/checkTrue.png" class="height-20 width-20"></ion-col>
+      <ion-col col-2 *ngIf="paym"><img src="assets/img/ProductList/checkFalse.png" class="height-20 width-20" block (click)="nopaym()"></ion-col>
+      <ion-col col-10>银行卡支付</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-2 *ngIf="!paym"><img src="assets/img/ProductList/checkFalse.png" block (click)="yespaym()" class="height-20 width-20"></ion-col>
+      <ion-col col-2 *ngIf="paym"><img src="assets/img/ProductList/checkTrue.png" class="height-20 width-20"></ion-col>
+      <ion-col col-10><img src="assets/img/ProductList/wx.png" class="height-20"></ion-col>
+    </ion-row>
+  </ion-item>
+  <ion-row class="bg-color-grey height-5" style="margin-top: 0px"></ion-row>
+
+  <ion-item>
+    <ion-row (click)="goProductCoupons()">
+      <ion-col col-2><img src="assets/img/ProductList/card.png" class="height-20 width-20"></ion-col>
+      <ion-col col-6>优惠券</ion-col>
+     
+      <ion-col col-3 *ngIf="data"><ion-row>{{data}}</ion-row></ion-col>
+      <ion-col col-3 *ngIf="!data"><p style="margin-left:10px;color:rgb(173,173,173)">可用一张</p></ion-col>
+
+      <ion-col col-1><img src="assets/img/More.png" style="vertical-align:middle"></ion-col>
+    </ion-row>
+  </ion-item>
+
+  <ion-row style="margin-top: 10px">
+    <ion-col col-8 *ngIf="!risk"><img style="margin-left: 30px; margin-right: 15px" src="assets/img/ProductList/checkFalse.png" class="height-15 width-15" block (click)="yesrisk()">同意服务协议及风险提示</ion-col>
+    <ion-col col-8 *ngIf="risk"><img style="margin-left: 30px; margin-right: 15px" src="assets/img/ProductList/checkTrue.png" class="height-15 width-15" block (click)="norisk()">同意服务协议及风险提示</ion-col>    
+    <ion-col col-4 class="text-color-red" (click)="goProductRiskStatement()">《风险声明》</ion-col>
+  </ion-row>
+
+  <ion-row style="margin-left:70px;margin-top: 10px" class="text-color-blue" (click)="goProductServiceAgreement()">《服务协议声明》</ion-row>
+</ion-content>
+
+<ion-footer>
+  <ion-row class="height-50">
+    <ion-col col-12 *ngIf="!risk" class="text-size-1 text-color-white bg-color-grey"> <p text-center style="margin-top: 8px">买入</p></ion-col>
+    <ion-col col-12 *ngIf="risk"  class="text-size-1 text-color-white bg-color-red" (click)="goPropertyList()"> <p text-center style="margin-top: 8px">买入</p></ion-col>
+  </ion-row>
+</ion-footer>

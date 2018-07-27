@@ -1,0 +1,75 @@
+import { Injectable } from '@angular/core';
+import { Response} from '@angular/http';
+// import { Observable } from "rxjs";
+import { HttpService } from "../../providers/HttpService";
+// import { Result } from "../../model/Result";
+// import { APP_SERVE_URL, PAGE_SIZE } from "../../providers/Constants";
+
+
+@Injectable()
+export class STLoginService {
+
+    constructor(public httpService: HttpService) {
+
+    }
+    // 登陆
+    UserLogin(Phone: string, Password: string): any {
+        let url = 'STAccount/UserLogin';
+        let paramMap = {
+            Phone: Phone,
+            Password: Password
+        };
+        return this.httpService.postFormData(url, paramMap).map((res: Response) => res);
+    } 
+
+
+
+
+    // 注册
+    GetUserStatus(Phone: string): any {
+        let url = 'STAccount/GetUserStatus';
+        let paramMap = {
+            Phone: Phone
+        };
+        return this.httpService.getWebApi(url, paramMap).map((res: Response) => res);
+    }
+    
+    //发送短信
+    SendCode(Phone: string,PictureCode:string): any {
+        let url = 'STAccount/SendCode';
+        let paramMap = {
+            Phone: Phone,
+            PictureCode:PictureCode
+        };
+        return this.httpService.getWebApi(url, paramMap).map((res: Response) => res);
+    }
+//判读短信校验成功还是失败
+    CheckValidationCode(Phone: string, code: string): any {
+        let url = 'STAccount/ValidationCode';
+        let paramMap = {
+            Phone: Phone,
+            code: code
+        };
+        return this.httpService.postFormData(url, paramMap).map((res: Response) => res);
+    }
+    //注册用户
+    UserRegister(Phone: string, Password: string,RecommendCode: string): any {
+        let url = 'STAccount/UserRegister';
+        let paramMap = {
+            Phone: Phone,
+            Password: Password,
+            RecommendCode:RecommendCode
+        };
+        return this.httpService.postFormData(url, paramMap).map((res: Response) => res);
+    }
+    //修改密码
+    ChangeUserPassword(Phone: string, Password: string): any {
+        let url = 'STAccount/ChangeUserPassword';
+        let paramMap = {
+            Phone: Phone,
+            Password: Password
+        };
+        return this.httpService.postFormData(url, paramMap).map((res: Response) => res);
+    }
+
+}

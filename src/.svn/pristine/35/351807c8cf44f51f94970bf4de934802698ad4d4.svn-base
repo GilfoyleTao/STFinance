@@ -1,0 +1,29 @@
+<ion-header >
+    <ion-navbar>
+        <ion-title >实名认证</ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content>
+    <ion-grid no-padding>
+        <ion-row class="Message ">
+            <ion-col col-4>
+                <span class="aq-text-size-normal aq-textcolor-grey-60 User">姓名</span>
+            </ion-col>
+            <ion-col col-8 text-right>
+                <input class="no-border aq-margin-top-15 text-align-right aq-margin-right-15" type="text" [(ngModel)]="Name"  placeholder="请输入姓名" required>
+            </ion-col>
+        </ion-row>
+        <!-- 身份证码 -->
+        <ion-row class="Message">
+            <ion-col col-4>
+                <span class="aq-text-size-normal aq-textcolor-grey-60 User">身份证码</span>
+            </ion-col>
+            <ion-col col-8 text-right>
+                <input class="no-border aq-margin-top-15 text-align-right aq-margin-right-15" type="text" [(ngModel)]="IdNumber" placeholder="请输入身份证号" maxlength="18" required>
+            </ion-col>
+        </ion-row>
+            <button block ion-button color="danger" class="footer-button custom-button-padding" (click)="GetAuthStatus()">
+                实名认证
+            </button>
+    </ion-grid>
+</ion-content>

@@ -1,0 +1,64 @@
+
+import { Component, ViewChild } from '@angular/core';
+import { Platform, App, Nav } from 'ionic-angular';
+import { StatusBar } from '@ionic-native/status-bar';
+import { SplashScreen } from '@ionic-native/splash-screen';
+import { TabsPage } from './tabs/tabs';
+import { NativeService } from './../providers/NativeService';
+import { HomeAdvertisementPage } from './../pages/STHome/HomeAdvertisement/HomeAdvertisement';
+@Component({
+  templateUrl: 'app.html'
+})
+export class MyApp {
+  rootPage = HomeAdvertisementPage;
+  backButtonPressed: boolean = false; //用于判断返回键是否触发
+  @ViewChild('myNav') nav: Nav;
+  constructor(
+    public platform: Platform,
+    public statusBar: StatusBar,
+    public splashScreen: SplashScreen,
+    public nativeService: NativeService,
+    public App: App
+  ) {
+    platform.ready().then(() => {
+      statusBar.styleDefault();
+      statusBar.overlaysWebView(true);
+      splashScreen.hide();
+      this.registerBackButtonAction();//注册返回按键事件
+     
+    });
+  }
+  registerBackButtonAction() {
+     //console.log(this.nav.getActive())
+    /* if (!this.nativeService.isAndroid) {
+      return;
+    } */
+    this.platform.registerBackButtonAction(() => {
+      // let ActiveViewName = this.nav.getActive().instance.navCtrl.root.name;
+      let ActiveViewName = this.nav.getActive().instance.tabs.getSelected();
+      console.log(ActiveViewName);
+      return ActiveViewName.canGoBack() ? ActiveViewName.popTo(TabsPage) : this.showExit()
+      /* if (ActiveViewName != "HomepagePage") {
+        this.nav.push(TabsPage)
+      }
+      else {
+        this.platform.exitApp();
+      } */
+    }, 1)
+  }
+
+  // 双击退出程序
+  showExit() {
+    if (this.backButtonPressed) {
+      this.platform.exitApp();
+    } else {
+      this.nativeService.showToast('再按一次退出应用');
+      this.backButtonPressed = true;
+      setTimeout(() => {
+        this.backButtonPressed = false;
+      }, 2000)
+    }
+  }
+
+}
+

@@ -1,0 +1,49 @@
+
+<ion-header>
+  <ion-navbar color="MintCream" >
+    <ion-title>公告</ion-title>
+   </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <ion-row text-center>
+        <ion-col col-6 style="background-color: rgb(246,246,246);height: 50px">
+
+
+        <h5 text-center style="margin: 4px;position:relative;top: 7px;" class="bg-color-white" block (click)="nobg()" [ngClass]="{'text-color-1':!pg,'text-color-2':pg}">官方</h5 >
+            <img *ngIf="!pg" src="assets/img/line-3.png" style="width:90px;height:2px">
+        </ion-col>
+
+        <ion-col col-6 style="background-color: rgb(246,246,246);height: 50px">
+        <h5 text-center style="margin: 4px;position:relative;top: 7px;" class="bg-color-white" block (click)="bg()" [ngClass]="{'text-color-1':pg,'text-color-2':!pg}">消息</h5 >
+            <img *ngIf="pg" src="assets/img/line-3.png" style="width:90px;height:2px">
+        </ion-col>
+    </ion-row>
+
+        <ion-row *ngIf="!pg">
+            <ion-item (click)="detail()">
+                <h4>你的代理又进了一笔收入，看看他们都在卖什么？</h4>
+            <br/>
+                <h6 style="color:gainsboro">你的代理竟然赚了这么多，快来向他学习</h6>
+                <h6 style="color:gainsboro">8月22日</h6>
+            </ion-item> 
+            <ion-item (click)="detail()">
+                <h4>你的代理又进了一笔收入，看看他们都在卖什么？</h4>
+                <br/>
+                <h6 style="color:gainsboro">你的代理竟然赚了这么多，快来向他学习</h6>
+                <h6 style="color:gainsboro">8月22日</h6>
+            </ion-item> 
+            <ion-item (click)="detail()">
+                <h4>你的代理又进了一笔收入，看看他们都在卖什么？</h4>
+                <br/>
+                <h6 style="color:gainsboro">你的代理竟然赚了这么多，快来向他学习</h6>
+                <h6 style="color:gainsboro">8月22日</h6>
+            </ion-item> 
+        </ion-row>
+            
+        <ion-row *ngIf="pg">
+            <ion-item>
+              <p>介是个消息</p>  
+            </ion-item> 
+          </ion-row>
+</ion-content>

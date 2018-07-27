@@ -1,0 +1,79 @@
+page-PropertyDetails{
+    .line-height-52 {
+        line-height: 43px;
+    }
+    .height-backgroundcolor2 {
+        background-color: lightgrey;
+        height: 1px;
+    }
+    .aq-common-overlay {
+        width: 75%;
+        background: #fff;
+        border: 0;
+        opacity: 1;
+        display: none;
+        position: fixed;
+        text-align: left;
+        -webkit-transition: opacity .1s ease-in-out .1s;
+        -moz-transition: opacity .1s ease-in-out .1s;
+        -o-transition: opacity .1s ease-in-out .1s;
+        -ms-transition: opacity .1s ease-in-out .1s;
+        transition: opacity .1s ease-in-out .1s;
+        z-index: 905;
+        left: 50%;
+        top: 50%;
+        max-width: 500px;
+        min-width: 200px;
+        -ms-transform: translate(-50%, -50%);
+        transform: translate3d(-50%, -50%, 0);
+        overflow: auto;
+    }
+    .aq-overlay-backdrop {
+        background: #111 none repeat scroll 0 0;
+        bottom: 0;
+        display: none;
+        left: 0;
+        opacity: 0.5;
+        position: fixed;
+        right: 0;
+        top: 0;
+        z-index: 800;
+    }
+    .text{
+        text-align: center;
+    }
+
+    .text-size-1{
+        font-size: 15px; 
+    }
+    .text-size-2{
+        font-size: 18px;
+    }
+    .text-size-3{
+        font-size: 38px;
+    }
+    .text-size-4{
+        font-size: 13px;
+    }
+    .text-size-5{
+        font-size: 23px;
+    }
+
+    .bg-color-1{
+        background-color: red;
+    }
+
+    .text-color-1{
+        color:red;
+    }
+    .text-color-2{
+        color:white;
+    }
+
+    .width-300{
+        width: 300px;
+    }
+    .height-30{
+        height: 30px;
+    }
+}

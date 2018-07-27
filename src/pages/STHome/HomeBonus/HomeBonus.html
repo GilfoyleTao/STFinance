@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-navbar color="MintCream">
+    <ion-title>红包</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+ 
+            <img src="assets/img/homebonus.png" (click)="OpenOverlay('overlay2')">
+ 
+</ion-content>
+
+
+<div id="overlay2" class="aq-common-overlay aq-border-radius-5">
+    <ion-row class="aq-padding-top-30">
+        <ion-col text-center class="aq-textsize-15 aq-textcolor-black-core">
+        </ion-col>
+    </ion-row>
+    <ion-row padding-top>
+        <ion-col>
+            <img src="assets/img/getbonus.png" (click)="CloseOverlay()">
+        </ion-col>
+    </ion-row>
+</div>
+<div class="aq-overlay-backdrop" (click)="CloseOverlay()"></div>

@@ -1,0 +1,92 @@
+
+import { Component } from '@angular/core';
+import { NavController, NavParams, ViewController, ModalController, } from 'ionic-angular';
+import { StorageService } from "../../../providers/StorageService";
+import { STPropertyService } from "../STPropertyService";
+import { PropertyDetailsPage } from './../PropertyDetails/PropertyDetails';
+import { GetMyPropertyModel, GetMyPropertyDetailsModel } from './../STPropertyModel';
+import { USER_INFO, isLogin } from './../../../providers/Constants';
+import { AlertController } from 'ionic-angular/components/alert/alert-controller';
+import { PropertyWithdrawPage } from './../PropertyWithdraw/PropertyWithdraw';
+import { LoginPage } from './../../STLogin/Login/Login';
+
+@Component({
+    selector: 'Page-PropertyList',
+    templateUrl: 'PropertyList.html',
+})
+export class PropertyListPage {
+    UserId: any;
+    ProductId: any;
+    UserWithdrawMoney: string;
+    isLogin: boolean;
+    USER_INFO: any;
+    _GetMyPropertyModel: GetMyPropertyModel;
+    _GetMyPropertyDetailsModel: GetMyPropertyDetailsModel;
+    constructor(public navCtrl: NavController, public alerCtrl: AlertController, public navParams: NavParams, public viewCtrl: ViewController, public modalCtrl: ModalController, private _STPropertyService: STPropertyService, public _StorageService: StorageService, ) {
+
+    }
+    ionViewDidLoad() {
+
+    }
+
+
+    ionViewDidEnter() {
+        // 获取用户Id
+        this.isLogin = this._StorageService.read(isLogin);
+        console.log(this.isLogin)
+        if (this.isLogin) {
+            this.USER_INFO = this._StorageService.read(USER_INFO);
+            this.UserId = this.USER_INFO.UserId;
+            this.GetWithdrawMoney();
+            this.GetMyProperty();
+        }
+        else {
+            this.navCtrl.push(LoginPage)
+        }
+    }
+
+    // 获取提现金额
+    GetWithdrawMoney() {
+        this._STPropertyService.GetWithdrawMoney(this.UserId).subscribe((data: any) => {
+            if (data.Code == 0) {
+                this.UserWithdrawMoney = data.Data.UserWithdrawMoney;
+            } else {
+                this.UserWithdrawMoney = '0';
+            }
+        })
+    }
+
+    // 获取商品列表
+    GetMyProperty() {
+        this._STPropertyService.GetMyProperty(this.UserId).subscribe((data: any) => {
+            if (data.Code == 0) {
+                this._GetMyPropertyModel = data.Data;
+
+            }
+        })
+    }
+
+
+
+    SubmitphonenumberMoveRegister() {
+
+
+    }
+    openPropertyDetails(ProductId , OrderId) {
+        this.navCtrl.push(PropertyDetailsPage, { ProductId: ProductId , OrderId : OrderId });
+
+
+    }
+    openPropertyWithdrawPage(ProductId) {
+        this.isLogin = this._StorageService.read(isLogin);
+        if (this.isLogin) {
+            this.USER_INFO = this._StorageService.read(USER_INFO);
+            this.UserId = this.USER_INFO.UserId;
+            this.navCtrl.push(PropertyWithdrawPage, { ProductId: ProductId });
+        }
+        else {
+            this.navCtrl.push(LoginPage);
+        }
+    }
+
+}

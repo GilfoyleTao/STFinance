@@ -1,0 +1,82 @@
+import { Component } from '@angular/core';
+import { NavController, NavParams, ViewController, ModalController } from 'ionic-angular';
+import { StorageService } from "../../../providers/StorageService";
+import { STLoginService } from "../STLoginService";
+import { ModifypasswordPage } from './../Modifypassword/Modifypassword';
+import { HomepagePage } from './../../STHome/Homepage/Homepage';
+// import { Utils } from './../../../providers/Utils';
+import { TabsPage } from './../../../app/tabs/tabs';
+// import { RegisterPage } from './../Register/Register';
+import { AlertController } from 'ionic-angular/components/alert/alert-controller';
+import { UserLoginModel } from '../STLoginModel';
+import { USER_INFO, isLogin } from './../../../providers/Constants';
+@Component({
+    selector: 'Page-Fillinpassword',
+    templateUrl: 'Fillinpassword.html',
+})
+export class FillinpasswordPage {
+    Phone: any;
+    Password: any;
+    UserId: any;
+    _UserLoginModel: UserLoginModel;
+    constructor(
+        public navCtrl: NavController,
+        public navParams: NavParams,
+        public viewCtrl: ViewController,
+        public modalCtrl: ModalController,
+        private _STLoginService: STLoginService,
+        public alerCtrl: AlertController,
+        public _StorageService: StorageService,
+    ) {
+        this.Phone = this.navParams.get('Phone');
+    }
+
+    ionViewDidLoad(navParams: NavParams) {
+
+    }
+
+    ionViewDidEnter() {
+    }
+
+    SubmitpasswordMoveHomepage() {
+        this.viewCtrl.dismiss();
+        let HomepageModal = this.modalCtrl.create(HomepagePage);
+        HomepageModal.present();
+
+    }
+
+    SubmitpasswordMoveModifypassword() {
+        this.viewCtrl.dismiss();
+        let ModifypasswordModal = this.modalCtrl.create(ModifypasswordPage);
+        ModifypasswordModal.present();
+
+    }
+
+    //   跳转忘记密码
+    ForgetPassword() {
+        this.navCtrl.push(ModifypasswordPage,{MobilePhone:this.Phone});
+    }
+
+    // 用户登陆
+    UserLogin() {
+        this._STLoginService.UserLogin(this.Phone, this.Password).subscribe((data: any) => {
+            if (data.Code == 0) {
+                this._UserLoginModel = data.Data;
+                this._StorageService.write(USER_INFO, this._UserLoginModel);//存储信息 key value
+                this._StorageService.write(isLogin,true);
+                console.log(this._UserLoginModel);
+                this.navCtrl.push(TabsPage);
+            }
+            else if(data.Code == 1){
+                let alert = this.alerCtrl.create({
+                    title: '密码错误', 
+                    buttons: ['确定']
+                  });
+                  alert.present();
+            }
+        });
+    }
+
+
+
+}

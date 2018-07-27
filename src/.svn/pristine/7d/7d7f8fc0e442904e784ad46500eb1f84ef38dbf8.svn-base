@@ -1,0 +1,106 @@
+import { Injectable } from '@angular/core';
+import { Response } from '@angular/http';
+import { Observable } from "rxjs";
+import { HttpService } from "../../providers/HttpService";
+
+
+@Injectable()
+export class STProductService {
+
+    constructor(public httpService: HttpService) {
+
+    }
+    // 获取理财页面列表
+    GetProductList(): any {
+        let url = 'STProduct/GetProductList';
+        let paramMap = {
+
+        }
+
+        return this.httpService.getWebApi(url, paramMap).map((res: Response) => res);
+    }
+    // 获取理财详情
+    GetProductDetails(ProductId: string): any {
+        let url = 'STProduct/GetProductDetails';
+        let paramMap = {
+            ProductId: ProductId
+        }
+
+        return this.httpService.getWebApi(url, paramMap).map((res: Response) => res);
+    }
+
+    // 获取债权明细/产品详情 Status=(0=产品详情,1=债权明细)
+    GetProductDeclaration(ProductId: string, Status: string): any {
+        let url = 'STProduct/GetProductDeclaration';
+        let paramMap = {
+            ProductId: ProductId,
+            Status: Status
+        }
+        return this.httpService.getWebApi(url, paramMap).map((res: Response) => res);
+    }
+
+    // 获取服务协议Status(0=服务协议,1=收益及取出规则,2=风险声明)
+    GetProductServiceAgreement(ProductId: string, Status: string): any {
+        let url = 'STProduct/GetProductServiceAgreement';
+        let paramMap = {
+            ProductId: ProductId,
+            Status: Status
+        }
+
+        return this.httpService.getWebApi(url, paramMap).map((res: Response) => res);
+    }
+
+    // 获取优惠券列表
+    GetMyCoupon(UserId: string, ProductId: string): any {
+        let url = 'STProduct/GetMyCoupon';
+        let paramMap = {
+            UserId: UserId,
+            ProductId: ProductId,
+        }
+        return this.httpService.getWebApi(url, paramMap).map((res: Response) => res);
+    }
+
+    // 买入
+    ProductPayment(UserId: string, ProductId: string,Payment:number,CouponId:string): any {
+        let url = 'STProduct/ProductPayment';
+        let paramMap = {
+            UserId: UserId,
+            ProductId: ProductId,
+            Payment:Payment,
+            CouponId:CouponId,
+        }
+        return this.httpService.postFormData(url, paramMap).map((res: Response) => res);
+    }
+
+
+    // 支付成功修改订单状态
+    UpdateOrderStatus(OrderId: string, OrderStatus: string,Userid:string): any {
+        let url = 'STProduct/UpdateOrderStatus';
+        let paramMap = {
+            OrderId: OrderId,
+            OrderStatus: OrderStatus,
+            Userid:Userid
+        }
+        return this.httpService.getWebApi(url, paramMap).map((res: Response) => res);
+    }
+
+
+    InitProductPayment(): Observable<any> {
+        let url = 'STProduct/InitProductPayment';
+        let postBody = {
+        }
+
+        return this.httpService.getWebApi(url, postBody).map((res: Response) => res);
+    }
+
+
+
+    MoveProductPaymentFromProductCoupons(postBody: any): Observable<any> {
+        let url = 'STProduct/MoveProductPaymentFromProductCoupons';
+
+        return this.httpService.getWebApi(url, postBody).map((res: Response) => res);
+    }
+
+
+
+}

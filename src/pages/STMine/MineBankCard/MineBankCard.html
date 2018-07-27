@@ -1,0 +1,22 @@
+<ion-header>
+    <ion-navbar color="MintCream" >
+        <ion-title>
+            <span class="aq-title-LoginPwd">钱包</span>
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <ion-row style="position: relative; margin-left: 5px;margin-top:5px;margin-right: 5px" >     
+        <ion-col text-right style="position: absolute;margin-top:60px;font-size: 22px;color: white;">****  ****  ****  4728</ion-col>    
+        <img src="assets/img/BankCard.png" height="120px" >
+    </ion-row>
+</ion-content>
+
+<ion-footer>
+    <ion-row text-center style=" font-size:15px;background:red; height:40px;color: white;" >
+        <ion-col (click)="goFillinBankCard()" style="margin-top:4px">
+           添加银行卡
+        </ion-col>
+    </ion-row>
+</ion-footer>

@@ -1,0 +1,22 @@
+<ion-header>
+        <ion-navbar color="MintCream">
+            <ion-title class="aq-textsize-16" >优惠券详情</ion-title>
+        </ion-navbar>
+    </ion-header>
+    
+    
+    <ion-content>
+        <ion-grid>
+            <ion-row  class="Ticket">
+                <ion-col col-12 >
+                    <span class="aq-textsize-20 aq-textcolor-grey-60 ">顾客办卡须知</span>
+                </ion-col>
+            </ion-row>
+            <ion-row class="Ticket">
+                <ion-col col-12 class="aq-textsize-12 aq-textcolor-grey-60 Userknow">
+                   {{_GetCouponDetailModel?.CouRule}}
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+        
+    </ion-content>

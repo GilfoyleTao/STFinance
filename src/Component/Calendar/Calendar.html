@@ -1,0 +1,27 @@
+<ion-grid class="aq-bgcolor-white-core">
+  <ion-row class=" margin-top-bottom-5 aq-textsize-15">
+      <ion-col offset-2 col-1>
+          <ion-icon name="ios-arrow-back-outline" (click)="LastMonth()"></ion-icon>
+      </ion-col>
+      <ion-col col-6 text-center >
+          {{CurrentYear}} 年 {{CurrentMonth}} 月
+      </ion-col>
+      <ion-col col-1>
+          <ion-icon name="ios-arrow-forward-outline" (click)="NextMonth()"></ion-icon>
+      </ion-col>
+  </ion-row>
+  <ion-row text-center class="aq-border-top ">
+      <ion-col col-1-4>日</ion-col>
+      <ion-col col-1-4>一</ion-col>
+      <ion-col col-1-4>二</ion-col>
+      <ion-col col-1-4>三</ion-col>
+      <ion-col col-1-4>四</ion-col>
+      <ion-col col-1-4>五</ion-col>
+      <ion-col col-1-4>六</ion-col>
+  </ion-row>
+  <ion-row text-center>
+      <ion-col *ngFor="let day of L_DaysCollectModel" col-1-4 text-center>
+          <span class="circle aq-textsize-16" [ngClass]="{'num-bgcolor':day?.SignStatus == 'sign','sign-gift-icon':day?.SignStatus == 'gift'}" (click)="SignToday()">{{day?.Date}}</span>
+      </ion-col>
+  </ion-row>
+</ion-grid>

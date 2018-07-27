@@ -1,0 +1,67 @@
+import { Component } from '@angular/core';
+import { NavController, NavParams } from 'ionic-angular';
+import { STHomeService } from "../STHomeService";
+import { HomeNoticeDetailsPage } from './../HomeNoticeDetails/HomeNoticeDetails';
+import { GetHomeNoticeModel } from '../STHomeModel';
+import { TabsPage } from './../../../app/tabs/tabs';
+@Component({
+    selector: 'Page-HomeNotice',
+    templateUrl: 'HomeNotice.html',
+})
+export class HomeNoticePage {
+    Status: any;
+    _GetHomeNoticeModel: Array<GetHomeNoticeModel>;
+    FirCategorys: any;
+    IsShow: boolean;
+    L_Notice: any;
+    constructor(public navCtrl: NavController,public navParams: NavParams,private _STHomeService: STHomeService) {
+        this.FirCategorys = [
+            { 'Id': 0, 'CategoryName': '官方', 'Selected': true },
+            { 'Id': 1, 'CategoryName': '消息', 'Selected': false },
+        ];
+    }
+
+    ionViewDidEnter() {
+        this.Status = this.navParams.get("Status");
+        if(this.Status != null && this.Status != ''){
+            this.GetListone(this.FirCategorys[this.Status]);
+        } else {
+            this.GetListone(this.FirCategorys[0]);
+        }
+        
+    }
+    //切换官方还是消息
+    GetListone(fircategory) {
+        this.Status = fircategory.Id;
+        if (fircategory.Selected) {
+        }
+        else {
+            this.FirCategorys.forEach(item => {
+                item.Selected = false;
+            });
+            fircategory.Selected = !fircategory.Selected;
+        };
+        if (this.Status == '0') {
+            this.GetNewsNoticeList('0');
+        }
+        else if (this.Status == '1') {
+            this.GetNewsNoticeList('1');
+        }
+    }
+    //获取公告列表 0=官方,1=消息
+    GetNewsNoticeList(Status) {
+        this._STHomeService.GetHomeNotice(Status).subscribe((data: any) => {
+            if (data.Code == 0) {
+                this._GetHomeNoticeModel = data.Data;
+            } else {
+                this._GetHomeNoticeModel = [];
+            }
+        });
+    }
+    MoveOfficialNoticeDetails(NoticeId) {
+        this.navCtrl.push(HomeNoticeDetailsPage, { NoticeId: NoticeId, Status: this.Status });
+    }
+    OpenHomepage(){
+        this.navCtrl.push(TabsPage);
+    }
+}

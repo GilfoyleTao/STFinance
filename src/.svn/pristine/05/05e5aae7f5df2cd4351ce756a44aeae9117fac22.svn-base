@@ -1,0 +1,144 @@
+page-PropertyList{
+    p{
+        margin:0px;
+        padding:0px;
+    }
+    .background{
+        background: #F4F4F4;
+    }
+    .height-210 {
+        height: 210px;
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#FC3131), color-stop(100%,#CB0101));
+    }
+    .widht-375{
+        width: 375px;
+    }
+    .font-size-13{
+        font-size:13px;
+    }
+    .background-img{
+        background:url(../assets/img/Line-1.png) no-repeat right;
+    }
+    .font-size-16{
+        font-size: 16px;
+    }
+    .font-size-32{
+        font-size: 40px;
+    }
+    .font-size-30{
+        font-size:30px;
+    }
+    .text-align-center{
+        text-align: center
+     }
+    .padding-top-6{
+        padding-top: 6px;
+        
+    }
+    .padding-left{
+        padding-left:18px;
+    }
+    .padding-top-12{
+        padding-top:12px;
+    }
+    .padding-left-10{
+        padding-left:10px;
+    }
+    .height-43{
+        height: 43px;
+    }
+    .width-18 {
+        width: 18px;
+    }
+    .height-15{
+        height: 15px;
+    }
+    .width-6{
+        width: 6px;
+    }
+    .background-white{
+        background-color: white;
+    }
+    .font-size-15{
+        font-size: 15px;
+    }
+    .font-size-14{
+        font-size: 14px;
+    }
+    .margin-top-13{
+        margin-top: 13px;
+    }
+    .margin-left-12{
+        margin-left:12px
+    }
+    .line-height-43{
+        line-height: 43px;
+    }
+    .margin-left-9{
+        margin-left: 9px;
+    }
+    .margin-left-8{
+        margin-left:8px;
+    }
+    .margin-left-186{
+        margin-left: 186px;
+    }
+    .margin-left-15{
+        margin-left: 15px;
+    }
+    .margin-top-5{
+        margin-top: 5px;
+    }
+    .width-6{
+        width: 6px;
+    }
+    .margin-top-10{
+        margin-top:10px;
+    }
+    .line-height-33{
+        line-height:33px;
+    }
+    .margin-top-14{
+        margin-top: 14px;
+    }
+    .color-626262{
+        color: #626262;
+    }
+    .color-FC3131{
+        color: #FC3131;
+        text-align: right;
+    }
+    .height-130{
+        height: 130px;
+    }
+    .color-070707{
+        color: #070707;
+    }
+    .height-12{
+        height:12px;
+    }
+    .margin-left-250{
+        margin-left: 248px;
+    }
+    .width-400{
+        width: 400px;
+    }
+    .line-height-40{
+        line-height: 40px;
+    }
+    .margin-left-20{
+        margin-left: 20px;
+    }
+    .text-align{
+        text-align: right;
+    }
+    .margin-right-16{
+        margin-right: 16px;
+    }
+    .margin-top-11{
+        margin-top: 11px;
+    }
+    .margin-left--10{
+        margin-left: -10px;
+    }
+}

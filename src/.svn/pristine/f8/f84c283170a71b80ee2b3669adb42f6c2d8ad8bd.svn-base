@@ -1,0 +1,55 @@
+import { Component } from '@angular/core';
+import { NavController } from 'ionic-angular';
+// pages
+import { RegisterPage } from './../Register/Register';
+import { FillinpasswordPage } from './../Fillinpassword/Fillinpassword';
+import { TabsPage } from './../../../app/tabs/tabs';
+//service
+import { STLoginService } from "../STLoginService";
+import { Validators } from './../../../providers/Validators';
+import { AlertService } from '../../../providers/Alert.service';
+@Component({
+    selector: 'Page-Login',
+    templateUrl: 'Login.html',
+})
+export class LoginPage {
+    Phone: any;
+    submit: boolean = false;//点击提交时判断
+    constructor(public navCtrl: NavController, public _AlertService: AlertService, private _STLoginService: STLoginService) {
+    }
+
+    ionViewDidLoad() {
+
+    }
+
+    ionViewDidEnter() {
+        this.Phone = "";
+    }
+
+    GoBackHomePage() {
+        this.navCtrl.push(TabsPage)
+    }
+
+    // 跳转输入密码页
+    goFillinpassword() {
+        if (!Validators.Phone(this.Phone)) {
+            this._AlertService.presentAlert('',"请输入正确手机号");
+        }
+        else {
+            this.GetUserStatus();
+        }
+    }
+
+    // 判断是否注册
+    GetUserStatus() {
+        this._STLoginService.GetUserStatus(this.Phone).subscribe((data: any) => {
+            if (data.Data.Status) {
+                this.navCtrl.push(FillinpasswordPage, { Phone: this.Phone });
+            }
+            else {
+                this.navCtrl.push(RegisterPage, { MobilePhone: this.Phone });
+            }
+        });
+    }
+}
+

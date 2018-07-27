@@ -1,0 +1,56 @@
+import { Component } from '@angular/core';
+import { NavController, NavParams, ViewController, ModalController } from 'ionic-angular';
+import { GetRedPacketMoneyModel } from '../STHomeModel';
+@Component({
+    selector: 'Page-HomeBonus',
+    templateUrl: 'HomeBonus.html',
+})
+export class HomeBonusPage {
+    backdrop:any;
+    OverlayId:any;
+    _GetRedPacketMoneyModel:GetRedPacketMoneyModel
+    hideget:boolean;
+    timer: any;//定时器
+    Count: any;//倒计时秒数
+    constructor(public navCtrl: NavController, 
+        public navParams: NavParams, public viewCtrl: ViewController, public modalCtrl: ModalController) {
+        this._GetRedPacketMoneyModel = {
+            RedPacketId:'',
+            Money:'99'
+        }
+        this.backdrop = "aq-overlay-backdrop" + Math.floor(Math.random() * 100);
+    }
+    ionViewDidLoad() {
+    }
+    ionViewDidEnter() {
+    }
+    OpenBonus(OverlayId){ {
+           document.getElementById(OverlayId).setAttribute('style', 'display:block');
+           document.getElementById(this.backdrop).setAttribute('style', 'display:block');
+      }
+    }
+    CloseOverlay() {
+        let overlay = document.getElementsByClassName('aq-common-overlay');
+        for (let i = 0; i < overlay.length; i++) {
+          overlay[i].setAttribute('style', 'display:none');
+        }
+        document.getElementById(this.backdrop).setAttribute('style', 'display:none');
+    }
+    //设置倒计时，3秒跳回首页
+    GetBonus(){
+        this.Count=2;
+        this.hideget = true;
+        this.timer = setInterval(() => {
+            if (this.Count == 0) {
+                clearInterval(this.timer);  
+                this.CloseOverlay();
+                this.hideget = false;
+            }
+            else {
+                this.Count = this.Count - 1;
+            }
+        }, 1000);
+    }
+    ShowBonusconfirmation() {   
+    }
+}

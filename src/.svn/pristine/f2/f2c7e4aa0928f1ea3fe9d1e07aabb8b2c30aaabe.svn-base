@@ -1,0 +1,30 @@
+import { Component } from '@angular/core';
+import { NavController, NavParams } from 'ionic-angular';
+import { MineCouponDetailPage } from './../MineCouponDetail/MineCouponDetail';
+@Component({
+    selector: 'Page-MineCoupon',
+    templateUrl: 'MineCoupon.html',
+})
+export class MineCouponPage {
+    //带银行卡
+    _GetUserInfoModel: any;
+    L_CouponList:any;
+    constructor(public navCtrl: NavController,public navParams: NavParams) {
+        //带银行卡
+        this._GetUserInfoModel = this.navParams.get('_GetUserInfoModel');
+        this.L_CouponList = this._GetUserInfoModel.L_CouponList;
+    }
+
+    ionViewDidLoad() {
+        
+    }
+
+    ionViewDidEnter() {
+
+    }
+
+    goMineCouponDetail(Couponid) {
+        this.navCtrl.push(MineCouponDetailPage,{Couponid:Couponid});
+    }
+
+}

@@ -1,0 +1,32 @@
+Page-Login{
+    // 盛通资产图片
+    .height-35{
+        height: 35px;
+    }
+    .Logo{
+        margin-top: 40px;
+        margin-left: 91px;
+        margin-bottom: 45px;
+    }
+    .item-ios.item-block .item-inner {
+        padding-right: 8px;
+        padding-right: 8px;
+        border-bottom: 0px solid #c8c7cc;
+        height: 16px !important;
+    }
+    .item-md.item-block .item-inner {
+        padding-right: 8px;
+        border-bottom: 0px solid #dedede;
+        height: 16px !important;
+    }
+    .phone-number {
+        -webkit-box-flex: 0;
+        -webkit-flex: 0 0 20px;
+        -ms-flex: 0 0 20px;
+        flex: 0 0 20px;
+        width: 20px;
+        min-width: 20px;
+        max-width: 200px;
+    }
+
+}

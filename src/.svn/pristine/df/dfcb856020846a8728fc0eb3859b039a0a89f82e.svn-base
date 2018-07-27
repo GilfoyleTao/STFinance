@@ -1,0 +1,54 @@
+Page-Homepage {
+.bgcolor-grey-22{
+    background-color: #F4F4F4;
+}
+.textcolor-grey-35 {
+    color: #535353!important;
+}
+.textcolor-grey-62 {
+    color:  #626262 !important;
+}
+
+.textcolor-red-10{
+    color:  #FE6969 !important;
+}
+.textcolor-red-30{
+    color:  #CB0101 !important;
+}
+.textsize-9{
+    font-size: 9px;
+    color:#A0A0A0;
+}
+.banner-height{
+    height: 220px;
+}
+.margin-top-12{
+    margin-top:12px;
+}
+.padding-top-bottom-10{
+    padding:10px 0;
+}
+
+.button-color{
+    background-color:  #CB0101 !important;
+}
+.border-radius-L-R {
+    border:3px solid #CB0101;
+    border-top-left-radius: 2.5px;
+    border-top-right-radius: 2.5px;
+    border-bottom-left-radius: 2.5px;
+    border-bottom-right-radius: 2.5px;
+    width:3px;
+}
+
+.readpoint{
+  position: absolute;
+  top:10px;
+  right: 24%;
+  height: 8px;
+  width: 8px;
+  border-radius: 50%;
+  background-color: red;
+}
+
+}

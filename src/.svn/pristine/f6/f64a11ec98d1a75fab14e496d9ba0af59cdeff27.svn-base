@@ -1,0 +1,37 @@
+import { Component } from '@angular/core';
+import { NavController, NavParams, ViewController, ModalController } from 'ionic-angular';
+import { HomepagePage } from './../../STHome/Homepage/Homepage';
+import { STMineService } from "../STMineService";
+import { GetCouponDetailModel } from '../STMineModel';
+@Component({
+    selector: 'Page-MineCouponDetail',
+    templateUrl: 'MineCouponDetail.html',
+})
+export class MineCouponDetailPage {
+    _GetCouponDetailModel:GetCouponDetailModel;
+    Couponid:any;
+    constructor(
+        public navCtrl: NavController, 
+        public navParams: NavParams, 
+        public viewCtrl: ViewController, 
+        public modalCtrl: ModalController,
+        public _STMineService: STMineService,
+    ) {
+        this.Couponid = this.navParams.get('Couponid');
+    }
+    
+    ionViewDidLoad() {
+    }
+
+    ionViewDidEnter() {
+        this.GetCouponDetail();
+    }
+    
+    GetCouponDetail(){
+        this._STMineService.GetCouponDetail(this.Couponid).subscribe((data: any) => {
+            if (data.Code == 0) {
+                this._GetCouponDetailModel = data.Data;
+            }
+        });
+    }
+}

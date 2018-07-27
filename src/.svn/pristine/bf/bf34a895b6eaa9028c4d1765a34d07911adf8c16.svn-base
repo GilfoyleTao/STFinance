@@ -1,0 +1,52 @@
+import { Component } from '@angular/core';
+import { NavController, NavParams } from 'ionic-angular';
+//pages
+import { ModifypasswordPage } from './../Modifypassword/Modifypassword';
+import { TabsPage } from './../../../app/tabs/tabs';
+//services
+import { STLoginService } from "../STLoginService";
+import { AlertService } from '../../../providers/Alert.service';
+import { StorageService } from "../../../providers/StorageService";
+//model
+import { UserLoginModel } from '../STLoginModel';
+import { USER_INFO, isLogin } from './../../../providers/Constants';
+
+@Component({
+    selector: 'Page-Fillinpassword',
+    templateUrl: 'Fillinpassword.html',
+})
+export class FillinpasswordPage {
+    Phone: any;
+    Password: any;
+    UserId: any;
+    _UserLoginModel: UserLoginModel;
+    constructor(public navCtrl: NavController, public navParams: NavParams, private _STLoginService: STLoginService, public _AlertService: AlertService, public _StorageService: StorageService) {
+        this.Phone = this.navParams.get('Phone');
+    }
+
+    ionViewDidEnter() {
+    }
+
+    //   跳转忘记密码
+    ForgetPassword() {
+        this.navCtrl.push(ModifypasswordPage, { MobilePhone: this.Phone });
+    }
+
+    // 用户登陆
+    UserLogin() {
+        this._STLoginService.UserLogin(this.Phone, this.Password).subscribe((data: any) => {
+            if (data.Code == 0) {
+                this._UserLoginModel = data.Data;
+                this._StorageService.write(USER_INFO, this._UserLoginModel);//存储信息 key value
+                this._StorageService.write(isLogin, true);
+                this.navCtrl.push(TabsPage);
+            }
+            else if (data.Code == 1) {
+                this._AlertService.presentAlert('', "密码错误");
+            }
+        });
+    }
+
+
+
+}

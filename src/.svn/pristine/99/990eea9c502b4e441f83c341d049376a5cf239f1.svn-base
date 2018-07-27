@@ -1,0 +1,72 @@
+import { Component } from '@angular/core';
+import { NavController, NavParams, ViewController, ModalController } from 'ionic-angular';
+import { StorageService } from "../../../providers/StorageService";
+import { STMineService } from "../STMineService";
+import { USER_INFO } from './../../../providers/Constants';
+import { AlertController } from 'ionic-angular/components/alert/alert-controller';
+import { MineCenterPage } from './../MineCenter/MineCenter';
+import { Utils } from './../../../providers/Utils';
+@Component({
+    selector: 'Page-MineFeedback',
+    templateUrl: 'MineFeedback.html',
+})
+export class MineFeedbackPage {
+    FeedBack: any;
+    UserId: any;
+    USER_INFO: any;
+    backdrop: any;
+    handler: any;
+    constructor(public navCtrl: NavController,
+        public navParams: NavParams,
+        public viewCtrl: ViewController,
+        public modalCtrl: ModalController,
+        private _STMineService: STMineService,
+        public _StorageService: StorageService,
+        public alertCtrl: AlertController,
+    ) {
+        this.USER_INFO = this._StorageService.read(USER_INFO);
+        this.UserId = this.USER_INFO.UserId;
+    }
+
+    ionViewDidLoad() {
+    }
+
+    ionViewDidEnter() {
+
+    }
+    submit() {
+        if (Utils.isEmpty(this.FeedBack)) {
+            let alert = this.alertCtrl.create({
+                title: '请输入反馈信息',
+                buttons: ['确定']
+            });
+            alert.present();
+        }
+        else {
+            this.UserFeedBack();
+        }
+    }
+    //用户反馈
+    UserFeedBack() {
+        this._STMineService.UserFeedBack(this.UserId, this.FeedBack).subscribe((data: any) => {
+            if (data.Code == 0) {
+                let confirm = this.alertCtrl.create({
+                    title: '反馈成功',
+                    buttons: [
+                        {
+                            text: '确认',
+                            handler: () => {
+                                this.navCtrl.parent.select(3);
+                            }
+                        }
+                    ]
+                });
+                confirm.present();
+            }
+
+        });
+    }
+    movetohomgpage() {
+        this.navCtrl.push(MineCenterPage);
+    }
+}

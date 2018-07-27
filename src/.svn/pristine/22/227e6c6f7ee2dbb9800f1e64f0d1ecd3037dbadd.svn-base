@@ -1,0 +1,8 @@
+<ion-content >
+    <ion-slides loop=false *ngIf="sliders.length> 1" (ionSlideDidChange)="slideChanged()" (click)="goHomepage()">
+        <ion-slide *ngFor="let slide of sliders">
+            <img [src]="slide.AdvertisementPhoto"  class="advertisement">
+        </ion-slide>
+    </ion-slides>
+    <div class="skip" (click)="goHomepage()">进入首页</div>
+</ion-content>

@@ -1,0 +1,36 @@
+<ion-header>
+    <ion-navbar color="MintCream">
+        <ion-title>
+            <span class="aq-title-LoginPwd">实名认证</span>
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <ion-row class="height-52">
+        <ion-col col-4 text-left style="font-size: 15px;line-height: 52px">请输入真实姓名</ion-col>
+        <ion-col col-4 text-left style="font-size: 15px;line-height: 52px" class="item item-input">
+            <input  [(ngModel)]="truename" type="text" style="border: 0px;outline:none;cursor: pointer;">
+        </ion-col>
+        <ion-col col-3 text-right style="font-size: 15px;line-height: 52px;color: grey;">实名认证</ion-col>
+</ion-row>   
+</ion-content>
+
+<ion-footer>
+    <ion-row text-center style=" font-size:15px;background:red; height:40px;color:white;margin-left: 15px;margin-right: 15px;border-radius: 5px; " (click)="int('overlay2')" >
+        <ion-col style="margin-top:4px">提交</ion-col>
+    </ion-row>
+</ion-footer>
+<div id="overlay2" class="aq-common-overlay aq-border-radius-5">
+    <ion-row>
+        <ion-col text-center style="color: rgb(170, 10, 10); font-size: 18px">
+          认证成功
+        </ion-col>
+    </ion-row>
+    <ion-row padding-top>
+        <ion-col  text-center style="background:rgb(170, 10, 10);color:white; font-size: 20px;margin-left: 5px;margin-right:5px;margin-bottom: 5px;" (click)="Closet()">
+          确认
+        </ion-col>
+    </ion-row>
+  </div>
+<div class="aq-overlay-backdrop" (click)="Closet()"></div>

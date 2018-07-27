@@ -1,0 +1,205 @@
+import { Component } from '@angular/core';
+import { NavController, NavParams, ViewController, ModalController } from 'ionic-angular';
+import { DaysCollectModel, GetHotExchangeModel, SignTodayModel } from '../STHomeModel';
+import { STHomeService } from '../STHomeService';
+import { StorageService } from '../../../providers/StorageService';
+import { USER_INFO, isLogin } from './../../../providers/Constants';
+import { GetSignInfoModel } from './../STHomeModel';
+@Component({
+  selector: 'Page-HomeSign',
+  templateUrl: 'HomeSign.html',
+})
+export class HomeSignPage {
+  UserId: any;
+  DayCol: any = [];//设置日历格式
+  Today: any;//获取今日时间
+  CurrentYear: any;//获取今日所在年份
+  CurrentMonth: any;//获取今日所在月份
+  MonthDays: any;//获取本月天数
+  FirstWeekDay: any;//获取今日所在月份的第一天是星期几
+  L_DaysCollectModel: Array<DaysCollectModel>;//本月日期信息
+  InitSignInfo: any;
+  timer: any;//定时器
+  Count: any;//倒计时秒数
+  backdrop: any;
+  _GetHotExchangeModel: GetHotExchangeModel;
+  _SignTodayModel: SignTodayModel;
+  USER_INFO: any;
+  isLogin: any;
+  _GetSignInfoModel: GetSignInfoModel;
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public viewCtrl: ViewController,
+    public modalCtrl: ModalController,
+    private _STHomeService: STHomeService,
+    public _StorageService: StorageService,
+  ) {
+    this.isLogin = this._StorageService.read(isLogin);
+    // 获取用户Id
+    if (this.isLogin) {
+      console.log(this.isLogin);
+      this.USER_INFO = this._StorageService.read(USER_INFO);
+      console.log(this.USER_INFO)
+      this.UserId = this.USER_INFO.UserId;
+    }
+    else {
+      this.UserId = '0';
+    }
+    this.backdrop = "aq-overlay-backdrop" + Math.floor(Math.random() * 100);
+    this.Today = new Date();
+    this.CurrentYear = this.Today.getFullYear();
+    this.CurrentMonth = this.Today.getMonth() + 1;
+    this.InitSignInfo = [
+      { 'Date': 1, 'SignStatus': 'sign' },
+      { 'Date': 2, 'SignStatus': 'sign' },
+      { 'Date': 3, 'SignStatus': 'sign' },
+      { 'Date': 4, 'SignStatus': 'sign' },
+      { 'Date': 5, 'SignStatus': 'sign' },
+      { 'Date': 6, 'SignStatus': 'sign' },
+      { 'Date': 7, 'SignStatus': 'gift' },
+      { 'Date': 8, 'SignStatus': 'sign' },
+      { 'Date': 9, 'SignStatus': 'sign' },
+      { 'Date': 10, 'SignStatus': 'none' },
+      { 'Date': 11, 'SignStatus': 'none' },
+      { 'Date': 12, 'SignStatus': 'sign' },
+    ]
+    this._GetHotExchangeModel = {
+
+      L_ExchangeList: [
+        {
+          ExchangeRule: '连续签到7天可兑换',
+          ExchangePhoto: 'assets/img/gift1.png'
+        },
+        {
+          ExchangeRule: '连续签到30天可兑换',
+          ExchangePhoto: 'assets/img/gift2.png'
+        },
+      ]
+    }
+  }
+  ionViewDidLoad() {
+  }
+
+  ionViewDidEnter() {
+    this.SetCalendar();
+    this.InitCalendarLayOut();
+  }
+  OpenOverlay(OverlayId) {
+    document.getElementById(OverlayId).setAttribute('style', 'display:block');
+    document.getElementById(this.backdrop).setAttribute('style', 'display:block');
+    this.Count = 2;
+    this.timer = setInterval(() => {
+      if (this.Count == 0) {
+        clearInterval(this.timer);
+        this.CloseOverlay();
+      }
+      else {
+        this.Count = this.Count - 1;
+      }
+    }, 1000);
+  }
+
+  CloseOverlay() {
+    let overlay = document.getElementsByClassName('aq-common-overlay');
+    for (let i = 0; i < overlay.length; i++) {
+      overlay[i].setAttribute('style', 'display:none');
+    }
+    document.getElementById(this.backdrop).setAttribute('style', 'display:none');
+  }
+  //获取今日所在月份
+  InitCalendarLayOut() {
+    for (var i = 0; i < 42; i++) {
+      this.DayCol.push(i);
+    }
+  }
+  //初始化本月日历
+  SetCalendar() {
+    this.L_DaysCollectModel = [];//初始化日历为空
+    this.FirstWeekDay = new Date(this.CurrentYear, this.CurrentMonth - 1, 1).getDay();//获取本月第一天是周几 0
+    this.MonthDays = this.getMonthDays(this.CurrentYear, this.CurrentMonth - 1); //本月30天
+    //遍历给日历赋值
+    for (let i = this.FirstWeekDay; i < (this.MonthDays + this.FirstWeekDay); i++) {
+      let _DaysCollectModel = new DaysCollectModel();
+      _DaysCollectModel.Date = i - this.FirstWeekDay + 1;//设置日期
+      _DaysCollectModel.SignStatus = '';//初始化签到状态
+      this.L_DaysCollectModel[i] = _DaysCollectModel;//赋值
+    }
+
+    this.SetSignInfo(this.L_DaysCollectModel);
+    this.GetSignInfo();
+  }
+  //初始化签到状态
+  SetSignInfo(L_DaysCollectModel) {
+    this.InitSignInfo.forEach((i, index) => {
+      if (L_DaysCollectModel[index]) {
+        if (i.Date == L_DaysCollectModel[index].Date) {
+          L_DaysCollectModel[index].SignStatus = i.SignStatus;
+        }
+      }
+    });
+  }
+  //上一月
+  LastMonth() {
+    if (this.CurrentMonth == 1) {
+      this.CurrentYear--;
+      this.CurrentMonth = 12;
+    }
+    else {
+      this.CurrentMonth--;
+    }
+    this.SetCalendar();
+  }
+  //下一月
+  NextMonth() {
+    if (this.CurrentMonth == 12) {
+      this.CurrentYear++;
+      this.CurrentMonth = 1;
+    }
+    else {
+      this.CurrentMonth++
+    }
+    this.SetCalendar();
+  }
+  //获取当前切换日期所在月份的总天数
+  getMonthDays(year, month) {
+    var monthAry = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+    if (year % 400 == 0) {
+      monthAry[1] = 29;
+    } else {
+      if (year % 4 == 0 && year % 100 != 0) {
+        monthAry[1] = 29;
+      }
+    }
+    return monthAry[month];
+  }
+  // 获取签到状态
+  GetSignInfo() {
+    this._STHomeService.GetSignInfo(this.UserId).subscribe((data: any) => {
+      if (data.Code == 0) {
+        this._GetSignInfoModel = data.Data;
+        if (this._GetSignInfoModel.SignStatus = true) {
+          this.SignToday();
+        }
+        else {
+
+        }
+      }
+    })
+  }
+// 今日签到
+  SignToday() {
+    var d = new Date();
+    var day = d.getDate();
+    var month = d.getMonth() + 1;
+    var year = d.getFullYear();
+    var time = year + '-' + month + '-' + day;
+    this._STHomeService.SignToday(this.UserId, time).subscribe((data: any) => {
+      if (data.Code == 0) {
+        this._SignTodayModel = data.Data;
+        this.OpenOverlay('overlay1');
+      }
+    });
+  }
+ 
+}

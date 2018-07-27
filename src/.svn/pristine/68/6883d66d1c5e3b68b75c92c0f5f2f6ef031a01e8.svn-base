@@ -1,0 +1,8 @@
+Page-HomeNoticeDetails {
+ 
+    .textsize-30 {
+        font-size: 30px;
+        color: #D11E1E;
+    }
+    
+}

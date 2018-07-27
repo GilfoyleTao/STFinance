@@ -1,0 +1,156 @@
+
+import { Component } from '@angular/core';
+import { NavController, NavParams, AlertController } from 'ionic-angular';
+import { StorageService } from "../../../providers/StorageService";
+import { STPropertyService } from "../STPropertyService";
+import { GetMyPropertyDetailsModel, GetRedeemMoneyMidel } from './../STPropertyModel';
+import { ProductPaymentPage } from './../../STProduct/ProductPayment/ProductPayment';
+import { USER_INFO, isLogin } from './../../../providers/Constants';
+import { ProductDetailsPage } from './../../STProduct/ProductDetails/ProductDetails';
+import { Validators } from '../../../providers/Validators';
+import { AlertService } from '../../../providers/Alert.service';
+
+@Component({
+    selector: 'Page-PropertyDetails',
+    templateUrl: 'PropertyDetails.html',
+})
+export class PropertyDetailsPage {
+    Overlay: any = {};//弹窗
+    backdrop: any;//遮罩层
+    UserId: string;
+    ProductId: string;
+    isLogin: boolean;
+    USER_INFO: any;
+    redemptionMoney: any;
+    RedeemStatus: any;
+    Redeem: boolean;
+    Purchase: boolean;
+    display: boolean;
+    OrderId: any;
+    _GetRedeemMoneyMidel: GetRedeemMoneyMidel;
+    _GetMyPropertyDetailsModel: GetMyPropertyDetailsModel;
+    L_RecommondProductList: any;
+    constructor
+        (public navCtrl: NavController,
+        public navParams: NavParams,
+        private _STPropertyService: STPropertyService,
+        public _AlertService: AlertService,
+        public _StorageService: StorageService) {
+        // 获取用户Id
+        this.ProductId = this.navParams.get('ProductId');
+        this.OrderId = this.navParams.get('OrderId');
+        this.isLogin = this._StorageService.read(isLogin);
+        if (this.isLogin) {
+            this.USER_INFO = this._StorageService.read(USER_INFO);
+            this.UserId = this.USER_INFO.UserId;
+        } else {
+            this.UserId = '0';
+        }
+
+    }
+
+    ionViewDidLoad() {
+
+    }
+
+    ionViewDidEnter() {
+        this.GetMyPropertyDetails();
+        this.GetRedeemMoney();
+
+    }
+
+    // 获取产品资产详情
+    GetMyPropertyDetails() {
+        this._STPropertyService.GetMyPropertyDetails(this.UserId, this.ProductId, this.OrderId).subscribe((data: any) => {
+
+            if (data.Code == 0) {
+                this._GetMyPropertyDetailsModel = data.Data;
+                this.RedeemStatus = this._GetMyPropertyDetailsModel.RedeemStatus;
+                this.L_RecommondProductList = this._GetMyPropertyDetailsModel.L_RecommondProductList;
+                this.L_RecommondProductList.forEach(item => {
+                    item.ProductMinPurchase = item.ProductMinPurchase > 9999 ? item.ProductMinPurchase / 10000 + "万" : item.ProductMinPurchase;
+                });
+                // 赎回判断
+                this.Redeem = false;
+                if (this.RedeemStatus == "可赎回") {
+                    this.Redeem = true;
+                    this.display = false;
+                } else {
+                    this.Redeem = false;
+                    this.display = true;
+                }
+                // 赎回判断
+                this.Purchase = false;
+                if (this.RedeemStatus == "可赎回") {
+                    this.Purchase = true;
+                } else {
+                    this.Purchase = false;
+                }
+
+            } else {
+                this.display = true;
+            }
+        })
+    }
+
+    // 获取赎回金额
+    GetRedeemMoney() {
+        this._STPropertyService.GetRedeemMoney(this.UserId, this.ProductId).subscribe((data: any) => {
+            if (data.Code == 0) {
+                this._GetRedeemMoneyMidel = data.Data.UserRedeemMoney;
+            } else {
+                this._GetRedeemMoneyMidel.UserRedeemMoney = '0';
+            }
+        })
+    }
+
+    // 提交赎回金额
+    RedeemMoney() {
+        if (Validators.RedemptionMoney(this.redemptionMoney) && this.redemptionMoney <= this._GetRedeemMoneyMidel) {
+            this._STPropertyService.RedeemMoney(this.UserId, this.ProductId, this.redemptionMoney).subscribe((data: any) => {
+                if (data.Code == 0) {
+                    this._AlertService.presentAlert('','赎回成功');
+                    this.CloseOverlay();
+                }
+            })
+        } else {
+            this._AlertService.presentAlert('','请输入正确提现金额');
+        }
+
+    }
+
+    openProductPaymentPage() {
+        if (this.RedeemStatus == "可赎回") {
+            this.navCtrl.push(ProductPaymentPage)
+        } else {
+            let message = this._GetMyPropertyDetailsModel.ProductName + '时间未到不可继续购买';
+            this._AlertService.presentAlert('',message);
+        }
+    }
+
+    //打开弹窗
+    OpenOverlay(OverlayId) {
+        this.redemptionMoney = '';
+        if (this.RedeemStatus == "可赎回") {
+            this.Overlay[OverlayId] = true;
+            this.backdrop = true;
+        }
+        else{
+            let message = this._GetMyPropertyDetailsModel.ProductName + this._GetMyPropertyDetailsModel.UserPurchaseDate + '时间未到不可赎回'
+            this._AlertService.presentAlert('',message)
+        }
+
+    }
+    //关闭弹窗
+    CloseOverlay() {
+        this.Overlay = {};
+        this.backdrop = false;
+    }
+
+    // 跳转产品详情
+    openProductDetail(ProductId) {
+        this.navCtrl.push(ProductDetailsPage, { ProductId: ProductId })
+    }
+
+
+}

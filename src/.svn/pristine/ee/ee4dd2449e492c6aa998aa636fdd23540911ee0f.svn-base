@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-navbar hideBackButton color="MintCream">
+    <ion-title class=" aq-textsize-16">登录或注册</ion-title>
+    <ion-buttons start>
+      <button ion-button icon-only color="danger" (tap)='GoBackHomePage()'>
+        <ion-icon name="ios-arrow-back-outline"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col col-12>
+        <img src="assets/img/login/logo.png" alt="" class="Logo">
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid padding>
+    <ion-item [ngClass]="{'aq-border-color-red-70': Phone,'aq-border-color-grey-50':!Phone}" padding-top class="aq-border-bottom aq-padding-left-0">
+      <ion-label class="phone-number" fixed>
+        <img class="aq-vertical-middle login-icon" src="assets/img/login/phone.png">
+      </ion-label>
+      <ion-input class="aq-text-size-big" type="tel" maxlength="11" placeholder="请输入您的手机号" [(ngModel)]="Phone"></ion-input>
+    </ion-item>
+  </ion-grid>
+    <ion-row padding-top>
+      <ion-col offset-1 col-10>
+        <button ion-button full class="aq-radius-10 height-35 aq-bg-color-grey-40 aq-text-size-large" (click)="goFillinpassword()"
+          [ngClass]="{'aq-bg-color-red-70':Phone,'aq-bg-color-grey-40':!Phone}">
+          下一步
+        </button>
+      </ion-col>
+    </ion-row>
+</ion-content>

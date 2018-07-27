@@ -1,0 +1,87 @@
+Page-ProductDetails {
+    .border-left-6{
+        border-left:6px solid #CB0101;
+    }
+
+    .border-bottom-F4F4F4{
+        border-bottom:1px solid #F4F4F4;
+    }
+
+    .border-F4F4F4{
+        border:2px solid #F4F4F4;
+    }
+
+    .border-F4F4F4-3{
+        border:3px solid #F4F4F4;
+    }
+
+    .border-right-B5B5B5-1 {
+        border-right:1px solid #B5B5B5
+    }
+
+    .border-radius-L-R {
+        border:3px solid #CB0101;
+        border-top-left-radius: 2.5px;
+        border-top-right-radius: 2.5px;
+        border-bottom-left-radius: 2.5px;
+        border-bottom-right-radius: 2.5px;
+        width:3px;
+    }
+
+
+
+
+    .progress {
+        width: 170px;
+        height: 10px !important;
+        background: #F4F4F4 !important;
+        overflow: visible !important;
+        border-radius: 20px !important;
+        border-top: 1px solid #F4F4F4 !important;
+        border-bottom: 1px solid #F4F4F4 !important;
+    }
+    .bg-progress {
+      height: 8px !important;
+      background: #FC3131 !important;
+      overflow: visible !important;
+      border-radius: 20px !important;
+      border-top: 1px solid #FC3131 !important;
+      border-bottom: 1px solid #FC3131 !important;
+    }
+    
+    .progress .progress-bar {
+        border-radius: 20px !important;
+        position: relative !important;
+        animation: animate-positive 2s !important;
+    }
+    
+    .progress .progress-value {
+        display: block !important;
+        padding: 3px 7px !important;
+        font-size: 13px !important;
+        color: #fff !important;
+        border-radius: 4px !important;
+        background: #fb8c65 !important;
+        border: 1px solid #fb8c65 !important;
+        position: absolute !important;
+        top: 17px !important;
+        right: -16px !important;
+        
+    }
+    
+    .progress .progress-value:after {
+        content: "";
+        border-bottom: 10px solid #fb8c65 !important;
+        border-left: 7px solid transparent !important;
+        border-right: 7px solid transparent !important;
+        position: absolute !important;
+        bottom: 25px !important;
+        left: 31% !important;
+    }
+    
+    .progress-bar.active {
+        animation: reverse progress-bar-stripes 0.40s linear infinite, animate-positive 2s;
+    }
+
+
+}

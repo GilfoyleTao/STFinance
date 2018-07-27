@@ -1,0 +1,71 @@
+<ion-header>
+    <ion-navbar color="light">
+        <ion-title>提现</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content class="background">
+    <ion-grid no-padding>
+        <ion-row class="aq-bgcolor-white-core">
+            <ion-col col-6>
+                <p class="color-323232 font-size-16 line-height-50 margin-left-14">提现金额</p>
+            </ion-col>
+            <ion-col col-6 text-right>
+                <p class=" line-height-50 font-size-15 color-CB0101 margin-right-10" (click)="MoveProductIncomeDisplay()">收益及取出规则</p>
+            </ion-col>
+        </ion-row>
+        <ion-row no-padding class="width-400">
+            <img src="assets/img/Line.png">
+        </ion-row>
+    </ion-grid>
+
+    <ion-grid no-padding>
+        <ion-row class="aq-bgcolor-white-core height-84">
+            <ion-col col-2 no-padding>
+                <img class="width-24 height-30 margin-left-14 margin-top-24" src="assets/img/RMB.png">
+            </ion-col>
+            <ion-col col-6>
+                <input class="margin-top-32 border-no color-B5B5B5" [(ngModel)]= "Moeny" type="number" placeholder="最多可提现{{_GetWithdrawMoneyMidel}}元" >
+            </ion-col>
+            <ion-col col-4 no-padding text-right>
+                <p class="color-FC3131 line-height-84 margin-right-10" (click) = "TakeOut()">全部取出</p>
+            </ion-col>
+            <ion-col col-12 class="border-bottom-1 margin-left-10 "></ion-col>
+        </ion-row>
+
+        <ion-row class="height-44 aq-bgcolor-white-core"></ion-row>
+    </ion-grid>
+
+    <ion-grid no-padding class="aq-bgcolor-white-core margin-top-6">
+        <ion-row class="aq-bgcolor-white-core height-50">
+            <ion-col col-6>
+                <p class="color-626262 font-size-16 line-height-50 margin-left-14">取出到</p>
+            </ion-col>
+        </ion-row>
+        <ion-row no-padding class="width-400">
+            <img src="assets/img/Line.png">
+        </ion-row>
+    </ion-grid>
+    <ion-grid no-padding class="aq-bgcolor-white-core" *ngFor="let bankcardlist of bankcard">
+        <ion-row class="height-42">
+            <ion-col col-1 no-style>
+                <ion-checkbox [(ngModel)]="bankcardlist.Selected" (click)="ionChange(bankcardlist)" class="aq-margin-top-12 margin-left-12"></ion-checkbox>
+            </ion-col>
+            <ion-col col-11 text-left class="line-height-44 ">
+                <p class="margin-left-18">银行卡({{bankcardlist.bankcardName}})</p>
+            </ion-col>
+        </ion-row>
+        <ion-row no-padding class="width-400">
+            <img src="assets/img/Line.png" class="margin-left-14">
+        </ion-row>
+    </ion-grid>
+
+</ion-content>
+
+<ion-footer>
+    <ion-row>
+        <ion-col text-center col-12 class="aq-bgcolor-red-10 aq-height-50" (click)="WithdrawMoney()">
+            <p no-padding class="aq-textsize-16 aq-textcolor-white-10 aq-margin-top-8">提现</p>
+        </ion-col>
+    </ion-row>
+</ion-footer>

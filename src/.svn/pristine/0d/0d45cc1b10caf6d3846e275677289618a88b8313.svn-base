@@ -1,0 +1,146 @@
+import { isLogin, } from './../../../providers/Constants';
+import { Component } from '@angular/core';
+import { NavController, NavParams } from 'ionic-angular';
+import { StorageService } from "../../../providers/StorageService";
+import { STProductService } from "../STProductService";
+import { ProductPaymentPage } from './../ProductPayment/ProductPayment';
+import { getProductDetailModel } from './../STProductModel';
+import { GetProductdeclaration } from './../STProductModel';
+import { LoginPage } from '../../STLogin/Login/Login';
+import { AlertController } from 'ionic-angular/components/alert/alert-controller';
+
+@Component({
+    selector: 'Page-ProductDetails',
+    templateUrl: 'ProductDetails.html',
+})
+export class ProductDetailsPage {
+    categorys: any;
+    _getProductDetailModel: getProductDetailModel;
+    _GetProductdeclaration: GetProductdeclaration;
+    Overlay: any = {};//弹窗
+    backdrop: any;//遮罩层
+    ProductId: string;
+    isLogin: boolean;
+    ProductStartMoney: any;
+    ProductTotalMoney: any;
+    ProductStatus: any;
+    Earnings: any;
+    ProductRate: any;
+    ProductLockPeriod: any;
+    StartDate: any;
+    constructor(public navCtrl: NavController, public navParams: NavParams, private _STProductService: STProductService, public _StorageService: StorageService, public alerCtrl: AlertController) {
+
+        this.ProductId = this.navParams.get('ProductId');
+        this.isLogin = this._StorageService.read(isLogin);
+        this.Earnings = 0;
+        var date = new Date;
+        //获取x月x日格式日期
+        this.StartDate = date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate() + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+        this.categorys = [
+            {
+                "CategoryNameId": "0",
+                "CategoryName": '产品详情',
+                "selected": true
+            },
+            {
+                "CategoryNameId": "1",
+                "CategoryName": '债权明细',
+                "selected": false
+            },
+        ]
+    }
+
+
+    ionViewDidLoad() {
+    }
+
+
+    ionViewDidEnter() {
+        this.GetProductDetails();
+        this.GetProductDeclaration('0');
+    }
+
+    // tab切换
+    switchCategory(category) {
+        this.categorys.forEach((item) => {
+            item.selected = false;
+        });
+        category.selected = true;
+        if (category.CategoryNameId == 0) {
+            this.GetProductDeclaration('0');
+        } else if (category.CategoryNameId == 1) {
+            if (this.isLogin) {
+                this.GetProductDeclaration('1');
+            } else {
+                this.MoveLogin();
+            }
+
+        }
+    }
+
+    // 获取商品详情
+    GetProductDetails() {
+        this._STProductService.GetProductDetails(this.ProductId).subscribe((data: any) => {
+            if (data.Code == 0) {
+                this._getProductDetailModel = data.Data;
+                this.ProductTotalMoney = this._getProductDetailModel.ProductTotalMoney;
+                this._getProductDetailModel.ProductTotalMoney = this.ProductTotalMoney > 9999 ? this.ProductTotalMoney / 10000 + "万" : this.ProductTotalMoney;
+                this.ProductRate = this._getProductDetailModel.ProductRate;
+                this.ProductLockPeriod = this._getProductDetailModel.ProductLockPeriod;
+            }
+        })
+    }
+
+    // tab切换获取,Status(0=产品详情,1=债权明细)
+    GetProductDeclaration(Status) {
+        this._STProductService.GetProductDeclaration(this.ProductId, Status).subscribe((data: any) => {
+            if (data.Code == 0) {
+                this._GetProductdeclaration = data.Data;
+            }
+        })
+    }
+
+    // 计算收益
+    CalculateEarnings() {
+        this.Earnings = ((this.ProductStartMoney * (this.ProductRate / 100) * this.ProductLockPeriod) / 360).toFixed(2);
+    }
+
+
+    MoveProductPaymentFromProductDetails() {
+        if (this.isLogin) {
+            if (this.StartDate < this._getProductDetailModel.ProductPlanStartDate) {
+                let alert = this.alerCtrl.create({
+                    title: '此标的于' + this._getProductDetailModel.ProductPlanStartDate + '正式开售,敬请期待',
+                    buttons: ['确定']
+                });
+                alert.present();
+            } else {
+                this.navCtrl.push(ProductPaymentPage, { ProductId: this.ProductId, ProductStartMoney: this._getProductDetailModel.ProductStartMoney, ProductName: this._getProductDetailModel.ProductName });
+            }
+        } else {
+            this.MoveLogin();
+        }
+
+    }
+
+    MoveLogin() {
+        this.navCtrl.push(LoginPage);
+    }
+    //打开弹窗
+    OpenOverlay(OverlayId) {
+        this.ProductStartMoney = '';
+        this.Earnings = 0;
+        this.Overlay[OverlayId] = true;
+        this.backdrop = true;
+    }
+    //关闭弹窗
+    CloseOverlay() {
+        this.Overlay = {};
+        this.backdrop = false;
+        this.CalculateEarnings();
+    }
+
+
+
+
+}

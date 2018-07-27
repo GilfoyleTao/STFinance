@@ -1,0 +1,133 @@
+
+
+import { Component } from '@angular/core';
+import { NavController, NavParams, ViewController, ModalController } from 'ionic-angular';
+import { StorageService } from "../../../providers/StorageService";
+import { STPropertyService } from "../STPropertyService";
+import { USER_INFO, isLogin } from './../../../providers/Constants';
+import { GetWithdrawMoneyMidel,GetRedeemMoneyMidel } from './../STPropertyModel';
+import { AlertController } from 'ionic-angular/components/alert/alert-controller';
+import { ProductIncomeDisplayPage } from './../../STProduct/ProductIncomeDisplay/ProductIncomeDisplay';
+
+@Component({
+    selector: 'Page-PropertyWithdraw',
+    templateUrl: 'PropertyWithdraw.html',
+})
+export class PropertyWithdrawPage {
+    UserId: any;
+    isLogin: boolean;
+    USER_INFO: any;
+    bankcard: any;
+    ProductId: any;
+    Moeny:any;
+    _GetWithdrawMoneyMidel:GetWithdrawMoneyMidel;
+    _GetRedeemMoneyMidel:GetRedeemMoneyMidel;
+    constructor(public navCtrl: NavController, public navParams: NavParams,public alertCtrl: AlertController, public viewCtrl: ViewController, public modalCtrl: ModalController, private _STPropertyService: STPropertyService, public _StorageService: StorageService) {
+        // 获取用户Id
+        this.isLogin = this._StorageService.read(isLogin);
+        if (this.isLogin) {
+            this.USER_INFO = this._StorageService.read(USER_INFO);
+            this.UserId = this.USER_INFO.UserId;
+            // console.log(this.USER_INFO);
+            // console.log(this.UserId);
+        }
+        else{
+            this.UserId = '0';
+        }
+        this.bankcard = [
+            { 'Id': 0, 'bankcardName': '招商银行8899', 'Selected': true },
+            { 'Id': 1, 'bankcardName': '北京银行8899', 'Selected': false },
+
+        ];
+        
+       
+    }
+    ionViewDidLoad() {
+        this.GetWithdrawMoney()
+    }
+
+    ionViewDidEnter() {
+
+    }
+    ionChange(bankcardlist) {
+        this.bankcard.forEach(element => {
+            element.Selected = false;
+        });
+        bankcardlist.Selected = true;
+    }
+    // 收益取出跳转
+    MoveProductIncomeDisplay() {
+        this.navCtrl.push(ProductIncomeDisplayPage,{ProductId:this.ProductId});
+        
+    }
+
+    // 全部取出
+    TakeOut(){
+        this.Moeny =  this._GetWithdrawMoneyMidel;
+    }
+    // 提现
+    WithdrawMoney() {
+        if(this.Moeny != null && this.Moeny <= this._GetWithdrawMoneyMidel){
+            this._STPropertyService.WithdrawMoney(this.UserId,this.Moeny).subscribe((data: any) => {
+                if (data.Code == 0) {
+                    // Utils.SweetAlert('提现成功', 'success', '确定');
+                    let alert = this.alertCtrl.create({
+                        title: '提现成功', 
+                        buttons: ['确定']
+                        });
+                        alert.present();
+                }else{
+                    let alert = this.alertCtrl.create({
+                        title: '提现失败', 
+                        buttons: ['确定']
+                        });
+                        alert.present();
+                }
+            })
+        }else{
+            let alert = this.alertCtrl.create({
+                title: '请输入正确提现金额', 
+                buttons: ['确定']
+                });
+                alert.present();
+        }
+        
+    }
+    // 可提现金额  
+    GetWithdrawMoney() {
+        this._STPropertyService.GetWithdrawMoney(this.UserId).subscribe((data: any) => {
+            if (data.Code == 0) {
+                this._GetWithdrawMoneyMidel = data.Data.UserWithdrawMoney;
+                console.log(this._GetWithdrawMoneyMidel)
+            } 
+            else {
+                this._GetWithdrawMoneyMidel.UserWithdrawMoney = '0';
+            }
+        })
+    }
+    // 可赎回金额
+    GetRedeemMoney(){
+        this._STPropertyService.GetRedeemMoney(this.UserId,this.ProductId).subscribe((data: any) => {
+            if (data.Code == 0) {
+                this._GetRedeemMoneyMidel = data.Data.UserRedeemMoney;
+                console.log(this._GetRedeemMoneyMidel)
+            } 
+            else {
+                this._GetRedeemMoneyMidel.UserRedeemMoney = '0';
+            }
+        })
+
+    }
+
+
+
+    ShowLoginconfirmation() {
+
+    }
+
+    SubmitpasswordMoveLogin() {
+
+
+    }
+   
+}

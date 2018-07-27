@@ -1,0 +1,124 @@
+Page-HomeSign {
+ 
+    //  ion-col{border:2px solid yellow; }
+    // ion-card-title{border:2px solid yellow; }
+    [col-1-4] {
+        -webkit-box-flex: 0;
+        -webkit-flex: 0 0 14.2%;
+        -ms-flex: 0 0 14.2%;
+        flex: 0 0 14.2%;
+        width: 14.2%;
+        max-width: 14.2%;
+    }
+
+    .num-bgcolor{
+        background-color:  #FC3131;
+        color: white;
+     
+    }
+    .sign-gift-icon{
+        background: url(../assets/icon/hot2.png) no-repeat top center;
+        background-size:22px 22px; 
+        color: rgba(255, 255, 255, 0);
+    }
+
+    .circle{
+        // border:2px solid yellow;
+        display: block;
+        padding-top: 4px;
+        border-radius: 50%;
+        margin: 0 auto;
+        text-align: center;       
+        width: 27px;
+        height: 26px;
+
+    }
+    
+    .gift-bg-color{
+        background-color:  #F6F6F6;
+    }
+    .margin-12{
+        margin: 13px;
+
+    }
+    .margin-top-2{
+        margin-top: 2px;
+    }
+    .textsize-11{
+        font-size: 11px;
+    }
+    .margin-top-bottom-5{
+        margin:5px 0;
+    }
+    .margin-top-bottom-10{
+        margin:10px 0;
+    }
+    .margin-top-bottom-20{
+        margin:20px 0;
+    }
+    .text-color{
+        color: #626262;
+    }
+    .congratulation{
+        text-align: center;
+        position:fixed;
+        left: 25%;
+        top: 55%;
+
+    }
+    .aq-common-overlay {
+        width: 75%;
+        height: 246px;
+        background: rgba(255, 255, 255, 0);
+        background-image: url(../assets/img/signsucceed.png);
+        background-size:contain;
+        background-repeat: no-repeat;
+        border: 0;
+        opacity: 1;
+        display: none;
+        position: fixed;
+        text-align: left;
+        -webkit-transition: opacity .1s ease-in-out .1s;
+        -moz-transition: opacity .1s ease-in-out .1s;
+        -o-transition: opacity .1s ease-in-out .1s;
+        -ms-transition: opacity .1s ease-in-out .1s;
+        transition: opacity .1s ease-in-out .1s;
+        z-index: 905;
+        left: 50%;
+        top: 40%;
+        max-width: 500px;
+        min-width: 200px;
+        -ms-transform: translate(-50%, -50%);
+        transform: translate3d(-50%, -50%, 0);
+        overflow: auto;
+    }
+    
+    // .aq-overlay-backdrop {
+    //     background: #111 none repeat scroll 0 0;
+    //     bottom: 0;
+    //     display: none;
+    //     left: 0;
+    //     opacity: 0.5;
+    //     position: fixed;
+    //     right: 0;
+    //     top: 0;
+    //     z-index: 800;
+    // }
+    [id*='aq-overlay-backdrop'] {
+        background: #111 none repeat scroll 0 0;
+        bottom: 0;
+        display: none;
+        left: 0;
+        opacity: 0.5;
+        position: fixed;
+        right: 0;
+        top: 0;
+        z-index: 800;
+    }
+
+    
+
+    
+
+
+}

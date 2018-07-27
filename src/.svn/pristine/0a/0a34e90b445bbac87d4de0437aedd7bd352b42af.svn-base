@@ -1,0 +1,18 @@
+<ion-header>
+        <ion-navbar color="MintCream">
+                <ion-title>
+                        <span class="aq-title-LoginPwd">用户反馈</span>
+                </ion-title>
+        </ion-navbar>
+</ion-header>
+<ion-content class="MineFeedbackBkground">
+        <ion-grid class="FeedbackArea">
+                <textarea rows="100" cols="20" [(ngModel)]="FeedBack" class="FeedbackArea-textarea aq-text-size-normal" placeholder="留下您的宝贵意见,我们尽全力予以改进"></textarea>
+        </ion-grid>
+</ion-content>
+
+<ion-footer>
+        <button full class="aq-bgcolor-red-10" ion-button (click)="submit()">
+                <span class="CommitFeedback">提交反馈</span>
+        </button>
+</ion-footer>

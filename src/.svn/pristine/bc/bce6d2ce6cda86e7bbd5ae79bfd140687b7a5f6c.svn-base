@@ -1,0 +1,6 @@
+Page-ProductRiskStatement {
+    .fixed-content{
+        background:url(../assets/img/noticedetail.png);
+        background-size:100% 100%;
+    }
+}

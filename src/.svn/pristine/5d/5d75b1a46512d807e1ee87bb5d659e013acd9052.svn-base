@@ -1,0 +1,81 @@
+Page-FillinBankCard {
+  .button-inner {
+    color: #CB0101;
+    margin-left: 5px;
+  }
+  .FillBankCard-input {
+    margin-left: -16px;
+  }
+  .aq-bgcolor-red-10 {
+    margin-top: -5px;
+    margin-bottom: 0px;
+  }
+  .CommitFeedback {
+    color: #F4F4F4;
+  }
+  .PhoneNumber {
+    text-align: center;
+  }
+  .FillBankCard-Submit {
+    color: white;
+  }
+  .GetMessageCode {
+    border-radius: 0px;
+    border-left: 2px solid #CB0101;
+    margin-right: -20px;
+    padding-left: -20px;
+  }
+  .border-color-gray {
+    color: #E8E8E8;
+  }
+  .PhoneNumber {
+    margin-right: -10px;
+    padding-left: -10px;
+  }
+  .ValidationCodePic {
+    float: right;
+    z-index: 999;
+    margin-bottom: -30px;
+    position: relative;
+    top: 7px;
+    right: 15px;
+  }
+
+  [id*='aq-overlay-backdrop'] {
+    background: #111 none repeat scroll 0 0;
+    bottom: 0;
+    display: none;
+    left: 0;
+    opacity: 0.5;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 800;
+  }
+  .aq-common-overlay {
+    width: 75%;
+    background: #fff;
+    border: 0;
+    display: none;
+    opacity: 1;
+    position: fixed;
+    text-align: left;
+    -webkit-transition: opacity .1s ease-in-out .1s;
+    -moz-transition: opacity .1s ease-in-out .1s;
+    -o-transition: opacity .1s ease-in-out .1s;
+    -ms-transition: opacity .1s ease-in-out .1s;
+    transition: opacity .1s ease-in-out .1s;
+    z-index: 905;
+    left: 50%;
+    top: 50%;
+    max-width: 500px;
+    min-width: 200px;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate3d(-50%, -50%, 0);
+    overflow: auto;
+  }
+
+
+
+
+}

@@ -1,0 +1,10 @@
+<ion-header>
+  <ion-navbar color="MintCream">
+    <ion-title>风控</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <img [src]="ImgUrl+_GetRiskManagementInfoModel?.ImgUrl" *ngIf="_GetRiskManagementInfoModel">
+
+</ion-content>

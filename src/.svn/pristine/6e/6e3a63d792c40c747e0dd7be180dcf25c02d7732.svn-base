@@ -1,0 +1,109 @@
+import { Injectable } from '@angular/core';
+import { Response} from '@angular/http';
+// import { Observable } from "rxjs";
+import { HttpService } from "../../providers/HttpService";
+// import { Result } from "../../model/Result";
+// import { APP_SERVE_URL, PAGE_SIZE } from "../../providers/Constants";
+
+
+@Injectable()
+export class STMineService {
+
+    constructor(public httpService: HttpService) {
+
+    }
+    //post 用户反馈
+    UserFeedBack(UserId: string, Feedback: string): any {
+        let url = 'STMine/UserFeedBack';
+        let paramMap = {
+            UserId: UserId,
+            Feedback: Feedback
+        };
+        return this.httpService.postFormData(url, paramMap).map((res: Response) => res);
+    }
+    //post 添加银行卡
+    AddBankCard(BankCardId: string, UserTrueName: string, Phone: string): any {
+        let url = 'STMine/AddBankCard';
+        let paramMap = {
+            BankCardId: BankCardId,
+            UserTrueName: UserTrueName,
+            Phone: Phone,
+        };
+        return this.httpService.postFormData(url, paramMap).map((res: Response) => res);
+    }
+    //post 实名认证
+    GetAuthStatus(UserId: string, Name: string, IdNumber: string): any {
+        let url = 'STAccount/GetAuthStatus';
+        let paramMap = {
+            UserId: UserId,
+            Name: Name,
+            IdNumber: IdNumber,
+        }
+        return this.httpService.postFormData(url, paramMap).map((res: Response) => res);
+    }
+    //常见问题
+    CommonQuestions(): any {
+        let url = 'STMine/CommonQuestions';
+        let paramMap = {
+
+        };
+        return this.httpService.getWebApi(url, paramMap).map((res: Response) => res);
+    }
+    // 获取用户信息
+    GetUserInfo(UserId: string): any {
+        let url = 'STMine/GetUserInfo';
+        let paramMap = {
+            UserId: UserId
+        };
+        return this.httpService.getWebApi(url, paramMap).map((res: Response) => res);
+    }
+    //关于app
+    AboutApp(): any {
+        let url = 'STMine/AboutApp';
+        let paramMap = {
+        };
+        return this.httpService.getWebApi(url, paramMap).map((res: Response) => res);
+    }
+    
+    //发送短信
+    SendCode(Phone: string, PictureCode: string): any {
+        let url = 'STAccount/SendCode';
+        let paramMap = {
+            Phone: Phone,
+            PictureCode: PictureCode
+        };
+        return this.httpService.getWebApi(url, paramMap).map((res: Response) => res);
+    }
+
+    // 修改用户信息
+    ModifyUserInfo(UserId: string, UserPhoto: string, UserName: string, UserTrueName: string, UserIdentityCode: string, UserRecommendCode: string): any {
+        // let url = 'STMine/ModifyUserInfo';
+        let url = 'STMine/ModifyUserInfo';
+        let paramMap = {
+            UserId: UserId,
+            UserPhoto: UserPhoto,
+            UserName: UserName,
+            UserTrueName: UserTrueName,
+            UserIdentityCode: UserIdentityCode,
+            UserRecommendCode: UserRecommendCode
+        };
+        return this.httpService.postFormData(url, paramMap).map((res: Response) => res);
+    }
+    //判读短信校验成功还是失败
+    CheckValidationCode(Phone: string, code: string): any {
+        let url = 'STAccount/ValidationCode';
+        let paramMap = {
+            Phone: Phone,
+            code: code
+        };
+        return this.httpService.postFormData(url, paramMap).map((res: Response) => res);
+    }
+    // 优惠券详情
+    GetCouponDetail(Couponid: string): any {
+        let url = 'STProduct/GetCouponDetail';
+        let paramMap = {
+            Couponid: Couponid
+        };
+        return this.httpService.getWebApi(url, paramMap).map((res: Response) => res);
+    }
+}

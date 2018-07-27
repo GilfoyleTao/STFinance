@@ -1,0 +1,12 @@
+<ion-header>
+  <ion-navbar color="MintCream">
+    <ion-title>服务协议声明</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row [innerHTML]="_GetProductServiceAgreement?.ProductServiceAgreement">
+    </ion-row>
+  </ion-grid>
+</ion-content>

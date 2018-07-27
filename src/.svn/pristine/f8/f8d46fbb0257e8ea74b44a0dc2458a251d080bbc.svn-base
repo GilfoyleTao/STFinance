@@ -1,0 +1,24 @@
+export class UserInfo {
+    Id: string;
+    UserName: string;
+    Phone: string;
+    Sex: string;
+    Age: string;
+    Birthday: string;
+    IdentityCode: string;
+    Photo: string;
+
+}
+export class UserLoginModel{
+    UserId:any;
+    UserTrueName:any;
+    UserName:any;
+    UserPhone:any;
+    UserSex:any;
+    UserAge:any;
+    UserBirthday:any;
+    UserIdentityCode:any;
+    UserPhoto:any;
+    UserRecommendCode:any;
+}
+

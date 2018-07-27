@@ -1,0 +1,125 @@
+<ion-header>
+  <ion-navbar color="MintCream">
+    <ion-title>理财</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid (click)="ProductDetails(_GetProductListModel.ProductId)">
+    <ion-row>
+      <ion-col>
+        <div class="aq-height-14 border-radius-L-R"></div>
+        <p class="aq-text-size-normal aq-textcolor-grey-40 aq-padding-left-8 aq-margin-top-m16 aq-padding-left-15">{{_GetProductListModel?.CategoryName}}</p>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col text-center>
+        <p class="aq-textsize-16 aq-margin-top-m10">{{_GetProductListModel?.ProductName}}</p>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col text-center>
+        <p class="aq-textsize-36 aq-margin-top-m10 aq-textcolor-red-10">{{_GetProductListModel?.ProductRate}}%</p>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-4 text-center>
+        <p class="aq-text-size-normal aq-textcolor-pink-10 aq-margin-top-m17">{{_GetProductListModel?.ProductTotalMoney}}</p>
+        <p class="aq-text-size-normal aq-margin-top-m5 aq-textcolor-grey-50">总金额</p>
+      </ion-col>
+      <ion-col col-4 text-center>
+        <p class="aq-text-size-normal aq-textcolor-pink-10 aq-margin-top-m17">{{_GetProductListModel?.ProductInvestMoney}}</p>
+        <p class="aq-text-size-normal aq-margin-top-m5 aq-textcolor-grey-50">已投资</p>
+      </ion-col>
+      <ion-col col-4 text-center>
+        <p class="aq-text-size-normal aq-textcolor-pink-10 aq-margin-top-m17">{{_GetProductListModel?.ProductLockPeriod}}天</p>
+        <p class="aq-text-size-normal aq-margin-top-m5 aq-textcolor-grey-50">锁定期限</p>
+      </ion-col>
+    </ion-row>
+    <ion-row class="aq-margin-top-m10">
+      <ion-col></ion-col>
+      <ion-col col-11 text-center>
+        <button ion-button full class="aq-border-radius-6 aq-bgcolor-red-10 aq-textcolor-white-10 aq-height-35">立即体验</button>
+      </ion-col>
+      <ion-col></ion-col>
+    </ion-row>
+    <div class="border-F4F4F4 aq-margin-top-7"></div>
+  </ion-grid>
+  <ion-grid *ngFor="let item of _GetProductListModel?.L_Category">
+    <ion-row class="aq-height-25">
+      <ion-col class="aq-padding-top-10">
+        <div class="aq-height-14 border-radius-L-R"></div>
+        <p class="aq-text-size-normal aq-textcolor-grey-40 aq-padding-left-8 aq-margin-top-m16 aq-padding-left-15">{{item.CategoryName}}</p>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngFor="let List of item?.ProductList" (click)="ProductDetails(List.ProductId)" class="aq-height-130 aq-margin-top-m10 border-bottom-F4F4F4">
+      <ion-col col-6>
+        <p class="aq-text-size-normal aq-textcolor-grey-40">{{List.ProductName}}</p>
+      </ion-col>
+      <ion-col col-6 text-left>
+        <p class="aq-textsize-13" [ngClass]="{'aq-textcolor-red-10':List.ProductStatus != 3,'aq-textcolor-grey-40':List.ProProductStatus == 3}">{{List.ProductStartDate}}开售</p>
+      </ion-col>
+      <ion-col col-6>
+        <p class="aq-textsize-24 aq-margin-top-m10" [ngClass]="{'aq-textcolor-pink-30':List.ProductStatus != 3,'aq-textcolor-grey-40':List.ProProductStatus == 3}">{{List.ProductRate}}%
+          <!-- <span class="aq-text-size-normal" [ngClass]="{'aq-textcolor-pink-30':List.ProductStatus != 3,'aq-textcolor-grey-40':List.ProProductStatus == 3}">+{{List.ProductRaiseRate}}</span> -->
+        </p>
+      </ion-col>
+      <ion-col col-3 text-left>
+        <p class="aq-textsize-24 aq-textcolor-black-core  aq-margin-top-m10">{{List.ProductLockPeriod}}天</p>
+      </ion-col>
+      <ion-col col-3 text-center>
+        <img src="assets/img/ProductList/unStart.png" *ngIf="List.ProductStatus == 0.00" class="aq-height-45 aq-width-45 aq-margin-top-m25">
+        <img src="assets/img/ProductList/one.png" *ngIf="List.ProductStatus > 0.00 && List.ProductStatus <= 12.5" class="aq-height-45 aq-width-45 aq-margin-top-m25">
+        <img src="assets/img/ProductList/two.png" *ngIf="List.ProductStatus >12.5 && List.ProductStatus <= 25.00" class="aq-height-45 aq-width-45 aq-margin-top-m25">
+        <img src="assets/img/ProductList/three.png" *ngIf="List.ProductStatus >25.00 && List.ProductStatus <= 37.5" class="aq-height-45 aq-width-45 aq-margin-top-m25">
+        <img src="assets/img/ProductList/four.png" *ngIf="List.ProductStatus >37.5 && List.ProductStatus <= 50.00" class="aq-height-45 aq-width-45 aq-margin-top-m25">
+        <img src="assets/img/ProductList/five.png" *ngIf="List.ProductStatus >50.00 && List.ProductStatus <= 62.5" class="aq-height-45 aq-width-45 aq-margin-top-m25">
+        <img src="assets/img/ProductList/six.png" *ngIf="List.ProductStatus >62.5 && List.ProductStatus <= 75.00" class="aq-height-45 aq-width-45 aq-margin-top-m25">
+        <img src="assets/img/ProductList/seven.png" *ngIf="List.ProductStatus >75.00 && List.ProductStatus <= 87.5" class="aq-height-45 aq-width-45 aq-margin-top-m25">
+        <!-- <img src="assets/img/ProductList/eight.png" *ngIf="List.ProductStatus >87.5 && List.ProductStatus <= 100" class="aq-height-45 aq-width-45 aq-margin-top-m25"> -->
+        <img src="assets/img/ProductList/stopBuy.png" *ngIf="List.ProductStatus == 100.00" class="aq-height-45 aq-width-45 aq-margin-top-m25">
+      </ion-col>
+      <ion-col col-6>
+        <p class="aq-text-size-normal aq-textcolor-grey-40 aq-margin-top-m25">预计年化收益率</p>
+      </ion-col>
+      <ion-col col-6 text-left>
+        <p class="aq-text-size-normal aq-textcolor-grey-40 aq-margin-top-m25">理财额度{{List.ProductMinPurchase}}元</p>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <!-- <ion-grid >
+    <ion-row class="aq-height-25">
+      <ion-col class="aq-padding-top-10">
+        <div class="aq-height-14 border-radius-L-R"></div>
+        <p class="aq-text-size-normal aq-textcolor-grey-40 aq-padding-left-8 aq-margin-top-m17 aq-padding-left-15">新手专享</p>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngFor="let List of _GetProductListModel?.L_Category" (click)="ProductDetails(List.ProductId)"  class="aq-height-130 aq-margin-top-m10 border-bottom-F4F4F4">
+      <ion-col col-6>
+        <p class="aq-text-size-normal aq-textcolor-grey-40">{{List.ProductName}}</p>
+      </ion-col>
+      <ion-col col-6 text-left>
+        <p class="aq-textsize-13" [ngClass]="{'aq-textcolor-red-10':List.ProductStatus != 3,'aq-textcolor-grey-40':List.ProProductStatus == 3}">{{List.ProductStartDate}}开售</p>
+      </ion-col>
+      <ion-col col-6>
+        <p class="aq-textsize-24 aq-margin-top-m10" [ngClass]="{'aq-textcolor-pink-30':List.ProductStatus != 3,'aq-textcolor-grey-40':List.ProProductStatus == 3}">{{List.ProductRate}}%
+        </p>
+      </ion-col>
+      <ion-col col-3 text-left>
+        <p class="aq-textsize-24 aq-textcolor-black-core  aq-margin-top-m10">{{List.ProductLockPeriod}}天</p>
+      </ion-col>
+      <ion-col col-3 text-center>
+        <img src="assets/img/ProductList/progressOne.png" *ngIf="List.ProductStatus == 0" class="aq-height-45 aq-width-45 aq-margin-top-m25">
+        <img src="assets/img/ProductList/progressTwo.png" *ngIf="List.ProductStatus == 1" class="aq-height-45 aq-width-45 aq-margin-top-m25">
+        <img src="assets/img/ProductList/progressThree.png" *ngIf="List.ProductStatus == 2" class="aq-height-45 aq-width-45 aq-margin-top-m25">
+        <img src="assets/img/ProductList/progressOne.png" *ngIf="List.ProductStatus == 3" class="aq-height-45 aq-width-45 aq-margin-top-m25">
+      </ion-col>
+      <ion-col col-6>
+        <p class="aq-text-size-normal aq-textcolor-grey-40 aq-margin-top-m25">期望年均回报率</p>
+      </ion-col>
+      <ion-col col-6 text-left>
+        <p class="aq-text-size-normal aq-textcolor-grey-40 aq-margin-top-m25">{{List.ProductMinPurchase}}元起购</p>
+      </ion-col>
+    </ion-row>
+  </ion-grid> -->
+</ion-content>

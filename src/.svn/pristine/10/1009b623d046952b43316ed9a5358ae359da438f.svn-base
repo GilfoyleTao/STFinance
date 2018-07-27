@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-navbar color="MintCream">
+    <ion-title>红包</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid no-padding>
+    <ion-row no-padding>
+      <ion-col col-2></ion-col>
+      <ion-col col-8 class="button-bonus" (click)="OpenBonus()">
+      </ion-col>
+      <ion-col col-2></ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+<div *ngIf="Overlay.overlay1" class="aq-common-overlay" (click)="GetBonus()">
+  <p class="getmoney">{{CouMoney}}
+    <span class="yuan">元</span>
+  </p>
+</div>
+
+<div *ngIf="Overlay.overlay2" class="aq-common-overlay-A" text-center>
+  <p class="aq-textsize-18 aq-textcolor-red-10">领取成功</p>
+  <p class="aq-textsize-16 aq-margin-top-30">请到“个人中心-我的优惠券”中查看</p>
+</div>
+
+<div *ngIf="backdrop" class="aq-overlay-backdrop" (click)="CloseOverlay()"></div>

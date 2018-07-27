@@ -1,0 +1,25 @@
+<ion-header>
+    <ion-navbar color="MintCream">
+        <ion-title>我的优惠券</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <ion-grid>
+        <ion-row >
+            <ion-col  col-6 text-center class="aq-height-90" (click)="return(item)" *ngFor="let item of _GetMyCoupon?.L_CouponList">
+                <!-- <img src="{{List.photo}}"> -->
+                <div class="aq-width-full aq-height-83 aq-absolute" *ngIf="item.CouponType == '0'"  text-left style="background: url(assets/img/ProductList/discounts.png);background-size: 100% 100%;">
+                    <p class="aq-textsize-30 aq-textcolor-white-core aq-margin-left-10 aq-margin-top-5" no-padding>￥{{item?.CouponMoney}}</p>
+                    <p class="aq-textsize-10 aq-textcolor-white-core aq-margin-left-19 aq-margin-top-m31">{{item?.CouponName}}</p>
+                    <p class="aq-textsize-10 aq-textcolor-white-core aq-margin-top-m8 aq-margin-left-5">{{item?.CouponStartDate | date:"yyyy-MM-dd"}}-{{item?.CouponEndDate | date:"yyyy-MM-dd"}}</p>
+                </div>
+                <div class="aq-width-full aq-height-83 aq-absolute" *ngIf="item.CouponType == '1'"  text-left style="background: url(assets/img/ProductList/rise.png);background-size: 100% 100%;">
+                    <p class="aq-textsize-30 aq-textcolor-white-core aq-margin-left-10 aq-margin-top-5" no-padding>{{item?.CouponMoney}}%</p>
+                    <p class="aq-textsize-10 aq-textcolor-white-core aq-margin-left-19 aq-margin-top-m27">{{item?.CouponName}}</p>
+                    <p class="aq-textsize-10 aq-textcolor-white-core aq-margin-top-m8 aq-margin-left-5">{{item?.CouponStartDate | date:"yyyy-MM-dd"}}-{{item?.CouponEndDate | date:"yyyy-MM-dd"}}</p>
+                </div>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>

@@ -1,0 +1,167 @@
+
+import { Component } from '@angular/core';
+import { NavController, NavParams, ViewController, ModalController } from 'ionic-angular';
+import { StorageService } from "../../../providers/StorageService";
+import { STMineService } from "../STMineService";
+import { MineBankCardPage } from './../MineBankCard/MineBankCard';
+import { Utils } from './../../../providers/Utils';
+import { AlertController } from 'ionic-angular/components/alert/alert-controller';
+import { NativeService } from './../../../providers/NativeService';
+@Component({
+    selector: 'Page-FillinBankCard',
+    templateUrl: 'FillinBankCard.html',
+})
+export class FillinBankCardPage {
+    Overlay: any = {};//弹窗
+    backdrop: any;//遮罩层
+    Count: any;
+    over: any;
+    timer: any;
+    TrueName: any;
+    Phone: any = '';
+    Bankcardnumber: any;
+    ValidationCode: any;
+    ImgUrl: string;//图片路径
+    // length: any;
+    Messagecode: any;
+    constructor(public navCtrl: NavController,
+        // private alertCtrl: AlertController,
+        public navParams: NavParams,
+        public viewCtrl: ViewController,
+        public modalCtrl: ModalController,
+        private _STMineService: STMineService,
+        public _StorageService: StorageService,
+        public alerCtrl: AlertController,
+        public _NativeService: NativeService,
+    ) {
+    }
+
+    ionViewDidLoad() {
+    }
+
+    ionViewDidEnter() {
+
+    }
+
+    setCountTimer() {
+        this.timer = setInterval(() => {
+            if (this.Count == 0) {
+                this.over = false;
+            }
+            else {
+                this.Count = this.Count - 1;
+            }
+        }, 1000);
+    }
+    // 跳回钱包
+    MoveMinBankCard() {
+        this.navCtrl.push(MineBankCardPage);
+    }
+    //打开弹窗
+    OpenOverlay(OverlayId) {
+        this.Overlay[OverlayId] = true;
+        this.backdrop = true;
+    }
+    //关闭弹窗
+    CloseOverlay() {
+        this.Overlay = {};
+        this.backdrop = false;
+        this.navCtrl.push(MineBankCardPage);
+    }
+    //提交
+    Submit() {
+        let result = true;
+        if (Utils.isEmpty(this.Bankcardnumber)) {
+            this._NativeService.alert("请输入银行卡号");
+            return false;
+        }
+        if (Utils.isEmpty(this.TrueName)) {
+            this._NativeService.alert("请输入开户姓名");
+            return false;
+        }
+        if (Utils.isEmpty(this.ValidationCode)) {
+            this._NativeService.alert("请输入图形验证码");
+            return false;
+        }
+        if (Utils.isEmpty(this.Phone)) {
+            this._NativeService.alert("请输入11位手机号");
+            return false;
+        }
+        if (Utils.isEmpty(this.Messagecode)) {
+            this._NativeService.alert("请输入验证码");
+            return false;
+        }
+        if (result) {
+            if (this.Phone.length == 11) {
+                this.CheckValidationCode();
+            } else {
+                this._NativeService.alert("请输入11位手机号");
+            }
+        }
+    }
+
+    // 倒计时
+    sendCode() {
+        let result = true;
+        if (Utils.isEmpty(this.Bankcardnumber)) {
+            this._NativeService.alert("请输入银行卡号");
+            return false;
+        }
+        if (Utils.isEmpty(this.TrueName)) {
+            this._NativeService.alert("请输入开户姓名");
+            return false;
+        }
+        if (Utils.isEmpty(this.ValidationCode)) {
+            this._NativeService.alert("请输入图形验证码");
+            return false;
+        }
+        if (Utils.isEmpty(this.Phone)) {
+            this._NativeService.alert("请输入11位手机号");
+            return false;
+        }
+        if (result) {
+            if (this.Phone.length == 11) {
+                this._STMineService.SendCode(this.Phone, this.ValidationCode).subscribe((data: any) => {
+                    if(data.Code == 0){
+                        this.Count = 60;
+                        this.over = true;
+                        this.setCountTimer();
+                    }else {
+                        this._NativeService.alert(data.Message);
+                    }
+                });
+            } else {
+                this._NativeService.alert("请输入11位手机号");
+            }
+        }
+    }
+    
+    // 判读校验码成功还是失败
+    CheckValidationCode() {
+        this._STMineService.CheckValidationCode(this.Phone, this.Messagecode).subscribe((data: any) => {
+            // 请求成功
+            if (data.Data.Status == true) {
+                this.AddBankCard();
+            }
+            //验证码输入有误
+            if (data.Data.Status == false) {
+                this._NativeService.alert("验证码错误!");
+            }
+        });
+    }
+    //添加银行卡
+    AddBankCard() {
+        this._STMineService.AddBankCard(this.Bankcardnumber, this.TrueName, this.Phone).subscribe((data: any) => {
+            if (data.Code == 0) {
+                this.OpenOverlay('overlay1');
+            }
+            if (data.Code == 1) {
+                let alert = this.alerCtrl.create({
+                    title: data.Message,
+                    buttons: ['确定']
+                });
+                alert.present();
+            }
+        });
+    }
+}
